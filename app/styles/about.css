@@ -1,0 +1,249 @@
+
+/* ─────────────────────────────────────────────
+   About page — ab-* prefix
+   Shared utilities (rl, rv, mono, mask, cta …)
+   live in landing.css / resume.css.
+───────────────────────────────────────────── */
+
+/* ── Hero ────────────────────────────────────── */
+.ab-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 60px;
+  align-items: end;
+  padding-bottom: 12px;
+}
+.ab-h1 {
+  margin: 0;
+  font-size: clamp(64px, 10vw, 128px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+}
+.ab-intro { max-width: 480px }
+.ab-intro p {
+  margin: 0 0 16px;
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.45;
+  color: rgba(244,241,234,.8);
+}
+.ab-intro p:last-child { margin-bottom: 0 }
+
+/* ── Banner ──────────────────────────────────── */
+.ab-bnr-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 .28em;
+  font-size: clamp(48px, 8vw, 116px);
+  font-weight: 800;
+  letter-spacing: -.05em;
+  line-height: 0.92;
+  text-align: center;
+}
+/* override the .rvon .rv opacity:0 so words animate individually */
+.rvon .ab-bnr-wrap.rv {
+  opacity: 1;
+  transform: none;
+}
+.ab-bw {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 0.92;
+  margin-right: .28em;
+}
+.ab-bw:last-child { margin-right: 0 }
+.rvon .ab-bw span {
+  display: inline-block;
+  transform: translateY(140%);
+  transition: transform 500ms cubic-bezier(.2,.7,.2,1);
+  transition-delay: calc(var(--wi, 0) * 70ms);
+}
+.rvon .ab-bnr-wrap.in .ab-bw span {
+  transform: none;
+}
+
+/* ── WHO I AM ────────────────────────────────── */
+.ab-bsec { max-width: 960px }
+.ab-belief {
+  margin: 0 0 32px;
+  font-size: clamp(28px, 3.8vw, 52px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #F4F1EA;
+}
+.ab-ignite { color: #F4F1EA }
+.rvon .ab-bsec.in .ab-ignite {
+  animation: abIgnite 650ms ease-out var(--ad, 0ms) both;
+}
+@keyframes abIgnite {
+  0%   { color: #F4F1EA }
+  28%  { color: #FFCFA0 }
+  100% { color: #FF6A24 }
+}
+.ab-body {
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.65;
+  color: rgba(244,241,234,.68);
+  max-width: 680px;
+  margin: 0 0 40px;
+}
+.ab-thesis {
+  margin: 0;
+  background: #1C1C1C;
+  border: 1px solid rgba(244,241,234,.18);
+  padding: 32px 36px;
+  max-width: 800px;
+  box-sizing: border-box;
+  font-size: clamp(17px, 1.8vw, 24px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+  color: #F4F1EA;
+  font-style: italic;
+}
+
+/* ── Journey ─────────────────────────────────── */
+#ab-journey-host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+/* #ab-jdots styles are set inline in the component to ensure
+   correct positioning regardless of CSS load order */
+.ab-journey-inner {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding: 0 var(--edge) 48px;
+}
+.ab-jstops {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.ab-jstop {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid #333;
+  padding-top: 16px;
+}
+.ab-jname {
+  font-size: clamp(18px, 2.1vw, 26px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+  color: #F4F1EA;
+  line-height: 1;
+}
+.ab-jtag {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(244,241,234,.45);
+  max-width: 180px;
+}
+
+/* ── HOW I WORK ──────────────────────────────── */
+.ab-intro-line {
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.55;
+  color: rgba(244,241,234,.6);
+  max-width: 640px;
+  margin: 0 0 36px;
+}
+.ab-pgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.ab-pcard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px 32px;
+  background: #1C1C1C;
+  border: 1px solid #3F3D3A;
+  box-sizing: border-box;
+  transition: transform 300ms ease-out, border-color 300ms ease-out;
+}
+.ab-pn { color: #91C9F7; font-size: 12px; letter-spacing: .06em }
+.ab-pt {
+  margin: 0;
+  font-size: clamp(15px, 1.5vw, 18px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+  color: #F4F1EA;
+}
+.ab-pb {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(244,241,234,.6);
+}
+
+/* ── Personal ────────────────────────────────── */
+.ab-per {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 48px;
+  align-items: flex-start;
+}
+.ab-portrait {
+  margin: 0;
+  width: 176px;
+  height: 220px;
+  box-sizing: border-box;
+  border: 1px solid #3F3D3A;
+  background: #1C1C1C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.ab-pertext {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+}
+.ab-perfill {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(244,241,234,.3);
+  border: 1px dashed #4a4a4a;
+  padding: 20px 24px;
+  font-style: italic;
+}
+
+/* ── Hover (pointer-capable devices only) ────── */
+@media (hover:hover) and (min-width:769px) {
+  .ab-pcard:hover {
+    border-color: #FF6A24;
+    transform: translateY(-4px);
+  }
+}
+
+/* ── Mobile ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .ab-hero-grid { grid-template-columns: 1fr; gap: 28px }
+  .ab-h1 { font-size: clamp(56px, 15vw, 96px) }
+  .ab-bnr-wrap { font-size: clamp(36px, 10vw, 68px) }
+  .ab-jstops { grid-template-columns: repeat(2, 1fr) }
+  .ab-pgrid { grid-template-columns: 1fr }
+  .ab-thesis { padding: 20px 24px }
+  .ab-pcard { padding: 20px 24px }
+  .ab-journey-inner { padding: 0 var(--edge) 36px }
+}
+
+/* ── Reduced motion ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ab-bw span { transform: none !important; transition: none !important }
+  .rvon .ab-bsec.in .ab-ignite { animation: none !important; color: #FF6A24 !important }
+}

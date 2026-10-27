@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import "./styles/landing.css";
+@import "./styles/resume.css";
+@import "./styles/about.css";
+
+@theme inline {
+  --color-ink: #101010;
+  --color-paper: #f4f1ea;
+  --color-muted: #a8a59e;
+  --color-orange: #ff6a24;
+  --color-ice: #91c9f7;
+  --color-panel: #1c1c1c;
+  --color-line: #242424;
+  --font-sans: var(--font-inter-tight), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #101010;
+  color: #f4f1ea;
+}
+
+body {
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+}
