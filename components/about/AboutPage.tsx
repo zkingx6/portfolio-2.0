@@ -10,12 +10,12 @@ import { useReveal } from "@/lib/useReveal";
 /* ── Content (edit here) ─────────────────────── */
 
 const SECTIONS = [
-  { id: "intro", num: "00", label: "Intro" },
-  { id: "origin", num: "01", label: "Origin" },
-  { id: "beliefs", num: "02", label: "Beliefs" },
-  { id: "with-ai", num: "03", label: "With AI" },
-  { id: "now", num: "04", label: "Now" },
-  { id: "off-screen", num: "05", label: "Off-screen" },
+  { id: "intro",      num: "00", label: "Intro",       sh: "In." },
+  { id: "origin",     num: "01", label: "Origin",      sh: "Or." },
+  { id: "beliefs",    num: "02", label: "Beliefs",     sh: "Be." },
+  { id: "with-ai",    num: "03", label: "With AI",     sh: "AI"  },
+  { id: "now",        num: "04", label: "Now",         sh: "No." },
+  { id: "off-screen", num: "05", label: "Off-screen",  sh: "Off." },
 ] as const;
 
 const PROFILE: { k: string; v: string; ph?: boolean; cursor?: boolean }[] = [
@@ -91,15 +91,30 @@ export function AboutPage() {
   const [act, setAct] = useState(0);
   useReveal();
 
+  // --rc: position the fixed rail in the left margin (identical to ResumeRail).
+  useEffect(() => {
+    const pos = () => {
+      const fr = document.querySelector(".frame");
+      const rail = document.querySelector(".rail2") as HTMLElement | null;
+      if (!fr || !rail) return;
+      rail.style.setProperty("--rc", fr.getBoundingClientRect().left / 2 + "px");
+    };
+    pos();
+    window.addEventListener("resize", pos);
+    const ro = window.ResizeObserver ? new ResizeObserver(pos) : null;
+    if (ro) ro.observe(document.body);
+    if (document.fonts?.ready) document.fonts.ready.then(pos);
+    requestAnimationFrame(pos);
+    return () => { window.removeEventListener("resize", pos); ro?.disconnect(); };
+  }, []);
+
   // Active section — same rule as the resume rail.
   useEffect(() => {
     const h = () => {
       let next = 0;
       SECTIONS.forEach((s, i) => {
         const el = document.getElementById(s.id);
-        if (el && el.getBoundingClientRect().top <= Math.min(240, window.innerHeight * 0.4)) {
-          next = i;
-        }
+        if (el && el.getBoundingClientRect().top <= Math.min(240, window.innerHeight * 0.4)) next = i;
       });
       setAct((prev) => (prev === next ? prev : next));
     };
@@ -110,7 +125,7 @@ export function AboutPage() {
 
   // Keep the active item visible in the mobile strip.
   useEffect(() => {
-    const strip = document.querySelector(".ab-idx") as HTMLElement | null;
+    const strip = document.querySelector(".strip") as HTMLElement | null;
     const a = strip?.querySelector("a.on") as HTMLElement | null;
     if (!strip || !a || strip.scrollWidth <= strip.clientWidth) return;
     strip.scrollTo({ left: a.offsetLeft - 20, behavior: "smooth" });
@@ -154,29 +169,30 @@ export function AboutPage() {
             onClose={nav.closeAll}
           />
 
-          <div className="ab-lay rl">
-            {/* ── Section index (sticky rail / mobile strip) ── */}
-            <nav className={"ab-idx mono" + (nav.sc ? " sc" : "")} aria-label="About sections">
-              {SECTIONS.map((s, i) => (
-                <a
-                  key={s.id}
-                  href={"#" + s.id}
-                  className={act === i ? "on" : ""}
-                  aria-current={act === i ? "location" : undefined}
-                  onClick={() => setAct(i)}
-                >
-                  <span className="ab-dsl">
-                    <span className="ab-dsh" />
-                  </span>
-                  <span className="ab-nm">{s.num}</span>
-                  <span className="ab-lb">{s.label}</span>
-                </a>
-              ))}
-            </nav>
+          {/* ── Rail — fixed in left margin, same as ResumeRail ── */}
+          <nav className={"rail2" + (nav.sc ? " sc" : "")} aria-label="About sections">
+            {SECTIONS.map((s, i) => (
+              <a key={s.id} href={"#" + s.id} className={act === i ? "on" : ""} aria-current={act === i ? "location" : undefined}>
+                <span className="dsl"><span className="dsh" /></span>
+                <span className="nm2">{s.num}</span>
+                <span className="lb">{s.label}</span>
+                <span className="sh">{s.sh}</span>
+              </a>
+            ))}
+          </nav>
 
-            <main className="ab-main">
+          {/* ── Strip — fixed below nav on smaller screens ── */}
+          <nav className={"strip" + (nav.sc ? " sc" : "")} aria-label="About sections">
+            {SECTIONS.map((s, i) => (
+              <a key={s.id} href={"#" + s.id} className={act === i ? "on" : ""} aria-current={act === i ? "location" : undefined}>
+                <span className="nm2">{s.num}</span>
+                <span className="lb">{s.label}</span>
+              </a>
+            ))}
+          </nav>
+
               {/* ── 00 INTRO ─────────────────────────── */}
-              <section id="intro" className="ab-sec">
+              <section id="intro" className="ab-sec" style={{ padding: "calc(24px + 81px) var(--edge) 0" }}>
                 <SecLabel num="00" label="Intro" />
                 <h1 className="ab-h1">
                   <span className="mask">
@@ -206,7 +222,7 @@ export function AboutPage() {
               </section>
 
               {/* ── 01 ORIGIN ────────────────────────── */}
-              <section id="origin" className="ab-sec">
+              <section id="origin" className="ab-sec rl" style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 0" }}>
                 <SecLabel num="01" label="Origin" />
                 <p className="ab-arc rv">
                   Fashion <i>→</i> visual communication <i>→</i> product.
@@ -241,7 +257,7 @@ export function AboutPage() {
               </section>
 
               {/* ── 02 BELIEFS ───────────────────────── */}
-              <section id="beliefs" className="ab-sec">
+              <section id="beliefs" className="ab-sec rl" style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 0" }}>
                 <SecLabel num="02" label="Beliefs" />
                 <div className="ab-bl">
                   {BELIEFS.map((b, i) => (
@@ -261,7 +277,7 @@ export function AboutPage() {
               </section>
 
               {/* ── 03 WITH AI ───────────────────────── */}
-              <section id="with-ai" className="ab-sec">
+              <section id="with-ai" className="ab-sec rl" style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 0" }}>
                 <SecLabel num="03" label="With AI" />
                 <div className="ab-cmp rv">
                   <div className="ab-pane">
@@ -303,7 +319,7 @@ export function AboutPage() {
               </section>
 
               {/* ── 04 NOW ───────────────────────────── */}
-              <section id="now" className="ab-sec">
+              <section id="now" className="ab-sec rl" style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 0" }}>
                 <SecLabel num="04" label="Now" />
                 <div className="ab-win ab-log rv" role="group" aria-label="Status log">
                   <WinHead title="now.log" status="Live" active />
@@ -324,7 +340,7 @@ export function AboutPage() {
               </section>
 
               {/* ── 05 OFF-SCREEN ────────────────────── */}
-              <section id="off-screen" className="ab-sec">
+              <section id="off-screen" className="ab-sec rl" style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 96px" }}>
                 <SecLabel num="05" label="Off-screen" />
                 <div className="ab-per rv">
                   <figure className="ab-portrait mono">[ Portrait ]</figure>
@@ -349,8 +365,6 @@ export function AboutPage() {
                   </a>
                 </div>
               </section>
-            </main>
-          </div>
         </div>
       </div>
 

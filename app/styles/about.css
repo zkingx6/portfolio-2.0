@@ -1,62 +1,14 @@
 /* ─────────────────────────────────────────────
    About page — ab-* prefix
    Direction B · Minimal / System
+   Nav rail: reuses resume.css .rail2 / .strip.
    Shared utilities (rl, rv, mono, mask, cta, frame)
    live in landing.css / resume.css.
 ───────────────────────────────────────────── */
 
-/* ── Layout: sticky index + content column ──── */
-.ab-lay { display: flex; flex-wrap: wrap; align-items: flex-start; margin-top: 81px }
-.ab-main {
-  flex: 999 1 560px;
-  min-width: 0;
-  box-sizing: border-box;
-  padding: 0 var(--edge) 96px;
-  border-left: 1px solid rgba(244,241,234,.1);
-}
-.ab-sec { padding: 72px 0 8px; max-width: 760px; scroll-margin-top: 96px }
-.ab-sec + .ab-sec { margin-top: 56px }
-.ab-k { display: flex; gap: 12px; margin-bottom: 28px }
-.ab-k b { color: #91C9F7; font-weight: 500 }
-.ab-k span { color: #FF6A24 }
-
-/* ── Section index (matches resume rail) ────── */
-.ab-idx {
-  position: sticky;
-  top: 81px;
-  z-index: 40;
-  align-self: flex-start;
-  flex: 1 1 220px;
-  max-width: 280px;
-  box-sizing: border-box;
-  padding: 56px var(--edge);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.ab-idx a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 32px;
-  flex: none;
-  text-decoration: none;
-  color: rgba(244,241,234,.55);
-}
-.ab-dsl { width: 44px; display: flex; flex: none }
-.ab-dsh {
-  display: block;
-  width: 22px;
-  height: 1px;
-  background: rgba(244,241,234,.4);
-  transition: width 200ms ease, background-color 200ms ease;
-}
-.ab-nm, .ab-lb { transition: color 200ms ease }
-.ab-idx a:hover .ab-lb { color: #F4F1EA }
-.ab-idx a.on .ab-dsh { width: 44px; background: #FF6A24 }
-.ab-idx a.on .ab-nm { color: #FF6A24 }
-.ab-idx a.on .ab-lb { color: #F4F1EA }
-.ab-idx a:focus-visible { outline: 2px solid #91C9F7; outline-offset: 4px }
+/* ── Section wrapper ─────────────────────────── */
+.ab-sec { max-width: 760px; scroll-margin-top: 96px }
+@media (max-width: 1279px) { .ab-sec { scroll-margin-top: 142px } }
 
 /* ── 00 Intro ────────────────────────────────── */
 .ab-h1 {
@@ -293,29 +245,13 @@
 .ab-close span { color: #FF6A24 }
 .ab-ctas { display: flex; flex-wrap: wrap; gap: 12px }
 
-/* ── Mobile: index becomes a sticky strip ────── */
+/* ── Section label (00 / INTRO) ──────────────── */
+.ab-k { display: flex; gap: 12px; margin-bottom: 28px }
+.ab-k b { color: #91C9F7; font-weight: 500 }
+.ab-k span { color: #FF6A24 }
+
+/* ── Mobile ──────────────────────────────────── */
 @media (max-width: 768px) {
-  .ab-idx {
-    max-width: none;
-    flex: 1 1 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 22px;
-    overflow-x: auto;
-    padding: 12px var(--edge);
-    background: rgba(16,16,16,.88);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(244,241,234,.08);
-    scrollbar-width: none;
-  }
-  .ab-idx::-webkit-scrollbar { display: none }
-  .ab-dsl { display: none }
-  .ab-idx a { min-height: 36px; gap: 8px; white-space: nowrap }
-  .ab-idx a.on { box-shadow: 0 3px 0 #FF6A24 }
-  .ab-main { border-left: 0; padding-bottom: 72px }
-  .ab-sec { padding-top: 56px; scroll-margin-top: 150px }
-  .ab-sec + .ab-sec { margin-top: 32px }
   .ab-kv { grid-template-columns: 1fr; gap: 0; padding: 5px 0 }
   .ab-og, .ab-cmp { grid-template-columns: 1fr }
   .ab-br { grid-template-columns: 36px minmax(0,1fr); gap: 12px }
@@ -329,5 +265,4 @@
 /* ── Reduced motion ───────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .ab-cur, .ab-thread:hover .ab-tn { animation: none !important }
-  .ab-dsh { transition: none }
 }
