@@ -1,249 +1,333 @@
-
 /* ─────────────────────────────────────────────
    About page — ab-* prefix
-   Shared utilities (rl, rv, mono, mask, cta …)
+   Direction B · Minimal / System
+   Shared utilities (rl, rv, mono, mask, cta, frame)
    live in landing.css / resume.css.
 ───────────────────────────────────────────── */
 
-/* ── Hero ────────────────────────────────────── */
-.ab-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px 60px;
-  align-items: end;
-  padding-bottom: 12px;
-}
-.ab-h1 {
-  margin: 0;
-  font-size: clamp(64px, 10vw, 128px);
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -.05em;
-  text-transform: uppercase;
-}
-.ab-intro { max-width: 480px }
-.ab-intro p {
-  margin: 0 0 16px;
-  font-size: clamp(16px, 1.5vw, 20px);
-  line-height: 1.45;
-  color: rgba(244,241,234,.8);
-}
-.ab-intro p:last-child { margin-bottom: 0 }
-
-/* ── Banner ──────────────────────────────────── */
-.ab-bnr-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0 .28em;
-  font-size: clamp(48px, 8vw, 116px);
-  font-weight: 800;
-  letter-spacing: -.05em;
-  line-height: 0.92;
-  text-align: center;
-}
-/* override the .rvon .rv opacity:0 so words animate individually */
-.rvon .ab-bnr-wrap.rv {
-  opacity: 1;
-  transform: none;
-}
-.ab-bw {
-  display: inline-block;
-  overflow: hidden;
-  line-height: 0.92;
-  margin-right: .28em;
-}
-.ab-bw:last-child { margin-right: 0 }
-.rvon .ab-bw span {
-  display: inline-block;
-  transform: translateY(140%);
-  transition: transform 500ms cubic-bezier(.2,.7,.2,1);
-  transition-delay: calc(var(--wi, 0) * 70ms);
-}
-.rvon .ab-bnr-wrap.in .ab-bw span {
-  transform: none;
-}
-
-/* ── WHO I AM ────────────────────────────────── */
-.ab-bsec { max-width: 960px }
-.ab-belief {
-  margin: 0 0 32px;
-  font-size: clamp(28px, 3.8vw, 52px);
-  font-weight: 800;
-  letter-spacing: -.04em;
-  line-height: 1.05;
-  text-transform: uppercase;
-  color: #F4F1EA;
-}
-.ab-ignite { color: #F4F1EA }
-.rvon .ab-bsec.in .ab-ignite {
-  animation: abIgnite 650ms ease-out var(--ad, 0ms) both;
-}
-@keyframes abIgnite {
-  0%   { color: #F4F1EA }
-  28%  { color: #FFCFA0 }
-  100% { color: #FF6A24 }
-}
-.ab-body {
-  font-size: clamp(15px, 1.35vw, 18px);
-  line-height: 1.65;
-  color: rgba(244,241,234,.68);
-  max-width: 680px;
-  margin: 0 0 40px;
-}
-.ab-thesis {
-  margin: 0;
-  background: #1C1C1C;
-  border: 1px solid rgba(244,241,234,.18);
-  padding: 32px 36px;
-  max-width: 800px;
+/* ── Layout: sticky index + content column ──── */
+.ab-lay { display: flex; flex-wrap: wrap; align-items: flex-start; margin-top: 81px }
+.ab-main {
+  flex: 999 1 560px;
+  min-width: 0;
   box-sizing: border-box;
-  font-size: clamp(17px, 1.8vw, 24px);
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: -.025em;
-  color: #F4F1EA;
-  font-style: italic;
+  padding: 0 var(--edge) 96px;
+  border-left: 1px solid rgba(244,241,234,.1);
 }
+.ab-sec { padding: 72px 0 8px; max-width: 760px; scroll-margin-top: 96px }
+.ab-sec + .ab-sec { margin-top: 56px }
+.ab-k { display: flex; gap: 12px; margin-bottom: 28px }
+.ab-k b { color: #91C9F7; font-weight: 500 }
+.ab-k span { color: #FF6A24 }
 
-/* ── Journey ─────────────────────────────────── */
-#ab-journey-host {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 320px;
-}
-/* #ab-jdots styles are set inline in the component to ensure
-   correct positioning regardless of CSS load order */
-.ab-journey-inner {
-  position: relative;
-  z-index: 1;
-  margin-top: auto;
-  padding: 0 var(--edge) 48px;
-}
-.ab-jstops {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-.ab-jstop {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  border-top: 1px solid #333;
-  padding-top: 16px;
-}
-.ab-jname {
-  font-size: clamp(18px, 2.1vw, 26px);
-  font-weight: 800;
-  letter-spacing: -.04em;
-  text-transform: uppercase;
-  color: #F4F1EA;
-  line-height: 1;
-}
-.ab-jtag {
-  font-size: 13px;
-  line-height: 1.5;
-  color: rgba(244,241,234,.45);
-  max-width: 180px;
-}
-
-/* ── HOW I WORK ──────────────────────────────── */
-.ab-intro-line {
-  font-size: clamp(15px, 1.35vw, 18px);
-  line-height: 1.55;
-  color: rgba(244,241,234,.6);
-  max-width: 640px;
-  margin: 0 0 36px;
-}
-.ab-pgrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-}
-.ab-pcard {
+/* ── Section index (matches resume rail) ────── */
+.ab-idx {
+  position: sticky;
+  top: 81px;
+  z-index: 40;
+  align-self: flex-start;
+  flex: 1 1 220px;
+  max-width: 280px;
+  box-sizing: border-box;
+  padding: 56px var(--edge);
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 28px 32px;
-  background: #1C1C1C;
-  border: 1px solid #3F3D3A;
-  box-sizing: border-box;
-  transition: transform 300ms ease-out, border-color 300ms ease-out;
 }
-.ab-pn { color: #91C9F7; font-size: 12px; letter-spacing: .06em }
-.ab-pt {
-  margin: 0;
-  font-size: clamp(15px, 1.5vw, 18px);
-  font-weight: 700;
-  letter-spacing: -.03em;
-  text-transform: uppercase;
-  color: #F4F1EA;
-}
-.ab-pb {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.65;
-  color: rgba(244,241,234,.6);
-}
-
-/* ── Personal ────────────────────────────────── */
-.ab-per {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px 48px;
-  align-items: flex-start;
-}
-.ab-portrait {
-  margin: 0;
-  width: 176px;
-  height: 220px;
-  box-sizing: border-box;
-  border: 1px solid #3F3D3A;
-  background: #1C1C1C;
+.ab-idx a {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+  min-height: 32px;
   flex: none;
+  text-decoration: none;
+  color: rgba(244,241,234,.55);
 }
-.ab-pertext {
-  flex: 1;
-  min-width: 240px;
-  display: flex;
-  flex-direction: column;
+.ab-dsl { width: 44px; display: flex; flex: none }
+.ab-dsh {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: rgba(244,241,234,.4);
+  transition: width 200ms ease, background-color 200ms ease;
 }
-.ab-perfill {
+.ab-nm, .ab-lb { transition: color 200ms ease }
+.ab-idx a:hover .ab-lb { color: #F4F1EA }
+.ab-idx a.on .ab-dsh { width: 44px; background: #FF6A24 }
+.ab-idx a.on .ab-nm { color: #FF6A24 }
+.ab-idx a.on .ab-lb { color: #F4F1EA }
+.ab-idx a:focus-visible { outline: 2px solid #91C9F7; outline-offset: 4px }
+
+/* ── 00 Intro ────────────────────────────────── */
+.ab-h1 {
+  margin: 0 0 20px;
+  font-size: clamp(48px, 6vw, 84px);
+  font-weight: 800;
+  line-height: .92;
+  letter-spacing: -.05em;
+}
+.ab-h1 em { font-style: normal; color: #FF6A24 }
+.ab-sub {
   margin: 0;
-  font-size: 15px;
-  line-height: 1.65;
-  color: rgba(244,241,234,.3);
-  border: 1px dashed #4a4a4a;
-  padding: 20px 24px;
+  max-width: 540px;
+  font-size: clamp(17px, 1.5vw, 20px);
+  line-height: 1.5;
+  color: rgba(244,241,234,.78);
+}
+
+/* window chrome (profile, now.log, AI panes) */
+.ab-win {
+  margin-top: 48px;
+  border: 1px solid rgba(244,241,234,.18);
+  background: #1C1C1C;
+  box-shadow: 0 24px 60px rgba(0,0,0,.55);
+}
+.ab-wh {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(244,241,234,.12);
+}
+.ab-wd {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: #242424;
+  box-shadow: inset 0 0 0 1px rgba(244,241,234,.22);
+}
+.ab-wd.o { background: #FF6A24; box-shadow: none }
+.ab-wt { margin-left: 8px; color: #A8A59E }
+.ab-ws { margin-left: auto; display: flex; align-items: center; gap: 8px; color: #A8A59E }
+.ab-nd { width: 5px; height: 5px; flex: none; border-radius: 50%; background: #FF6A24 }
+.ab-wb { padding: 20px 24px 24px; font: 13px/1.75 'JetBrains Mono', monospace }
+.ab-kv { display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 12px; padding: 3px 0 }
+.ab-kk { color: #91C9F7 }
+.ab-kvv { color: #F4F1EA }
+.ab-ph { color: #FF6A24 }
+.ab-cur {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  margin-left: 4px;
+  vertical-align: -2px;
+  background: #FF6A24;
+  animation: blink 1s steps(1) infinite;
+}
+
+/* ── 01 Origin ───────────────────────────────── */
+.ab-arc {
+  margin: 0 0 40px;
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+.ab-arc i { font-style: normal; color: #FF6A24 }
+.ab-og { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(0,1fr); gap: 40px }
+.ab-ogt p { margin: 0 0 18px; font-size: 18px; line-height: 1.65; color: rgba(244,241,234,.78) }
+.ab-drop {
+  float: left;
+  margin: 6px 12px 0 0;
+  font-size: 72px;
+  font-weight: 800;
+  line-height: .82;
+  letter-spacing: -.04em;
+  color: #F4F1EA;
+}
+.ab-lesson { margin-top: 28px; padding: 22px 24px; background: #1C1C1C; border: 1px solid #3F3D3A }
+.ab-lesson .mono { display: block; margin-bottom: 10px; color: #91C9F7 }
+.ab-lesson p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
   font-style: italic;
+  letter-spacing: -.02em;
+  line-height: 1.4;
+  color: #F4F1EA;
 }
-
-/* ── Hover (pointer-capable devices only) ────── */
-@media (hover:hover) and (min-width:769px) {
-  .ab-pcard:hover {
-    border-color: #FF6A24;
-    transform: translateY(-4px);
-  }
+.ab-thread { border: 1px solid #333; padding: 22px 20px }
+.ab-th { display: block; margin-bottom: 22px; color: #A8A59E }
+.ab-ts { position: relative; padding: 0 0 26px 28px }
+.ab-ts:last-child { padding-bottom: 0 }
+.ab-ts::before { content: ""; position: absolute; left: 4.5px; top: 16px; bottom: -4px; width: 1px; background: #333 }
+.ab-ts:last-child::before { display: none }
+.ab-tn {
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 10px;
+  height: 10px;
+  box-sizing: border-box;
+  border: 1px solid #F4F1EA;
+  background: #242424;
 }
+.ab-tn.o { background: #FF6A24; border-color: #FF6A24 }
+.ab-thread:hover .ab-tn { animation: tnrun 400ms ease-out both }
+.ab-ts:nth-child(3) .ab-tn { animation-delay: 60ms }
+.ab-ts:nth-child(4) .ab-tn { animation-delay: 120ms }
+.ab-ts:nth-child(5) .ab-tn { animation-delay: 180ms }
+.ab-tnm {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.ab-ttg { display: block; margin-top: 6px; font-size: 14px; line-height: 1.5; color: #A8A59E }
 
-/* ── Mobile ──────────────────────────────────── */
+/* ── 02 Beliefs ──────────────────────────────── */
+.ab-bl { border-top: 1px solid #333 }
+.ab-br {
+  display: grid;
+  grid-template-columns: 56px minmax(0,1fr);
+  gap: 20px;
+  padding: 30px 0;
+  border-bottom: 1px solid #333;
+}
+.ab-br b { padding-top: 8px; color: #91C9F7; font-weight: 500 }
+.ab-br h3 {
+  margin: 0 0 10px;
+  font-size: clamp(26px, 2.8vw, 38px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+.ab-br h3 span { color: #FF6A24 }
+.ab-br p { margin: 0; max-width: 560px; font-size: 17px; line-height: 1.6; color: rgba(244,241,234,.78) }
+
+/* ── 03 With AI ──────────────────────────────── */
+.ab-cmp { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px }
+.ab-pane { display: flex; flex-direction: column; background: #1C1C1C; border: 1px solid rgba(244,241,234,.18) }
+.ab-pane.me { border-color: #FF6A24 }
+.ab-shot {
+  position: relative;
+  margin: 16px;
+  min-height: 240px;
+  box-sizing: border-box;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border: 1px dashed #4a4a4a;
+  color: #A8A59E;
+}
+.ab-pin {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  background: #FF6A24;
+  color: #101010;
+  font: 700 11px 'JetBrains Mono', monospace;
+}
+.ab-pin.w { background: #242424; color: #F4F1EA; box-shadow: inset 0 0 0 1px rgba(244,241,234,.3) }
+.ab-cap { margin: 0; padding: 0 16px 16px; font-size: 14px; line-height: 1.5; color: #A8A59E }
+.ab-notes { margin-top: 18px; border: 1px solid #333 }
+.ab-nt {
+  display: grid;
+  grid-template-columns: 40px minmax(0,1fr) minmax(0,1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 20px;
+  border-top: 1px solid #333;
+}
+.ab-nt:first-child { border-top: 0 }
+.ab-nt .ab-pin { position: static }
+.ab-l { display: block; margin-bottom: 4px; color: #A8A59E }
+.ab-nt p { margin: 0; font-size: 15px; line-height: 1.55; color: #D9D6CF }
+
+/* ── 04 Now ──────────────────────────────────── */
+.ab-log { margin-top: 0 }
+.ab-log .ab-wb { padding: 8px 0 12px }
+.ab-lr {
+  display: grid;
+  grid-template-columns: 110px 120px minmax(0,1fr);
+  gap: 12px;
+  padding: 10px 24px;
+  border-top: 1px solid rgba(244,241,234,.06);
+}
+.ab-lr:first-child { border-top: 0 }
+.ab-lt { color: #A8A59E }
+.ab-ltag { color: #91C9F7 }
+.ab-ltx { color: #F4F1EA }
+.ab-ltx em { font-style: normal; color: #FF6A24 }
+.ab-upd { padding: 12px 24px; border-top: 1px solid rgba(244,241,234,.12); color: #A8A59E; font-size: 11px }
+
+/* ── 05 Off-screen ───────────────────────────── */
+.ab-per { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start }
+.ab-portrait {
+  margin: 0;
+  width: 200px;
+  aspect-ratio: 4 / 5;
+  flex: none;
+  display: grid;
+  place-items: center;
+  background: #1C1C1C;
+  border: 1px solid #3F3D3A;
+  color: #A8A59E;
+}
+.ab-pl { flex: 1 1 280px; display: flex; flex-direction: column; gap: 12px }
+.ab-fill {
+  margin: 0;
+  padding: 16px 20px;
+  border: 1px dashed #4a4a4a;
+  font-size: 16px;
+  line-height: 1.6;
+  font-style: italic;
+  color: #A8A59E;
+}
+.ab-close {
+  margin: 88px 0 32px;
+  font-size: clamp(44px, 6.4vw, 92px);
+  font-weight: 800;
+  letter-spacing: -.05em;
+  line-height: .9;
+  text-transform: uppercase;
+}
+.ab-close span { color: #FF6A24 }
+.ab-ctas { display: flex; flex-wrap: wrap; gap: 12px }
+
+/* ── Mobile: index becomes a sticky strip ────── */
 @media (max-width: 768px) {
-  .ab-hero-grid { grid-template-columns: 1fr; gap: 28px }
-  .ab-h1 { font-size: clamp(56px, 15vw, 96px) }
-  .ab-bnr-wrap { font-size: clamp(36px, 10vw, 68px) }
-  .ab-jstops { grid-template-columns: repeat(2, 1fr) }
-  .ab-pgrid { grid-template-columns: 1fr }
-  .ab-thesis { padding: 20px 24px }
-  .ab-pcard { padding: 20px 24px }
-  .ab-journey-inner { padding: 0 var(--edge) 36px }
+  .ab-idx {
+    max-width: none;
+    flex: 1 1 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 22px;
+    overflow-x: auto;
+    padding: 12px var(--edge);
+    background: rgba(16,16,16,.88);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(244,241,234,.08);
+    scrollbar-width: none;
+  }
+  .ab-idx::-webkit-scrollbar { display: none }
+  .ab-dsl { display: none }
+  .ab-idx a { min-height: 36px; gap: 8px; white-space: nowrap }
+  .ab-idx a.on { box-shadow: 0 3px 0 #FF6A24 }
+  .ab-main { border-left: 0; padding-bottom: 72px }
+  .ab-sec { padding-top: 56px; scroll-margin-top: 150px }
+  .ab-sec + .ab-sec { margin-top: 32px }
+  .ab-kv { grid-template-columns: 1fr; gap: 0; padding: 5px 0 }
+  .ab-og, .ab-cmp { grid-template-columns: 1fr }
+  .ab-br { grid-template-columns: 36px minmax(0,1fr); gap: 12px }
+  .ab-nt { grid-template-columns: 32px minmax(0,1fr) }
+  .ab-nt > div:last-child { grid-column: 2 }
+  .ab-lr { grid-template-columns: 1fr; gap: 2px; padding: 12px 20px }
+  .ab-portrait { width: 160px }
+  .ab-close { margin-top: 64px }
 }
 
 /* ── Reduced motion ───────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .ab-bw span { transform: none !important; transition: none !important }
-  .rvon .ab-bsec.in .ab-ignite { animation: none !important; color: #FF6A24 !important }
+  .ab-cur, .ab-thread:hover .ab-tn { animation: none !important }
+  .ab-dsh { transition: none }
 }
