@@ -199,7 +199,7 @@ button.ix{transition:background-color 300ms ease}
 .ix .al{grid-column:2/4}
 .ix .vt{grid-column:4;justify-self:end;margin-top:10px;color:#FF6A24;font-size:11px}
 .pn{padding-left:76px}
-@media (hover:hover) and (min-width:769px){.cv.cz:hover{transform:translateY(-4px)}.cv.cz.on:hover{transform:none}.cz:hover .dm .d{animation:dotin 360ms ease-out both;animation-delay:calc(var(--c)*40ms)}.cv.cz:hover .m1pr{animation:drawP 420ms ease-out 0ms both}.cv.cz:hover .m1pv1{animation:drawP 170ms ease-out 400ms both}.cv.cz:hover .m1pv2{animation:drawP 170ms ease-out 490ms both}.cv.cz:hover .m1ph{animation:drawP 210ms ease-out 610ms both}.cv.cz:hover .m3l{animation:drawDown 180ms ease-out calc(var(--li,0)*80ms) both}.cv.cz:hover .m3t{animation:settleIn 270ms ease-out 420ms both}}
+@media (hover:hover) and (min-width:769px){.cv.cz:hover{transform:translateY(-4px)}.cv.cz.on:hover{transform:none}.cz:hover .dm .d{animation:dotin 360ms ease-out both;animation-delay:calc(var(--c)*40ms)}.cv.cz:hover .m1g{animation:draw 500ms ease-out both}.cv.cz:hover .m3l{animation:drawDown 180ms ease-out calc(var(--li,0)*80ms) both}.cv.cz:hover .m3t{animation:settleIn 270ms ease-out 420ms both}}
 @media (max-width:768px){.cv.cz{margin-bottom:0}.wk{padding-top:56px}.ix{grid-template-columns:48px 1fr}.ix .rn,.ix .rd,.ix .r,.ix .al,.ix .vt{grid-column:2;justify-self:start}.pn{padding-left:0}}
 #ask .rx{width:100%;box-sizing:border-box;padding:0;background:#1C1C1C;background-image:none;border:1px solid rgba(244,241,234,.18);box-shadow:0 24px 60px rgba(0,0,0,.55)}
 .rxh{display:flex;align-items:center;gap:8px;padding:12px 24px;border-bottom:1px solid rgba(244,241,234,.12)}
@@ -376,3 +376,4 @@ button.ix{transition:background-color 300ms ease}
 @media (prefers-reduced-motion:reduce){.bcg-graphic.is-anim .bc-sq{animation:none!important;transform:none!important;opacity:1!important}}
 @media (max-width:768px){.cfgcluster{position:static;margin:12px 0 0 auto}}
 @media (hover:hover) and (min-width:769px){.cv.cz:hover{border-color:#FF6A24}.cv.cz.on:hover{border-color:#91C9F7;border-width:2px}}
+.cv.cz.on .m1g{opacity:1;animation:none}

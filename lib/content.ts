@@ -27,7 +27,7 @@ export const CATEGORIES: Category[] = [
     title: "Products & Experiences",
     count: "05",
     status: "Core work",
-    names: ["PARALLEL", "TAPGO", "RESTIFY", "RIT MYCOURSES", "BCG BANKING APP"],
+    names: ["PARALLEL", "TAPGO", "RESTIFY", "RIT MYCOURSES", "BCG BY FORAGE"],
     rotate: "-1.5deg",
   },
   {
@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
     id: "001",
     name: "Parallel",
     tags: "SaaS Product / UX/UI / Next.js / Supabase",
-    status: "[Deployed MVP]",
+    status: "[B2B SaaS]",
     categories: [1, 3],
     d1: "A SaaS product spanning UX/UI and a full-stack build.",
     d2: "Built with Next.js and Supabase; deployed as an MVP.",
@@ -142,7 +142,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "009",
-    name: "BCG Banking App",
+    name: "BCG by Forage",
     tags: "Banking UX Research / Experience Strategy",
     status: "[Forage Simulation]",
     categories: [1],
@@ -254,20 +254,17 @@ export const TICKER =
 export const SKILLS: SkillGroup[] = [
   {
     num: "01",
-    title: "Product & UX",
+    title: "Product & UX/UI",
     chips: [
       "Product Design",
       "UX/UI Design",
       "Interaction Design",
       "User Research",
       "Information Architecture",
-      "User Flows",
       "Wireframing",
       "Prototyping",
       "Design Systems",
       "Accessibility",
-      "Responsive Design",
-      "Usability",
     ],
   },
   {

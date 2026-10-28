@@ -6,10 +6,10 @@ export function CaseMotif({ index }: { index: number }) {
     return (
       <svg className="mt" viewBox="0 0 100 32" preserveAspectRatio="none">
         <g className="m1g" fill="none" stroke="#FF6A24" strokeWidth="1">
-          <path className="m1pr" pathLength="1" d="M1 4H99V28H1Z" />
-          <path className="m1pv1" pathLength="1" d="M34 4V28" />
-          <path className="m1pv2" pathLength="1" d="M67 4V28" />
-          <path className="m1ph" pathLength="1" d="M1 14H99" />
+          <path className="m1pr" d="M1 4H99V28H1V4" />
+          <path className="m1pv1" d="M34 4V28" />
+          <path className="m1pv2" d="M67 4V28" />
+          <path className="m1ph" d="M1 14H99" />
         </g>
       </svg>
     );

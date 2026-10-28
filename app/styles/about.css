@@ -7,7 +7,7 @@
 ───────────────────────────────────────────── */
 
 /* ── Section wrapper ─────────────────────────── */
-.ab-sec { max-width: 760px; scroll-margin-top: 96px }
+.ab-sec { scroll-margin-top: 96px }
 @media (max-width: 1279px) { .ab-sec { scroll-margin-top: 142px } }
 
 /* ── 00 Intro ────────────────────────────────── */

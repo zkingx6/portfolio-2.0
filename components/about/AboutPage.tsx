@@ -10,30 +10,28 @@ import { useReveal } from "@/lib/useReveal";
 /* ── Content (edit here) ─────────────────────── */
 
 const SECTIONS = [
-  { id: "intro",      num: "00", label: "Intro",       sh: "In." },
-  { id: "origin",     num: "01", label: "Origin",      sh: "Or." },
-  { id: "beliefs",    num: "02", label: "Beliefs",     sh: "Be." },
-  { id: "with-ai",    num: "03", label: "With AI",     sh: "AI"  },
-  { id: "now",        num: "04", label: "Now",         sh: "No." },
-  { id: "off-screen", num: "05", label: "Off-screen",  sh: "Off." },
+  { id: "intro",    num: "00", label: "Intro",    sh: "INTRO"   },
+  { id: "origin",   num: "01", label: "Origin",   sh: "ORIGIN"  },
+  { id: "beliefs",  num: "02", label: "Beliefs",  sh: "BELIEFS" },
+  { id: "with-ai",  num: "03", label: "With AI",  sh: "WITH AI" },
+  { id: "now",      num: "04", label: "Now",       sh: "NOW"     },
 ] as const;
 
 const PROFILE: { k: string; v: string; ph?: boolean; cursor?: boolean }[] = [
-  { k: "name", v: "Ronger Xu — “Zion”" },
+  { k: "name", v: "Ronger Xu — \"Zion\" 🧡" },
   { k: "based", v: "New Jersey / New York" },
   { k: "started in", v: "Fashion design" },
-  { k: "now", v: "Product design × AI" },
-  { k: "building", v: "[CURRENTLY BUILDING]", ph: true },
+  { k: "now", v: "Product & UX/UI design × AI Workflow" },
+  { k: "building", v: "Portfolio 2.0" },
   { k: "believes", v: "Accessible by default" },
-  { k: "off-screen", v: "[HOBBY]", ph: true },
   { k: "mode", v: "Directs the AI; keeps the taste", cursor: true },
 ];
 
 const THREAD = [
-  { name: "Washington", tag: "[ORIGIN — where it started]" },
-  { name: "California", tag: "[ORIGIN — fashion design]" },
-  { name: "New Jersey", tag: "[ORIGIN — home base]" },
-  { name: "New York", tag: "[ORIGIN — visual communication → product]" },
+  { name: "Washington", tag: "Where it started" },
+  { name: "California", tag: "Fashion design" },
+  { name: "New Jersey", tag: "Home base" },
+  { name: "New York", tag: "Visual communication → product" },
 ];
 
 const BELIEFS = [
@@ -49,19 +47,9 @@ const BELIEFS = [
     tail: ".",
     body: "I lead the AI to design — I’m still the one in charge of the design.",
   },
-  {
-    lead: "[BELIEF 3]",
-    key: "",
-    tail: "",
-    body: "[BELIEF 3 — one line of explanation.]",
-  },
 ];
 
-const AI_NOTES = [
-  { changed: "[CHANGE 1 — what you changed]", why: "[WHY 1 — the user or craft reason]" },
-  { changed: "[CHANGE 2]", why: "[WHY 2]" },
-  { changed: "[CHANGE 3]", why: "[WHY 3]" },
-];
+const AI_NOTES: { changed: string; why: string }[] = [];
 
 /* positions of the numbered pins on both screenshots */
 const PINS = [
@@ -71,18 +59,12 @@ const PINS = [
 ];
 
 const NOW_LOG = [
-  { date: "[DATE]", tag: "building", text: "[CURRENTLY BUILDING]" },
-  { date: "[DATE]", tag: "learning", text: "[CURRENTLY LEARNING]" },
-  { date: "[DATE]", tag: "curious", text: "[CURIOUS ABOUT]" },
-  { date: "[DATE]", tag: "open to", text: "AI product design roles", arrow: true },
+  { date: "Oct 2026", tag: "building", text: "Portfolio 2.0" },
+  { date: "Oct 2026", tag: "open to", text: "AI product design roles", arrow: true },
 ];
-const NOW_UPDATED = "[MONTH YEAR]";
+const NOW_UPDATED = "Oct 2026";
 
-const PERSONAL = [
-  "[PERSONAL — line 1]",
-  "[PERSONAL — line 2]",
-  "[PERSONAL — line 3, optional]",
-];
+const PERSONAL: string[] = [];
 
 /* ── Page ────────────────────────────────────── */
 
@@ -197,7 +179,7 @@ export function AboutPage() {
                 <h1 className="ab-h1">
                   <span className="mask">
                     <span>
-                      Designing with AI, not <em>by</em> it.
+                      Direct the tools, keep the taste.
                     </span>
                   </span>
                 </h1>
@@ -206,7 +188,7 @@ export function AboutPage() {
                   experiences simpler, more intuitive, and more human.
                 </p>
                 <div className="ab-win rv" role="group" aria-label="Profile summary" style={{ transitionDelay: "200ms" }}>
-                  <WinHead title="zion.profile" status="Live" active />
+                  <WinHead title="Ronger.profile" status="Live" active />
                   <div className="ab-wb">
                     {PROFILE.map((r) => (
                       <div key={r.k} className="ab-kv">
@@ -230,17 +212,18 @@ export function AboutPage() {
                 <div className="ab-og">
                   <div className="ab-ogt rv">
                     <p>
-                      <span className="ab-drop">I</span>[ORIGIN — where it started:
-                      why fashion, what you were making, the moment you realized the
-                      thing you loved was designing for people, not garments.]
+                      <span className="ab-drop">I</span>started in fashion design.
+                      What I was learning, without quite naming it, was how to design
+                      for a person — the garment was the medium, not the point.
                     </p>
                     <p>
-                      [ORIGIN — the bridge: what visual communication added, and how
-                      it led to product and AI.]
+                      That recognition moved me from fashion into visual communication,
+                      and from there into product design and AI. The materials changed
+                      each time. The question stayed the same.
                     </p>
                     <div className="ab-lesson">
                       <span className="mono">What fashion still teaches me</span>
-                      <p>[ORIGIN — one sentence: the lesson from fashion you still design by.]</p>
+                      <p>The garment was never the point — the person wearing it was.</p>
                     </div>
                   </div>
                   <div className="ab-thread rv" role="group" aria-label="Journey" style={{ transitionDelay: "80ms" }}>
@@ -283,39 +266,41 @@ export function AboutPage() {
                   <div className="ab-pane">
                     <WinHead title="ai.draft" status="Before" />
                     <div className="ab-shot mono">
-                      [ What the AI gave me — screenshot or snippet ]
+                      AI draft
                       {PINS.map((p, i) => (
                         <span key={i} className="ab-pin w" style={p}>{i + 1}</span>
                       ))}
                     </div>
-                    <p className="ab-cap">[AI OUTPUT — the prompt and what came back, in one line.]</p>
+                    <p className="ab-cap">—</p>
                   </div>
                   <div className="ab-pane me">
                     <WinHead title="zion.edit" status="After" active />
                     <div className="ab-shot mono">
-                      [ What I shipped — screenshot ]
+                      Edited version
                       {PINS.map((p, i) => (
                         <span key={i} className="ab-pin" style={p}>{i + 1}</span>
                       ))}
                     </div>
-                    <p className="ab-cap">[RESULT — what the final version does better, in one line.]</p>
+                    <p className="ab-cap">—</p>
                   </div>
                 </div>
-                <div className="ab-notes rv" style={{ transitionDelay: "80ms" }}>
-                  {AI_NOTES.map((n, i) => (
-                    <div key={i} className="ab-nt">
-                      <span className="ab-pin">{i + 1}</span>
-                      <div>
-                        <span className="ab-l mono">Changed</span>
-                        <p>{n.changed}</p>
+                {AI_NOTES.length > 0 && (
+                  <div className="ab-notes rv" style={{ transitionDelay: "80ms" }}>
+                    {AI_NOTES.map((n, i) => (
+                      <div key={i} className="ab-nt">
+                        <span className="ab-pin">{i + 1}</span>
+                        <div>
+                          <span className="ab-l mono">Changed</span>
+                          <p>{n.changed}</p>
+                        </div>
+                        <div>
+                          <span className="ab-l mono">Why</span>
+                          <p>{n.why}</p>
+                        </div>
                       </div>
-                      <div>
-                        <span className="ab-l mono">Why</span>
-                        <p>{n.why}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </section>
 
               {/* ── 04 NOW ───────────────────────────── */}
@@ -339,21 +324,9 @@ export function AboutPage() {
                 </div>
               </section>
 
-              {/* ── 05 OFF-SCREEN ────────────────────── */}
-              <section id="off-screen" className="ab-sec rl" style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 96px" }}>
-                <SecLabel num="05" label="Off-screen" />
-                <div className="ab-per rv">
-                  <figure className="ab-portrait mono">[ Portrait ]</figure>
-                  <div className="ab-pl">
-                    {PERSONAL.map((line) => (
-                      <p key={line} className="ab-fill">{line}</p>
-                    ))}
-                  </div>
-                </div>
-                <p className="ab-close rv">
-                  Making a way out of no <span>way</span>.
-                </p>
-                <div className="ab-ctas rv" style={{ transitionDelay: "80ms" }}>
+              {/* ── CTA row (end of page) ────────────── */}
+              <div style={{ padding: "48px var(--edge) 96px" }}>
+                <div className="ab-ctas rv">
                   <Link className="cta mono" href="/#work">
                     Work <span style={{ color: "#FF6A24" }}>→</span>
                   </Link>
@@ -364,7 +337,7 @@ export function AboutPage() {
                     Contact <span style={{ color: "#FF6A24" }}>→</span>
                   </a>
                 </div>
-              </section>
+              </div>
         </div>
       </div>
 

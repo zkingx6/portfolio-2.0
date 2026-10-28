@@ -241,7 +241,7 @@ export function LandingPage() {
                 }}
                 className="mono"
               >
-                <span>Product Designer × Creative Technologist</span>
+                <span>Product &amp; UX/UI Designer × Creative Technologist</span>
                 <span className="xy" style={{ color: "#91C9F7" }}>
                   X {pad(mx)} · Y {pad(my)}
                 </span>
@@ -278,7 +278,7 @@ export function LandingPage() {
                   style={{
                     position: "relative",
                     margin: 0,
-                    fontSize: 16,
+                    fontSize: 14,
                     lineHeight: 1.4,
                     color: "#F4F1EA",
                   }}
