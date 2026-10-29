@@ -20,7 +20,12 @@
 .cs a { color: inherit; text-decoration: none }
 
 /* ── 1 · Header block ── */
-.cs-hd { padding: calc(56px + 81px) var(--edge) 48px }
+.cs-hd {
+  padding-top: calc(56px + 81px);
+  padding-right: var(--edge);
+  padding-bottom: 48px;
+  padding-left: var(--edge);
+}
 .cs-hdtop { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; margin-bottom: 20px }
 .cs-id { color: #91C9F7 }
 .cs-type { color: #A8A59E; font-size: 11px }
@@ -83,7 +88,12 @@
 .cs-rule { height: 0 }
 
 /* ── Media placeholders (visibly empty) ── */
-.cs-hero { padding: 48px var(--edge) 64px }
+.cs-hero {
+  padding-top: 48px;
+  padding-right: var(--edge);
+  padding-bottom: 64px;
+  padding-left: var(--edge);
+}
 .cs-media {
   aspect-ratio: 16 / 9;
   max-width: 100%;
@@ -189,9 +199,9 @@
 }
 @media (max-width: 768px) {
   .cs { --cs-l: 32px }
-  .cs-hd { padding: calc(32px + 81px) var(--edge) 36px }
+  .cs-hd { padding-top: calc(32px + 81px); padding-right: var(--edge); padding-bottom: 36px; padding-left: var(--edge) }
   .cs-crumb { margin-bottom: 40px }
-  .cs-hero { padding: 32px var(--edge) 40px }
+  .cs-hero { padding-top: 32px; padding-right: var(--edge); padding-bottom: 40px; padding-left: var(--edge) }
   .cs-band { grid-template-columns: 1fr 1fr }
   .cs-bc { padding: 20px 16px 20px 0 }
   .cs-bc + .cs-bc { padding-left: 16px }
