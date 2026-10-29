@@ -36,6 +36,8 @@ export type Project = {
   d2: string;
   d2s?: string;
   trace?: boolean;
+  pageSlug?: string;
+  hasPage?: boolean;
 };
 
 export type Category = {

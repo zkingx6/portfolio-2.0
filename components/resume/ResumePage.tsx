@@ -360,7 +360,6 @@ export function ResumePage() {
       <SiteFooter
         logoSweep={nav.lk % 2 === 1}
         onLogoHover={nav.bumpLogo}
-        backToPortfolio
       />
     </div>
   );

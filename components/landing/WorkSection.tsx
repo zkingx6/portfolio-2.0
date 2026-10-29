@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties, MouseEvent, FocusEvent } from "react";
+import Link from "next/link";
 import {
   CATEGORIES,
   CATEGORY_NAMES,
@@ -58,7 +59,7 @@ type Props = {
   onToggleRow: (key: string) => void;
   onShowPreview: (
     i: number,
-    e: MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>,
+    e: MouseEvent<HTMLElement> | FocusEvent<HTMLElement>,
   ) => void;
   onLeave: () => void;
   onTracePrompt: () => void;
@@ -171,56 +172,76 @@ export function WorkSection({
                               .filter((x) => x !== k + 1)
                               .map((x) => CATEGORY_NAMES[x].toUpperCase())
                               .join(" / ");
-                            return (
-                              <div key={key}>
-                                <button
-                                  className="ix"
-                                  style={
-                                    highlightKey === key
-                                      ? { animation: "hlp 1200ms ease-out both" }
-                                      : undefined
-                                  }
-                                  aria-expanded={expandedKey === key}
-                                  onClick={() => onToggleRow(key)}
-                                  onMouseEnter={(e) => onShowPreview(i, e)}
-                                  onMouseMove={(e) => onShowPreview(i, e)}
-                                  onFocus={(e) => onShowPreview(i, e)}
-                                  onBlur={onLeave}
-                                >
-                                  <span className="rn">
-                                    <span className="t">{p.name}</span>
-                                    <span
-                                      className="mono"
-                                      style={{
-                                        display: "block",
-                                        marginTop: 8,
-                                        color: "#A8A59E",
-                                      }}
-                                    >
-                                      {p.tags}
-                                    </span>
-                                  </span>
-                                  <span className="rd">{p.d1}</span>
+                            const rowContent = (
+                              <>
+                                <span className="rn">
+                                  <span className="t">{p.name}</span>
                                   <span
-                                    className="mono r"
+                                    className="mono"
                                     style={{
-                                      color:
-                                        p.status === "[Deployed MVP]"
-                                          ? "#FF6A24"
-                                          : "#A8A59E",
+                                      display: "block",
+                                      marginTop: 8,
+                                      color: "#A8A59E",
                                     }}
                                   >
-                                    {p.status}
+                                    {p.tags}
                                   </span>
-                                  {p.categories.length > 1 ? (
-                                    <span className="mono al">
-                                      Also filed under → {also}
-                                    </span>
-                                  ) : null}
-                                  {p.trace ? (
-                                    <span className="mono vt">View trace →</span>
-                                  ) : null}
-                                </button>
+                                </span>
+                                <span className="rd">{p.d1}</span>
+                                <span
+                                  className="mono r"
+                                  style={{
+                                    color:
+                                      p.status === "[Deployed MVP]"
+                                        ? "#FF6A24"
+                                        : "#A8A59E",
+                                  }}
+                                >
+                                  {p.status}
+                                </span>
+                                {p.categories.length > 1 ? (
+                                  <span className="mono al">
+                                    Also filed under → {also}
+                                  </span>
+                                ) : null}
+                                {p.trace ? (
+                                  <span className="mono vt">View trace →</span>
+                                ) : null}
+                              </>
+                            );
+                            const rowStyle =
+                              highlightKey === key
+                                ? { animation: "hlp 1200ms ease-out both" }
+                                : undefined;
+                            return (
+                              <div key={key}>
+                                {p.hasPage ? (
+                                  <Link
+                                    href={`/work/${p.pageSlug}`}
+                                    className="ix"
+                                    style={rowStyle}
+                                    aria-label={p.name}
+                                    onMouseEnter={(e) => onShowPreview(i, e)}
+                                    onMouseMove={(e) => onShowPreview(i, e)}
+                                    onFocus={(e) => onShowPreview(i, e)}
+                                    onBlur={onLeave}
+                                  >
+                                    {rowContent}
+                                  </Link>
+                                ) : (
+                                  <button
+                                    className="ix"
+                                    style={rowStyle}
+                                    aria-expanded={expandedKey === key}
+                                    onClick={() => onToggleRow(key)}
+                                    onMouseEnter={(e) => onShowPreview(i, e)}
+                                    onMouseMove={(e) => onShowPreview(i, e)}
+                                    onFocus={(e) => onShowPreview(i, e)}
+                                    onBlur={onLeave}
+                                  >
+                                    {rowContent}
+                                  </button>
+                                )}
                                 {rowOpen ? (
                                   <div className="pn">
                                     <div>

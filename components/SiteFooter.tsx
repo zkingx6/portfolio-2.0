@@ -1,20 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import { LogoMark } from "@/components/nav/LogoMark";
 import { EMAIL, MAILTO } from "@/lib/content";
 
 type Props = {
   logoSweep: boolean;
   onLogoHover: () => void;
-  backToPortfolio?: boolean;
   showCanvas?: boolean;
 };
 
 export function SiteFooter({
   logoSweep,
   onLogoHover,
-  backToPortfolio = false,
   showCanvas = false,
 }: Props) {
   return (
@@ -130,11 +127,7 @@ export function SiteFooter({
               onHover={onLogoHover}
             />
           </span>
-          {backToPortfolio && (
-            <Link href="/" style={{ color: "#F4F1EA", textDecoration: "none" }}>
-              Back to portfolio →
-            </Link>
-          )}
+
         </div>
       </div>
     </section>

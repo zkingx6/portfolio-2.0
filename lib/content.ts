@@ -87,6 +87,8 @@ export const PROJECTS: Project[] = [
     categories: [3, 2],
     d1: "A SaaS product spanning UX/UI and a full-stack build.",
     d2: "Built with Next.js and Supabase; deployed as an MVP.",
+    pageSlug: "parallel",
+    hasPage: true,
   },
   {
     id: "009",
