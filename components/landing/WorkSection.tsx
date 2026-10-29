@@ -10,6 +10,7 @@ import {
 import { parse, projectShapes } from "@/lib/shapes";
 import { BcgGraphic } from "./BcgGraphic";
 import { CaseMotif } from "./CaseMotif";
+import { NarrowingGraphic } from "./NarrowingGraphic";
 import { EcoVizGraphic } from "./EcoVizGraphic";
 import { FennecGraphic } from "./FennecGraphic";
 import { MyCoursesGraphic } from "./MyCoursesGraphic";
@@ -28,19 +29,21 @@ function isFlushGraphic(i: number) {
     i === 4 ||
     i === 5 ||
     i === 6 ||
+    i === 7 ||
     i === 8
   );
 }
 
 function ProjectGraphic({ index }: { index: number }) {
-  if (index === 0) return <ParallelGraphic />;
-  if (index === 1) return <EcoVizGraphic />;
-  if (index === 2) return <TapGoGraphic />;
-  if (index === 3) return <RestifyGraphic />;
-  if (index === 4) return <MyCoursesGraphic />;
-  if (index === 5) return <VisaGraphic />;
-  if (index === 6) return <FennecGraphic />;
-  if (index === 8) return <BcgGraphic />;
+  if (index === 0) return <VisaGraphic />;
+  if (index === 1) return <FennecGraphic />;
+  if (index === 2) return <ParallelGraphic />;
+  if (index === 3) return <BcgGraphic />;
+  if (index === 4) return <EcoVizGraphic />;
+  if (index === 5) return <MyCoursesGraphic />;
+  if (index === 6) return <RestifyGraphic />;
+  if (index === 7) return <TapGoGraphic />;
+  if (index === 8) return <NarrowingGraphic />;
   return null;
 }
 

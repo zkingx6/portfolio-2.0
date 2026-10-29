@@ -260,7 +260,7 @@ button.ix{transition:background-color 300ms ease}
 .pn{padding-left:0}
 @media (max-width:768px){.ix{grid-template-columns:1fr}.ix .rn,.ix .rd,.ix .r,.ix .al,.ix .vt{grid-column:1;justify-self:start}.ex{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.cv{transform:none!important}}
-.parallel-graphic,.tapgo-graphic,.restify-graphic,.mycourses-graphic,.visa-graphic,.ecoviz-graphic,.fennec-graphic,.bcg-graphic{display:block;width:100%;height:auto;vertical-align:top}
+.parallel-graphic,.tapgo-graphic,.restify-graphic,.mycourses-graphic,.visa-graphic,.ecoviz-graphic,.fennec-graphic,.bcg-graphic,.narrowing-graphic{display:block;width:100%;height:auto;vertical-align:top}
 .pv.pv-pg,.inl.inl-pg{background:transparent;aspect-ratio:auto;height:auto;padding:0;overflow:visible;line-height:0}
 .parallel-graphic .pg-spine{transform-box:view-box;transform-origin:600px 108px;transform:scaleY(1)}
 .parallel-graphic .pg-hair,.parallel-graphic .pg-bar,.parallel-graphic .pg-mark{opacity:1}
@@ -377,3 +377,14 @@ button.ix{transition:background-color 300ms ease}
 @media (max-width:768px){.cfgcluster{position:static;margin:12px 0 0 auto}}
 @media (hover:hover) and (min-width:769px){.cv.cz:hover{border-color:#FF6A24}.cv.cz.on:hover{border-color:#91C9F7;border-width:2px}}
 .cv.cz.on .m1g{opacity:1;animation:none}
+.narrowing-graphic .nd-sq,.narrowing-graphic .nd-funnel,.narrowing-graphic .nd-out{transform-box:fill-box;transform-origin:center;opacity:1;transform:none}
+.narrowing-graphic.is-anim .nd-sq-0{animation:nd-sq-in 240ms cubic-bezier(.2,.7,.2,1) 0ms both}
+.narrowing-graphic.is-anim .nd-sq-1{animation:nd-sq-in 240ms cubic-bezier(.2,.7,.2,1) 80ms both}
+.narrowing-graphic.is-anim .nd-sq-2{animation:nd-sq-in 240ms cubic-bezier(.2,.7,.2,1) 160ms both}
+.narrowing-graphic.is-anim .nd-funnel{animation:nd-funnel-in 300ms ease 300ms both}
+.narrowing-graphic.is-anim .nd-out{animation:nd-land 280ms cubic-bezier(.2,.7,.2,1) both,nd-pulse 220ms cubic-bezier(.2,.7,.2,1) forwards;animation-delay:600ms,920ms}
+@keyframes nd-sq-in{0%{opacity:0;transform:translateY(-16px)}60%{opacity:1;transform:translateY(2px)}100%{opacity:1;transform:none}}
+@keyframes nd-funnel-in{from{opacity:0}to{opacity:1}}
+@keyframes nd-land{from{opacity:0;transform:translateY(-20px) scale(.92)}to{opacity:1;transform:none}}
+@keyframes nd-pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.narrowing-graphic.is-anim .nd-sq,.narrowing-graphic.is-anim .nd-funnel,.narrowing-graphic.is-anim .nd-out{animation:none!important;transform:none!important;opacity:1!important}}

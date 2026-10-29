@@ -15,102 +15,52 @@ export const MAILTO = `mailto:${EMAIL}`;
 
 export const CATEGORY_NAMES = [
   "",
-  "Products & Experiences",
+  "Product & UX/UI Design",
   "Data & Systems",
-  "Design & Build",
+  "Design & Development",
   "Visual Communication",
   "The Playground",
 ];
 
 export const CATEGORIES: Category[] = [
   {
-    title: "Products & Experiences",
-    count: "05",
-    status: "Core work",
-    names: ["PARALLEL", "TAPGO", "RESTIFY", "RIT MYCOURSES", "BCG BY FORAGE"],
+    title: "Product & UX/UI Design",
+    count: "04",
+    status: "Product Design / UX/UI",
+    names: ["BCG BY FORAGE", "RIT MYCOURSES", "RESTIFY", "TAPGO"],
     rotate: "-1.5deg",
   },
   {
     title: "Data & Systems",
-    count: "02",
-    status: "Systems",
-    names: ["ECOVIZ", "VISA FINANCIAL INSIGHTS"],
+    count: "03",
+    status: "Data / Algorithms",
+    names: ["VISA FINANCIAL INSIGHTS", "PARALLEL", "ECOVIZ"],
     rotate: "1.2deg",
   },
   {
-    title: "Design & Build",
-    count: "03",
-    status: "Shipped + Live",
-    names: ["PARALLEL", "FENNEC", "PROMPT DIRECTION"],
+    title: "Design & Development",
+    count: "02",
+    status: "Development / AI",
+    names: ["PARALLEL", "PROMPT DIRECTION"],
     rotate: "-0.8deg",
   },
   {
     title: "Visual Communication",
     count: "02",
-    status: "Client + Self-initiated",
+    status: "Branding / Graphic Design",
     names: ["VISA FINANCIAL INSIGHTS", "FENNEC"],
     rotate: "1.5deg",
   },
   {
     title: "The Playground",
-    count: "04",
-    status: "Always open",
-    names: [
-      "PORTFOLIO 2.0",
-      "PARALLEL CYCLES",
-      "ECOVIZ SYSTEMS",
-      "PROMPT DIRECTION",
-    ],
+    count: "02",
+    status: "Creative Coding",
+    names: ["ZF DIARY APP", "LITTLE THINGS"],
     rotate: "-3deg",
   },
 ];
 
 export const PROJECTS: Project[] = [
-  {
-    id: "001",
-    name: "Parallel",
-    tags: "SaaS Product / UX/UI / Next.js / Supabase",
-    status: "[B2B SaaS]",
-    categories: [1, 3],
-    d1: "A SaaS product spanning UX/UI and a full-stack build.",
-    d2: "Built with Next.js and Supabase; deployed as an MVP.",
-  },
-  {
-    id: "002",
-    name: "EcoViz",
-    tags: "Interactive Environmental Data Visualization",
-    status: "[MFA Thesis]",
-    categories: [2],
-    d1: "Interactive environmental data visualization.",
-    d2: "My MFA thesis, built around four climate data systems: rainfall, air, snowfall, solar.",
-  },
-  {
-    id: "003",
-    name: "TapGo",
-    tags: "Accessibility-focused Mobile UX",
-    status: "[Case Study]",
-    categories: [1],
-    d1: "Accessibility-focused mobile UX.",
-    d2: "Presented as a case study.",
-  },
-  {
-    id: "004",
-    name: "Restify",
-    tags: "Sleep Wellness UX",
-    status: "[Design System]",
-    categories: [1],
-    d1: "Sleep wellness UX.",
-    d2: "Documented as a design system.",
-  },
-  {
-    id: "005",
-    name: "RIT MyCourses Redesign",
-    tags: "Learning Experience Design",
-    status: "[Redesign]",
-    categories: [1],
-    d1: "Learning experience design.",
-    d2: "A redesign of RIT MyCourses.",
-  },
   {
     id: "006",
     name: "Visa Financial Insights",
@@ -125,20 +75,18 @@ export const PROJECTS: Project[] = [
     name: "Fennec",
     tags: "Website / E-commerce / Visual Communication",
     status: "[Ongoing]",
-    categories: [3, 4],
+    categories: [4],
     d1: "Website, e-commerce and digital visual communication.",
     d2: "Ongoing work.",
   },
   {
-    id: "008",
-    name: "Prompt Direction",
-    tags: "AI Direction / Prompt Design",
-    status: "[Process]",
-    categories: [3, 5],
-    d1: "A working log of how I direct AI to design and build — the prompts, the cuts, and what shipped.",
-    d2: "Prompting is a skill. Anyone can talk to AI. Being specific is experience.",
-    d2s: "font-size:14px;color:#A8A59E",
-    trace: true,
+    id: "001",
+    name: "Parallel",
+    tags: "SaaS Product / UX/UI / Next.js / Supabase",
+    status: "[B2B SaaS]",
+    categories: [3, 2],
+    d1: "A SaaS product spanning UX/UI and a full-stack build.",
+    d2: "Built with Next.js and Supabase; deployed as an MVP.",
   },
   {
     id: "009",
@@ -149,29 +97,64 @@ export const PROJECTS: Project[] = [
     d1: "Developed a UX research framework encompassing participant screening, surveys, personas, and 5+ customer pain points for a simulated banking-product challenge.",
     d2: "Synthesized research findings into actionable product opportunities, translating customer needs into a Figma case study emphasizing experience strategy and UX storytelling.",
   },
+  {
+    id: "002",
+    name: "EcoViz",
+    tags: "Interactive Environmental Data Visualization",
+    status: "[MFA Thesis]",
+    categories: [2],
+    d1: "Interactive environmental data visualization.",
+    d2: "My MFA thesis, built around four climate data systems: rainfall, air, snowfall, solar.",
+  },
+  {
+    id: "005",
+    name: "RIT MyCourses Redesign",
+    tags: "Learning Experience Design",
+    status: "[Redesign]",
+    categories: [1],
+    d1: "Learning experience design.",
+    d2: "A redesign of RIT MyCourses.",
+  },
+  {
+    id: "004",
+    name: "Restify",
+    tags: "Sleep Wellness UX",
+    status: "[Design System]",
+    categories: [1],
+    d1: "Sleep wellness UX.",
+    d2: "Documented as a design system.",
+  },
+  {
+    id: "003",
+    name: "TapGo",
+    tags: "Accessibility-focused Mobile UX",
+    status: "[Case Study]",
+    categories: [1],
+    d1: "Accessibility-focused mobile UX.",
+    d2: "Presented as a case study.",
+  },
+  {
+    id: "008",
+    name: "Prompt Direction",
+    tags: "AI Direction / Prompt Design",
+    status: "[Process]",
+    categories: [3],
+    d1: "A working log of how I direct AI to design and build — the prompts, the cuts, and what shipped.",
+    d2: "Prompting is a skill. Anyone can talk to AI. Being specific is experience.",
+    d2s: "font-size:14px;color:#A8A59E",
+  },
 ];
 
 export const PLAYGROUND: PlaygroundItem[] = [
   {
-    name: "Portfolio 2.0",
-    tags: "Claude / Prompt Design",
+    name: "ZF Diary App",
+    tags: "SwiftUI / Personal",
+    status: "[In Progress]",
+  },
+  {
+    name: "Little Things",
+    tags: "Creative Coding / Design",
     status: "[Ongoing]",
-  },
-  {
-    name: "Parallel Cycles",
-    tags: "Cursor AI / Supabase",
-    status: "[Deployed]",
-  },
-  {
-    name: "EcoViz Systems",
-    tags: "Cinema 4D / Motion",
-    status: "[Thesis]",
-  },
-  {
-    name: "Prompt Direction",
-    tags: "AI Direction / Prompt Design",
-    status: "[Process]",
-    also: "ALSO FILED UNDER → DESIGN & BUILD",
   },
 ];
 
@@ -229,14 +212,14 @@ export const TRACE: TraceDef = {
 };
 
 export const ASK_KEYWORDS: [number, string[]][] = [
-  [5, ["fintech", "payments", "banking", "finance", "visa"]],
-  [0, ["ai", "saas", "agents", "shipped", "startup", "parallel"]],
-  [1, ["climate", "environment", "data viz", "thesis", "ecoviz", "data"]],
-  [2, ["accessibility", "seniors", "mobile", "health", "tapgo"]],
-  [3, ["wellness", "design system", "sleep", "restify"]],
-  [4, ["education", "lms", "learning", "mycourses", "rit"]],
-  [7, ["prompting", "prompt", "process", "directing", "how do you work"]],
-  [6, ["branding", "ecommerce", "web", "website", "phoenix", "fennec"]],
+  [0, ["fintech", "payments", "banking", "finance", "visa"]],
+  [2, ["ai", "saas", "agents", "shipped", "startup", "parallel"]],
+  [4, ["climate", "environment", "data viz", "thesis", "ecoviz", "data"]],
+  [7, ["accessibility", "seniors", "mobile", "health", "tapgo"]],
+  [6, ["wellness", "design system", "sleep", "restify"]],
+  [5, ["education", "lms", "learning", "mycourses", "rit"]],
+  [8, ["prompting", "prompt", "process", "directing", "how do you work"]],
+  [1, ["branding", "ecommerce", "web", "website", "phoenix", "fennec"]],
 ];
 
 export const ASK_CHIPS = [
@@ -512,7 +495,7 @@ export function findProjectIndex(q: string) {
   if (!t) return -1;
   const tok = t.split(/[^a-z0-9]+/).filter(Boolean);
   if (/\b(bcg|forage|banking app|ux research|boston consulting)\b/.test(t)) {
-    return 8;
+    return 3;
   }
   for (const [i, ks] of ASK_KEYWORDS) {
     for (const k of ks) {
