@@ -14,7 +14,6 @@
   background-color: #101010;
   background-image: radial-gradient(#2a2a2a 1.2px, transparent 1.2px);
   background-size: 32px 32px;
-  padding: 0 var(--fm);
 }
 .cs { display: block; --hl: rgba(244,241,234,.14); --cs-l: 48px; --cs-lab: minmax(160px, 220px) }
 .cs * { border-radius: 0 }
@@ -161,13 +160,6 @@
 .cs-nxn { font-size: clamp(28px, 3.4vw, 48px); font-weight: 700; letter-spacing: -.04em; line-height: 1; text-transform: uppercase; transition: color 200ms ease, transform 250ms cubic-bezier(.2,.7,.2,1) }
 .cs-nx:hover .cs-nxn, .cs-nx:focus-visible .cs-nxn { transform: translateX(4px) }
 .cs-nx:focus-visible { outline: 1px solid #91C9F7; outline-offset: 4px }
-
-/* ── Footer — compensate for .cs-wrap's padding: 0 var(--fm) so the
-   SiteFooter gets the same effective inset as on every other page ── */
-.cs-wrap #contact {
-  padding-left: calc(1px + var(--edgev));
-  padding-right: calc(1px + var(--edgev));
-}
 
 /* ── Sticky expand / collapse all ── */
 .cs-all {
