@@ -1,0 +1,212 @@
+/* ─────────────────────────────────────────────
+   Case study template — cs-* prefix
+   Used by components/case/CaseStudyPage.tsx (imported there, so no
+   shared stylesheet is edited). Existing tokens only:
+   ink #101010 · paper #F4F1EA · muted #A8A59E · ice #91C9F7
+   orange #FF6A24 (metrics only) · hairline rgba(244,241,234,.14)
+   Sharp corners. Ease cubic-bezier(.2,.7,.2,1).
+───────────────────────────────────────────── */
+
+.cs-wrap {
+  color: #F4F1EA;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  overflow-x: clip;
+  background-color: #101010;
+  background-image: radial-gradient(#2a2a2a 1.2px, transparent 1.2px);
+  background-size: 32px 32px;
+  padding: 0 var(--fm);
+}
+.cs { display: block; --hl: rgba(244,241,234,.14); --cs-l: 48px; --cs-lab: minmax(160px, 220px) }
+.cs * { border-radius: 0 }
+.cs a { color: inherit; text-decoration: none }
+
+/* ── 1 · Header block ── */
+.cs-hd { padding: calc(56px + 81px) var(--edge) 48px }
+.cs-hdtop { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; margin-bottom: 20px }
+.cs-id { color: #91C9F7 }
+.cs-type { color: #A8A59E; font-size: 11px }
+.cs-t {
+  margin: 0;
+  font-size: clamp(56px, 10vw, 160px);
+  font-weight: 800;
+  line-height: .88;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+.cs-out {
+  margin: 28px 0 0;
+  max-width: 44ch;
+  font-size: clamp(19px, 1.7vw, 24px);
+  line-height: 1.35;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+
+/* ── Breadcrumb ── */
+.cs-crumb {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  color: #A8A59E;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--hl);
+  /* 55.5px offsets the title block's half-pixel height so everything below lands on whole pixels */
+  margin-bottom: 55.5px;
+}
+.cs-crsep { margin: 0 10px; color: #3F3D3A }
+.cs a.cs-crlk { color: #FF6A24; position: relative }
+.cs-crlk::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: #FF6A24; transform: scaleX(0); transform-origin: left; transition: transform 240ms ease }
+.cs-crlk:hover::after, .cs-crlk:focus-visible::after { transform: scaleX(1) }
+
+/* ── 2 · Meta band (mirrors the Visa page: 4 cells + full-width Role row) ──
+   Top rule + crossing nodes come from the shared .rl utility (landing.css);
+   .cs-rule (another .rl) is the bottom rule. Line heights are whole pixels so
+   everything below keeps its exact position. */
+.cs-band { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0 var(--edge) }
+.cs-bc { display: flex; flex-direction: column; gap: 12px; padding: 24px 20px 26px 0; border-right: 1px solid #242424; min-width: 0 }
+.cs-bc + .cs-bc { padding-left: 20px }
+.cs-bc:nth-child(4) { border-right: 0 }
+.cs-bc dt { color: #A8A59E; font-size: 11px; line-height: 16px }
+.cs-bc dd { margin: 0; color: #F4F1EA; line-height: 20px }
+.cs-bice { color: #91C9F7 !important }
+.cs-brole {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: baseline;
+  gap: 12px 0;
+  border-right: 0;
+  border-top: 1px solid #242424;
+  padding-left: 0 !important;
+}
+.cs-brole dd { grid-column: 2 / -1; padding-left: 20px; font-size: 15px; line-height: 21px }
+.cs-rule { height: 0 }
+
+/* ── Media placeholders (visibly empty) ── */
+.cs-hero { padding: 48px var(--edge) 64px }
+.cs-media {
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  border: 1px dashed rgba(244,241,234,.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cs-media .mono { color: #A8A59E; font-size: 11px }
+
+/* ── 4 · Sections (collapsed first) ── */
+.cs-secs { margin: 0 var(--edge); border-bottom: 1px solid var(--hl) }
+.cs-sec { border-top: 1px solid var(--hl) }
+.cs-h { margin: 0; font: inherit }
+.cs-row {
+  display: grid;
+  grid-template-columns: var(--cs-l) var(--cs-lab) minmax(0, 1fr) 32px;
+  align-items: baseline;
+  column-gap: 24px;
+  width: 100%;
+  padding: 30px 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 300ms ease;
+}
+.cs-row:hover { background: rgba(244,241,234,.03) }
+.cs-row:focus-visible { outline: 1px solid #91C9F7; outline-offset: -1px }
+.cs-num { color: #91C9F7 }
+.cs-lab { color: #F4F1EA }
+.cs-sum { font-size: clamp(17px, 1.4vw, 20px); line-height: 1.4; letter-spacing: -.01em; color: #F4F1EA; max-width: 62ch }
+.cs-pm { justify-self: end; font-size: 18px; line-height: 1; color: #A8A59E; transition: color 200ms ease }
+.cs-row:hover .cs-pm, .cs-sec.on .cs-pm { color: #F4F1EA }
+
+/* height transition via grid rows (same pattern as Work drawers) */
+.cs-dr {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 420ms cubic-bezier(.2,.7,.2,1);
+}
+.cs-sec.on .cs-dr { grid-template-rows: 1fr }
+.cs-di { overflow: hidden; min-height: 0 }
+.cs-body {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 0 calc(32px + 24px) 44px calc(var(--cs-l) + 220px + 48px);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.cs-sec.on .cs-body { opacity: 1; transition-delay: 80ms }
+.cs-body p { margin: 0; max-width: 66ch; font-size: 16px; line-height: 1.65; color: #A8A59E }
+
+.cs-pts { list-style: none; margin: 0; padding: 0; max-width: 66ch; border-top: 1px solid var(--hl) }
+.cs-pts li { padding: 18px 0; border-bottom: 1px solid var(--hl); font-size: 16px; line-height: 1.55; color: #A8A59E }
+.cs-ptk { color: #F4F1EA; font-weight: 500 }
+
+/* metrics — the page's one orange */
+.cs-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--hl); border-bottom: 1px solid var(--hl) }
+.cs-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 12px; padding: 22px 20px 24px 0; min-width: 0 }
+.cs-stat + .cs-stat { padding-left: 20px; border-left: 1px solid var(--hl) }
+.cs-stat dt { color: #A8A59E; font-size: 11px; line-height: 1.5 }
+.cs-stat dd { margin: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap }
+.cs-sv { font-size: clamp(32px, 3.2vw, 48px); font-weight: 700; letter-spacing: -.04em; line-height: 1; color: #FF6A24; font-variant-numeric: tabular-nums }
+.cs-su { color: #F4F1EA; font-size: 11px }
+
+/* ── Next ── */
+.cs-next { padding: 0 var(--edge) }
+.cs-nx { display: flex; align-items: baseline; gap: 16px 20px; flex-wrap: wrap; padding: 44px 0 56px; transition: background-color 300ms ease }
+.cs-nxk { color: #A8A59E }
+.cs-nxn { font-size: clamp(28px, 3.4vw, 48px); font-weight: 700; letter-spacing: -.04em; line-height: 1; text-transform: uppercase; transition: color 200ms ease, transform 250ms cubic-bezier(.2,.7,.2,1) }
+.cs-nx:hover .cs-nxn, .cs-nx:focus-visible .cs-nxn { transform: translateX(4px) }
+.cs-nx:focus-visible { outline: 1px solid #91C9F7; outline-offset: 4px }
+
+/* ── Sticky expand / collapse all ── */
+.cs-all {
+  position: fixed;
+  right: calc(24px + env(safe-area-inset-right, 0px));
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 90; /* below .nav (100) */
+  padding: 12px 16px;
+  border: 1px solid rgba(244,241,234,.24);
+  border-radius: 0;
+  background: rgba(16,16,16,.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: #F4F1EA;
+  cursor: pointer;
+  transition: border-color 200ms ease;
+}
+.cs-all:hover { border-color: rgba(244,241,234,.55) }
+.cs-all:focus-visible { outline: 1px solid #91C9F7; outline-offset: 2px }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .cs-row { grid-template-columns: var(--cs-l) minmax(0, 1fr) 32px; row-gap: 12px }
+  .cs-sum { grid-column: 2 }
+  .cs-pm { grid-column: 3; grid-row: 1 }
+  .cs-body { padding: 0 0 40px calc(var(--cs-l) + 24px) }
+}
+@media (max-width: 768px) {
+  .cs { --cs-l: 32px }
+  .cs-hd { padding: calc(32px + 81px) var(--edge) 36px }
+  .cs-crumb { margin-bottom: 40px }
+  .cs-hero { padding: 32px var(--edge) 40px }
+  .cs-band { grid-template-columns: 1fr 1fr }
+  .cs-bc { padding: 20px 16px 20px 0 }
+  .cs-bc + .cs-bc { padding-left: 16px }
+  .cs-bc:nth-child(2) { border-right: 0 }
+  .cs-bc:nth-child(3) { padding-left: 0 }
+  .cs-bc:nth-child(n+3) { border-top: 1px solid #242424 }
+  .cs-brole { grid-template-columns: 1fr }
+  .cs-brole dd { grid-column: 1; padding-left: 0 }
+  .cs-row { column-gap: 12px; padding: 24px 0 }
+  .cs-body { padding-left: 0 }
+  .cs-stats { grid-template-columns: 1fr }
+  .cs-stat + .cs-stat { padding-left: 0; border-left: 0; border-top: 1px solid var(--hl) }
+  .cs-all { right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)) }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-dr, .cs-body, .cs-row, .cs-nxn, .cs-pm { transition: none !important }
+}
