@@ -144,6 +144,8 @@ export const PROJECTS: Project[] = [
     d1: "A working log of how I direct AI to design and build — the prompts, the cuts, and what shipped.",
     d2: "Prompting is a skill. Anyone can talk to AI. Being specific is experience.",
     d2s: "font-size:14px;color:#A8A59E",
+    pageSlug: "prompt-direction",
+    hasPage: true,
   },
 ];
 

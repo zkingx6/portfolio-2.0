@@ -1,0 +1,1080 @@
+/* ─────────────────────────────────────────────
+   Prompt Examples — pe-* prefix
+   app/work/prompt-direction/PromptExamples.tsx
+   Palette inherits: paper #F4F1EA · muted #A8A59E
+     ice #91C9F7 · orange #FF6A24 · hairline var(--hl)
+   Sharp corners. Site vertical rhythm.
+───────────────────────────────────────────── */
+
+/* ── Outer wrapper ── */
+.pe-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Honesty / task header ── */
+.pe-honest-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+  margin-bottom: 40px;
+}
+
+.pe-honest {
+  font-size: 9px;
+  letter-spacing: .08em;
+  color: #A8A59E;
+  padding: 2px 7px;
+  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
+}
+
+.pe-task-lbl {
+  font-size: 10px;
+  letter-spacing: .03em;
+  color: #A8A59E;
+}
+
+/* ─────────────────────────────────────────────
+   Example block
+───────────────────────────────────────────── */
+.pe-block {
+  border-top: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  padding-top: 48px;
+  padding-bottom: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── Scroll-reveal animation (one-shot via IntersectionObserver) ── */
+.pe-block .pe-hd-row,
+.pe-block .pe-prompt-row,
+.pe-block .pe-output-row {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 520ms ease, transform 520ms cubic-bezier(.2, .7, .2, 1);
+}
+.pe-block.pe-in .pe-hd-row     { opacity: 1; transform: none; transition-delay:   0ms; }
+.pe-block.pe-in .pe-prompt-row { opacity: 1; transform: none; transition-delay:  90ms; }
+.pe-block.pe-in .pe-output-row { opacity: 1; transform: none; transition-delay: 180ms; }
+
+/* ─────────────────────────────────────────────
+   1 · Header row
+───────────────────────────────────────────── */
+.pe-hd-row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: baseline;
+  column-gap: 24px;
+}
+
+.pe-n {
+  font-size: 13px;
+  color: #91C9F7;
+  letter-spacing: -.01em;
+}
+
+.pe-name {
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: #F4F1EA;
+  margin-bottom: 7px;
+}
+
+.pe-desc {
+  font-size: 16px;
+  color: #A8A59E;
+  line-height: 1.4;
+  letter-spacing: -.01em;
+}
+
+/* ─────────────────────────────────────────────
+   2 · Prompt comparison panels
+───────────────────────────────────────────── */
+.pe-prompt-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
+}
+
+.pe-panel {
+  padding: 20px 22px 24px;
+}
+
+.pe-panel-l {
+  border-right: 1px solid var(--hl, rgba(244, 241, 234, .14));
+}
+
+.pe-panel-lbl {
+  font-size: 9px;
+  letter-spacing: .07em;
+  color: #A8A59E;
+  margin-bottom: 14px;
+}
+
+/* Mistake panel */
+.pe-mistake-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pe-bad-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  background: rgba(255, 106, 36, .1);
+  border: 1px solid rgba(255, 106, 36, .3);
+  color: #FF6A24;
+  font-size: 8px;
+  letter-spacing: .05em;
+  width: fit-content;
+}
+
+.pe-bad-text {
+  font-size: 14px;
+  color: #F4F1EA;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* Direction panel */
+.pe-dir-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pe-dir-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.pe-ann {
+  flex-shrink: 0;
+  padding: 1px 5px;
+  background: rgba(145, 201, 247, .1);
+  border: 1px solid rgba(145, 201, 247, .28);
+  color: #91C9F7;
+  font-size: 8px;
+  letter-spacing: .04em;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.pe-dir-text {
+  font-size: 12px;
+  color: #A8A59E;
+  line-height: 1.6;
+}
+
+.pe-dir-space { height: 8px; }
+
+/* ─────────────────────────────────────────────
+   3 · Output comparison
+───────────────────────────────────────────── */
+.pe-output-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.pe-out-col:first-child { padding-right: 16px; }
+.pe-out-col:last-child  {
+  padding-left: 16px;
+  border-left: 1px solid var(--hl, rgba(244, 241, 234, .14));
+}
+
+.pe-out-lbl {
+  font-size: 9px;
+  letter-spacing: .07em;
+  color: #A8A59E;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pe-killed-tag {
+  font-size: 8px;
+  letter-spacing: .06em;
+  color: #FF6A24;
+  border: 1px solid rgba(255, 106, 36, .35);
+  padding: 1px 5px;
+}
+
+.pe-mock-wrap {
+  height: 200px;
+  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─────────────────────────────────────────────
+   Mock hero panels — six types
+───────────────────────────────────────────── */
+
+.pe-mock { width: 100%; height: 100%; }
+
+/* ── HYPE — generic blue gradient (01 BEFORE) ── */
+.pe-mock-hype {
+  background: linear-gradient(140deg, #0d4fa0 0%, #1565c0 50%, #0891b2 100%);
+  display: flex;
+  height: 100%;
+}
+
+.pe-mhype-content {
+  flex: 1;
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.pe-mhype-eyebrow {
+  font-size: 6px;
+  color: rgba(255, 255, 255, .55);
+  letter-spacing: .1em;
+}
+
+.pe-mhype-h {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+}
+
+.pe-mhype-sub {
+  font-size: 7px;
+  color: rgba(255, 255, 255, .7);
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.pe-mhype-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: #fff;
+  color: #0d4fa0;
+  font-size: 7px;
+  font-weight: 600;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  width: fit-content;
+  margin-top: 2px;
+}
+
+.pe-mhype-img {
+  width: 34%;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, .12);
+  border-left: 1px solid rgba(255, 255, 255, .1);
+}
+
+/* ── CALM — dark directed (01 AFTER) ── */
+.pe-mock-calm {
+  background: #0A0A0A;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  height: 100%;
+}
+
+.pe-mcalm-tag {
+  font-size: 7px;
+  color: #A8A59E;
+  letter-spacing: .1em;
+  font-family: var(--font-jb-mono), monospace;
+}
+
+.pe-mcalm-h {
+  font-size: 16px;
+  font-weight: 700;
+  color: #F4F1EA;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  letter-spacing: -.04em;
+  line-height: 1.15;
+}
+
+.pe-mcalm-sub {
+  font-size: 7px;
+  color: #A8A59E;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.pe-mcalm-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border: 1px solid #FF6A24;
+  color: #FF6A24;
+  font-size: 7px;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  width: fit-content;
+}
+
+.pe-mcalm-rule {
+  height: 1px;
+  background: rgba(244, 241, 234, .08);
+}
+
+.pe-mcalm-fine {
+  font-size: 6px;
+  color: #3F3D3A;
+  letter-spacing: .06em;
+  font-family: var(--font-jb-mono), monospace;
+}
+
+/* ── PREMIUM — purple gradient + glass (02 BEFORE) ── */
+.pe-mock-premium {
+  background: linear-gradient(135deg, #3b0764 0%, #2563eb 100%);
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 12px;
+  height: 100%;
+}
+
+.pe-mprem-glass {
+  flex: 1;
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .18);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.pe-mprem-eyebrow {
+  font-size: 6px;
+  color: rgba(255, 255, 255, .45);
+  letter-spacing: .15em;
+  font-family: var(--font-jb-mono), monospace;
+}
+
+.pe-mprem-h {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+
+.pe-mprem-sub {
+  font-size: 6px;
+  color: rgba(255, 255, 255, .6);
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.pe-mprem-cta {
+  display: inline-flex;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, .9);
+  color: #2563eb;
+  font-size: 6px;
+  font-weight: 600;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  width: fit-content;
+}
+
+.pe-mprem-photo {
+  width: 34%;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 3px;
+  align-self: stretch;
+}
+
+/* ── CONSTRAINED — dark + one accent (02 AFTER) ── */
+.pe-mock-constrained {
+  background: #0A0A0A;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
+}
+
+.pe-mcon-tag {
+  font-size: 7px;
+  color: #A8A59E;
+  letter-spacing: .08em;
+  font-family: var(--font-jb-mono), monospace;
+}
+
+.pe-mcon-h {
+  font-size: 18px;
+  font-weight: 700;
+  color: #F4F1EA;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  letter-spacing: -.05em;
+  line-height: 1.1;
+}
+
+.pe-mcon-sub {
+  font-size: 7px;
+  color: #A8A59E;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.pe-mcon-cta {
+  display: inline-flex;
+  align-items: center;
+  color: #FF6A24;
+  font-size: 8px;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: .05em;
+}
+
+/* ── KILLED — dimmed first pass (03 BEFORE) ── */
+.pe-mock-killed {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, #0d4fa0 0%, #1565c0 50%, #0891b2 100%);
+}
+
+.pe-mkill-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, .65);
+}
+
+.pe-mkill-body {
+  position: relative;
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  opacity: .4;
+}
+
+.pe-mkill-h {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+}
+
+.pe-mkill-sub {
+  font-size: 7px;
+  color: rgba(255, 255, 255, .7);
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+}
+
+.pe-mkill-cta {
+  display: inline-flex;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, .7);
+  color: #0d4fa0;
+  font-size: 7px;
+  font-weight: 600;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  width: fit-content;
+}
+
+/* ── REVISED — second pass distinctive (03 AFTER) ── */
+.pe-mock-revised {
+  background: #0A0A0A;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
+}
+
+.pe-mrev-accent {
+  height: 2px;
+  width: 24px;
+  background: #FF6A24;
+  margin-bottom: 2px;
+}
+
+.pe-mrev-h {
+  font-size: 16px;
+  font-weight: 700;
+  color: #F4F1EA;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  letter-spacing: -.04em;
+  line-height: 1.15;
+}
+
+.pe-mrev-sub {
+  font-size: 7px;
+  color: #A8A59E;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.pe-mrev-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border: 1px solid #FF6A24;
+  color: #FF6A24;
+  font-size: 7px;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  width: fit-content;
+}
+
+/* ─────────────────────────────────────────────
+   Responsive
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .pe-prompt-row,
+  .pe-output-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pe-panel-l {
+    border-right: 0;
+    border-bottom: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  }
+
+  .pe-out-col:first-child {
+    padding-right: 0;
+    padding-bottom: 24px;
+  }
+
+  .pe-out-col:last-child {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--hl, rgba(244, 241, 234, .14));
+    padding-top: 24px;
+  }
+
+  .pe-hd-row {
+    grid-template-columns: 32px 1fr;
+    column-gap: 16px;
+  }
+
+  .pe-block {
+    gap: 24px;
+    padding-top: 36px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pe-mock-wrap { height: 160px; }
+  .pe-mhype-img { display: none; }
+  .pe-mprem-photo { display: none; }
+}
+
+/* ─────────────────────────────────────────────
+   Reduced motion — all content immediately visible
+───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .pe-block .pe-hd-row,
+  .pe-block .pe-prompt-row,
+  .pe-block .pe-output-row {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Window panel — MISTAKE 01 only
+   Chrome language from Ask Terminal (.rx) + Ronger.Profile (.ab-win):
+     · 3 traffic dots (8px, gray, 3rd orange)
+     · mono title #A8A59E + status dot + "ANALYSIS" right-aligned
+     · panel bg #1C1C1C, border rgba(244,241,234,.18)
+     · KV rows: 100px ice-blue key (#91C9F7) + warm-white value (#F4F1EA)
+     · sub-panels: same chrome at 6px dot scale
+   Classes: pe-win pe-wh pe-wd pe-wd-o pe-wt pe-ws pe-wdot
+            pe-wb pe-w-intro pe-w-sec pe-w-sec-hd
+            pe-wkv pe-wk pe-wk-empty pe-wval pe-wval-pre
+            pe-w-sep pe-w-outs pe-w-out pe-woh pe-wod pe-wod-o pe-woh-t
+───────────────────────────────────────────── */
+
+/* Scroll-reveal (window variant — fades whole panel as one unit) */
+.pe-block .pe-win {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 520ms ease, transform 520ms cubic-bezier(.2, .7, .2, 1);
+}
+.pe-block.pe-in .pe-win {
+  opacity: 1;
+  transform: none;
+}
+
+/* Panel container */
+.pe-win {
+  background: #1C1C1C;
+  border: 1px solid rgba(244, 241, 234, .18);
+  box-shadow: 0 20px 56px rgba(0, 0, 0, .5);
+}
+
+/* Chrome header */
+.pe-wh {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(244, 241, 234, .12);
+}
+
+/* Traffic dots — matches .rxd / .ab-wd exactly */
+.pe-wd {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: #242424;
+  box-shadow: inset 0 0 0 1px rgba(244, 241, 234, .22);
+}
+.pe-wd-o {
+  background: #FF6A24;
+  box-shadow: none;
+}
+
+/* Panel title — matches .rxt / .ab-wt */
+.pe-wt {
+  margin-left: 8px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: #A8A59E;
+}
+
+/* Status area — matches .rxs / .ab-ws */
+.pe-ws {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: #A8A59E;
+}
+
+/* Status dot — matches .rxdt / .ab-nd */
+.pe-wdot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: #FF6A24;
+}
+
+/* Panel body */
+.pe-wb {
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Intro / subtitle line */
+.pe-w-intro {
+  font-size: 13px;
+  color: #A8A59E;
+  line-height: 1.5;
+}
+
+/* Content section (THE MISTAKE / THE DIRECTION) */
+.pe-w-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Section heading — same spec as .pe-panel-lbl */
+.pe-w-sec-hd {
+  font-size: 9px;
+  letter-spacing: .07em;
+  color: #A8A59E;
+  margin-bottom: 6px;
+}
+
+/* Key-value row — mirrors .ab-kv grid */
+.pe-wkv {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+/* Key — ice blue, matches .ab-kk */
+.pe-wk {
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: #91C9F7;
+  line-height: 1.6;
+  padding-top: 1px;
+}
+
+/* Empty key column — spacer for continued direction lines */
+.pe-wk-empty {
+  display: block;
+}
+
+/* Value — warm white, matches .ab-kvv */
+.pe-wval {
+  font-size: 12px;
+  color: #F4F1EA;
+  line-height: 1.6;
+}
+.pe-wval-pre {
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* Hairline separator between THE MISTAKE and THE DIRECTION */
+.pe-w-sep {
+  height: 1px;
+  background: rgba(244, 241, 234, .10);
+}
+
+/* Sub-panels grid (BEFORE / AFTER) */
+.pe-w-outs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Sub-panel container */
+.pe-w-out {
+  border: 1px solid rgba(244, 241, 234, .14);
+}
+
+/* Sub-panel chrome header — same chrome language at smaller scale */
+.pe-woh {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(244, 241, 234, .10);
+  font-size: 9px;
+  letter-spacing: .07em;
+  color: #A8A59E;
+}
+
+/* Sub-panel traffic dots (6px) */
+.pe-wod {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: #242424;
+  box-shadow: inset 0 0 0 1px rgba(244, 241, 234, .18);
+}
+.pe-wod-o {
+  background: #FF6A24;
+  box-shadow: none;
+}
+
+/* Sub-panel label text (holds label + optional KILLED tag) */
+.pe-woh-t {
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .pe-w-outs { grid-template-columns: 1fr; }
+  .pe-wkv { grid-template-columns: 72px minmax(0, 1fr); gap: 8px; }
+  .pe-wb { padding: 16px 18px 18px; }
+}
+
+/* ─────────────────────────────────────────────
+   VISUAL-FIRST PANEL — all three windows (class pe-win--vf)
+   Order: chrome → SKILL headline → BEFORE/AFTER showcase →
+          MISTAKE/DIRECTION prompts → COST → PRINCIPLE/REF.
+   --pe-accent is set inline per example (01 orange · 02 ice · 03 warm grey).
+   BEFORE ≈ ⅓ (subdued) · AFTER ≈ ⅔ (dominant). Never stacked.
+───────────────────────────────────────────── */
+
+/* Static pass — no scroll-reveal / transitions on these windows.
+   The IntersectionObserver still adds .pe-in so animation can return later.
+   Same specificity as .pe-block .pe-win (0,2,0), declared later → wins. */
+.pe-block .pe-win--vf {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.pe-win--vf .pe-wh { padding: 9px 18px; }
+
+.pe-win--vf .pe-wb {
+  padding: 16px 22px 14px;
+  gap: 12px;
+}
+
+/* Shared small label */
+.pe-vf-lbl {
+  font-size: 10px;
+  letter-spacing: .07em;
+  color: #A8A59E;
+}
+
+/* ── 1 · SKILL headline + MISTAKE subtitle ── */
+.pe-vf-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 6px 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(244, 241, 234, .10);
+}
+
+.pe-vf-skill .pe-vf-lbl { margin-bottom: 5px; }
+
+.pe-vf-skill-h {
+  margin: 0;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  font-size: clamp(22px, 2.3vw, 30px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  color: #F4F1EA;
+  text-wrap: balance;
+}
+
+.pe-vf-sub { text-align: right; }
+.pe-vf-sub .pe-vf-lbl { margin-bottom: 4px; }
+.pe-vf-sub-t {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #F4F1EA;
+}
+
+/* ── 2 · BEFORE / AFTER showcase ── */
+.pe-vf-scroll {
+  /* Narrow screens scroll sideways instead of stacking */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.pe-win--vf .pe-w-outs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.pe-win--vf .pe-woh {
+  padding: 5px 12px;
+  background: rgba(244, 241, 234, .03);
+}
+
+.pe-win--vf .pe-mock-wrap {
+  height: 256px;
+  border: 0;
+}
+
+/* BEFORE — subdued but still legible (no blur) */
+.pe-w-out--before { filter: saturate(.6); }
+.pe-w-out--before .pe-mock-wrap { opacity: .7; }
+
+/* AFTER — identity-color frame, dominant */
+.pe-w-out--after { border-color: var(--pe-accent, rgba(244, 241, 234, .14)); }
+.pe-w-out--after .pe-woh-t { color: var(--pe-accent, #A8A59E); }
+
+/* BEFORE mock sizing (≈⅓ column). Decorative image blocks dropped for fit. */
+.pe-w-out--before .pe-mhype-img,
+.pe-w-out--before .pe-mprem-photo { display: none; }
+
+.pe-w-out--before .pe-mhype-content,
+.pe-w-out--before .pe-mkill-body { padding: 20px 18px; gap: 10px; }
+.pe-w-out--before .pe-mock-premium { padding: 12px; }
+.pe-w-out--before .pe-mprem-glass { padding: 14px 14px; gap: 8px; }
+.pe-w-out--before .pe-mkill-body { opacity: .55; }
+
+.pe-w-out--before .pe-mhype-eyebrow,
+.pe-w-out--before .pe-mprem-eyebrow { font-size: 9px; }
+.pe-w-out--before .pe-mhype-h,
+.pe-w-out--before .pe-mkill-h { font-size: 22px; }
+.pe-w-out--before .pe-mprem-h { font-size: 19px; }
+.pe-w-out--before .pe-mhype-sub,
+.pe-w-out--before .pe-mprem-sub,
+.pe-w-out--before .pe-mkill-sub { font-size: 12px; }
+.pe-w-out--before .pe-mhype-cta,
+.pe-w-out--before .pe-mprem-cta,
+.pe-w-out--before .pe-mkill-cta { font-size: 11px; padding: 7px 12px; }
+
+/* AFTER mock sizing (≈⅔ column) — reads as a real landing hero */
+.pe-w-out--after .pe-mock-calm,
+.pe-w-out--after .pe-mock-constrained,
+.pe-w-out--after .pe-mock-revised { padding: 22px 30px; gap: 12px; }
+
+.pe-w-out--after .pe-mcalm-tag,
+.pe-w-out--after .pe-mcon-tag { font-size: 11px; }
+.pe-w-out--after .pe-mcalm-h,
+.pe-w-out--after .pe-mrev-h { font-size: clamp(24px, 2.4vw, 34px); }
+.pe-w-out--after .pe-mcon-h { font-size: clamp(28px, 2.8vw, 40px); }
+.pe-w-out--after .pe-mcalm-sub,
+.pe-w-out--after .pe-mcon-sub,
+.pe-w-out--after .pe-mrev-sub { font-size: 15px; }
+.pe-w-out--after .pe-mcalm-cta,
+.pe-w-out--after .pe-mrev-cta { font-size: 14px; padding: 8px 16px; }
+.pe-w-out--after .pe-mcon-cta { font-size: 14px; }
+.pe-w-out--after .pe-mcalm-fine { font-size: 11px; color: #6E6B66; }
+.pe-w-out--after .pe-mrev-accent { width: 36px; }
+
+/* ── 3 · THE MISTAKE / THE DIRECTION ── */
+.pe-vf-prompts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  padding: 12px 18px;
+  background: rgba(244, 241, 234, .03);
+}
+
+.pe-vf-col-hd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.pe-vf-prompt {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: pre-wrap;
+  color: #F4F1EA;
+}
+
+/* Two-column grid: tag column + text column, so untagged lines align */
+.pe-vf-dir {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 3px 10px;
+  align-items: start;
+}
+.pe-vf-dir-line { display: contents; }
+.pe-vf-dir-line .pe-ann { grid-column: 1; margin-top: 1px; }
+.pe-vf-dir-line .pe-vf-prompt { grid-column: 2; }
+
+.pe-win--vf .pe-dir-space { grid-column: 1 / -1; height: 0; }
+
+/* ── 4 · THE COST ── */
+.pe-vf-cost {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid rgba(244, 241, 234, .10);
+}
+.pe-vf-cost .pe-vf-lbl { flex: none; }
+.pe-vf-cost-t {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #F4F1EA;
+}
+
+/* ── 5 · PRINCIPLE / REF ── */
+.pe-vf-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .pe-win--vf .pe-wb { padding: 14px 14px 12px; gap: 12px; }
+  .pe-vf-head { grid-template-columns: 1fr; }
+  .pe-vf-sub { text-align: left; }
+  /* Keep BEFORE | AFTER side by side; region scrolls horizontally */
+  .pe-win--vf .pe-w-outs {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    min-width: 640px;
+    gap: 10px;
+  }
+  .pe-win--vf .pe-mock-wrap { height: 236px; }
+  .pe-w-out--after .pe-mcalm-h,
+  .pe-w-out--after .pe-mrev-h { font-size: 26px; }
+  .pe-w-out--after .pe-mcon-h { font-size: 30px; }
+  .pe-vf-prompts { grid-template-columns: 1fr; gap: 12px; padding: 12px 14px; }
+  .pe-vf-dir { grid-template-columns: minmax(0, 1fr); }
+  .pe-vf-dir-line .pe-ann,
+  .pe-vf-dir-line .pe-vf-prompt { grid-column: 1; }
+  .pe-vf-dir-line .pe-ann { justify-self: start; }
+  .pe-vf-cost { flex-direction: column; gap: 4px; }
+}
+
+/* ─────────────────────────────────────────────
+   PROMPT DIFF — Example 01 THE DIRECTION (animation prototype)
+   Rows are always in the layout; only opacity + transform change.
+   Timing: 150ms delay · 250ms per line · 180ms gap between lines
+           → starts at 150 / 580 / 1010ms, done at ~1260ms.
+───────────────────────────────────────────── */
+
+/* "+" diff marker — sits in the tag column, same row metrics as the text */
+.pe-diff-plus {
+  grid-column: 1;
+  font-size: 12px;
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: #91C9F7;
+}
+
+/* Armed by JS (not reduced-motion): additions start hidden, slightly lowered.
+   display:contents rows can't take opacity, so target their children. */
+.pe-diff--armed .pe-diff-add > * {
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+.pe-diff--armed.pe-diff--play .pe-diff-add > * {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 250ms ease-out,
+    transform 250ms cubic-bezier(.2, .7, .2, 1);
+  transition-delay: calc(150ms + var(--pe-diff-i, 0) * 430ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pe-diff--armed .pe-diff-add > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Reduced motion (window panel) ── */
+@media (prefers-reduced-motion: reduce) {
+  .pe-block .pe-win {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   NEXT / INDEX → footer boundary (this page only)
+   Root cause: when collapsed, .cs-nib-row's border-bottom (inset by the band's
+   --edge padding) sat 1px directly above SiteFooter's full-width border-top,
+   drawing a double divider. The footer owns the section boundary; the row's
+   line is only needed as the row/grid separator while expanded.
+   Kept as a transparent 1px border so the band height never changes.
+   Scoped via :has(.pe-wrap) — the band + case.css are shared with other pages.
+───────────────────────────────────────────── */
+.csp:has(.pe-wrap) .cs-nib-row {
+  transition: border-bottom-color 400ms cubic-bezier(.2, .7, .2, 1);
+}
+.csp:has(.pe-wrap) .cs-nib:not(.on) .cs-nib-row {
+  border-bottom-color: transparent;
+}

@@ -1,0 +1,371 @@
+/* ─────────────────────────────────────────────
+   Loop Demo — ld-* prefix
+   Used by components/case/LoopDemo.tsx
+   Palette: ink #101010 · paper #F4F1EA · muted #A8A59E
+            ice #91C9F7 · orange #FF6A24 · hairline var(--hl)
+   Sharp corners. Easing matches site convention.
+───────────────────────────────────────────── */
+
+/* ── Outer container ── */
+.ld-wrap {
+  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  background: #0d0d0d;
+  user-select: none;
+}
+
+/* ── Window chrome ── */
+.ld-chrome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  gap: 12px;
+}
+
+.ld-chrome-title {
+  color: #F4F1EA;
+  font-size: 10px;
+  letter-spacing: .07em;
+}
+
+.ld-chrome-r {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.ld-pause-tag {
+  color: #91C9F7;
+  font-size: 9px;
+  letter-spacing: .08em;
+  /* opacity driven by JS */
+}
+
+.ld-scripted-tag {
+  color: #A8A59E;
+  font-size: 9px;
+  letter-spacing: .08em;
+  padding: 2px 7px;
+  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
+}
+
+/* ── Inner wrapper (target for global end-of-loop fade) ── */
+.ld-inner {
+  /* opacity driven by JS */
+}
+
+/* ── Two-panel layout ── */
+.ld-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ld-left {
+  border-right: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  padding: 28px 24px;
+  position: relative;
+  min-height: 340px;
+}
+
+.ld-right {
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
+}
+
+/* ── Prompt panels — absolutely stacked, driven by JS ── */
+.ld-p01,
+.ld-p03 {
+  position: absolute;
+  inset: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* opacity driven by JS */
+}
+
+.ld-type-lbl {
+  color: #A8A59E;
+  font-size: 9px;
+  letter-spacing: .07em;
+}
+
+/* TYPE 01 */
+.ld-p01-text {
+  font-size: 17px;
+  color: #F4F1EA;
+  line-height: 1.6;
+}
+
+/* TYPE 03 */
+.ld-p03-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ld-p03-task {
+  color: #F4F1EA;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.ld-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.ld-line-txt {
+  font-size: 10px;
+  color: #A8A59E;
+  line-height: 1.5;
+}
+
+/* ── Annotation badges ── */
+.ld-ann {
+  flex-shrink: 0;
+  padding: 1px 5px;
+  background: rgba(145, 201, 247, .1);
+  border: 1px solid rgba(145, 201, 247, .28);
+  color: #91C9F7;
+  font-size: 8px;
+  letter-spacing: .04em;
+  margin-top: 2px;
+  /* opacity + transform driven by JS; CSS transition for smoothness */
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+/* ── Output panels — absolutely stacked ── */
+.ld-out-g,
+.ld-out-d {
+  position: absolute;
+  inset: 0;
+  /* opacity driven by JS */
+}
+
+/* ─────────────────────────────────────────────
+   Generic output mock (TYPE 01 / Stage 01)
+   Blue gradient, bold, stock-photo-ish
+───────────────────────────────────────────── */
+.ld-mock-g {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(140deg, #0d4fa0 0%, #1565c0 45%, #0891b2 100%);
+  display: flex;
+  align-items: center;
+  padding: 28px 20px;
+  gap: 0;
+}
+
+.ld-mg-left {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ld-mg-pill {
+  display: inline-flex;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 20px;
+  color: rgba(255, 255, 255, .85);
+  font-size: 7px;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  width: fit-content;
+}
+
+.ld-mg-h {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  letter-spacing: -.03em;
+}
+
+.ld-mg-sub {
+  font-size: 7px;
+  color: rgba(255, 255, 255, .75);
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  line-height: 1.5;
+  max-width: 140px;
+}
+
+.ld-mg-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  background: #fff;
+  color: #0d4fa0;
+  font-size: 7px;
+  font-weight: 600;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  width: fit-content;
+}
+
+.ld-mg-social {
+  font-size: 6px;
+  color: rgba(255, 255, 255, .5);
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+}
+
+.ld-mg-right {
+  width: 42%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.ld-mg-screen {
+  width: 78px;
+  height: 108px;
+  background: rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 6px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ld-mg-bar {
+  height: 5px;
+  background: rgba(255, 255, 255, .35);
+  border-radius: 2px;
+}
+
+.ld-mg-row {
+  height: 4px;
+  background: rgba(255, 255, 255, .2);
+  border-radius: 2px;
+}
+
+.ld-mg-row-sm { width: 70%; }
+
+.ld-mg-chart {
+  flex: 1;
+  background: linear-gradient(to top, rgba(255, 255, 255, .22) 40%, transparent 100%);
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+/* ─────────────────────────────────────────────
+   Distinctive output mock (TYPE 03 / Stage 03)
+   Dark, type-led, orange accent — no gradients
+───────────────────────────────────────────── */
+.ld-mock-d {
+  width: 100%;
+  height: 100%;
+  background: #0A0A0A;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 24px;
+  gap: 12px;
+}
+
+.ld-md-tag {
+  font-size: 8px;
+  font-family: var(--font-jb-mono), monospace;
+  color: #A8A59E;
+  letter-spacing: .1em;
+}
+
+.ld-md-h {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #F4F1EA;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  letter-spacing: -.04em;
+}
+
+.ld-md-sub {
+  font-size: 8px;
+  color: #A8A59E;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+.ld-md-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  border: 1px solid #FF6A24;
+  color: #FF6A24;
+  font-size: 8px;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  font-weight: 500;
+  width: fit-content;
+  letter-spacing: .06em;
+}
+
+.ld-md-rule {
+  height: 1px;
+  background: rgba(244, 241, 234, .1);
+  max-width: 180px;
+}
+
+.ld-md-fine {
+  font-size: 7px;
+  color: #3F3D3A;
+  font-family: var(--font-jb-mono), monospace;
+  letter-spacing: .07em;
+}
+
+/* ── Footer / stage indicator ── */
+.ld-foot {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 16px;
+  border-top: 1px solid var(--hl, rgba(244, 241, 234, .14));
+}
+
+.ld-stage {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+  letter-spacing: .05em;
+}
+
+.ld-stage-n {
+  /* color driven by JS */
+}
+
+.ld-sep {
+  color: #3F3D3A;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .ld-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .ld-left {
+    border-right: 0;
+    border-bottom: 1px solid var(--hl, rgba(244, 241, 234, .14));
+    min-height: 260px;
+  }
+
+  .ld-right {
+    min-height: 220px;
+  }
+
+  .ld-p01,
+  .ld-p03 {
+    inset: 20px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ld-ann { transition: none !important; }
+}

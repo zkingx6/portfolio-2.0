@@ -15,32 +15,32 @@
   background-image: radial-gradient(#2a2a2a 1.2px, transparent 1.2px);
   background-size: 32px 32px;
 }
-.cs { display: block; --hl: rgba(244,241,234,.14); --cs-l: 48px; --cs-lab: minmax(160px, 220px) }
-.cs * { border-radius: 0 }
-.cs a { color: inherit; text-decoration: none }
+.csp { display: block; --hl: rgba(244,241,234,.14); --cs-l: 48px; --cs-lab: minmax(160px, 220px) }
+.csp * { border-radius: 0 }
+.csp a { color: inherit; text-decoration: none }
 
 /* ── 1 · Header block ── */
 .cs-hd {
-  padding-top: calc(56px + 81px);
+  padding-top: calc(28px + 81px);
   padding-right: var(--edge);
-  padding-bottom: 48px;
+  padding-bottom: 24px;
   padding-left: var(--edge);
 }
-.cs-hdtop { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; margin-bottom: 20px }
+.cs-hdtop { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; margin-bottom: 10px }
 .cs-id { color: #91C9F7 }
 .cs-type { color: #A8A59E; font-size: 11px }
 .cs-t {
   margin: 0;
-  font-size: clamp(56px, 10vw, 160px);
+  font-size: clamp(36px, 5.5vw, 88px);
   font-weight: 800;
   line-height: .88;
   letter-spacing: -.055em;
   text-transform: uppercase;
 }
 .cs-out {
-  margin: 28px 0 0;
+  margin: 14px 0 0;
   max-width: 44ch;
-  font-size: clamp(19px, 1.7vw, 24px);
+  font-size: clamp(14px, 1.1vw, 15px);
   line-height: 1.35;
   letter-spacing: -.015em;
   text-wrap: balance;
@@ -55,11 +55,10 @@
   color: #A8A59E;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--hl);
-  /* 55.5px offsets the title block's half-pixel height so everything below lands on whole pixels */
-  margin-bottom: 55.5px;
+  margin-bottom: 28px;
 }
 .cs-crsep { margin: 0 10px; color: #3F3D3A }
-.cs a.cs-crlk { color: #FF6A24; position: relative }
+.csp a.cs-crlk { color: #FF6A24; position: relative }
 .cs-crlk::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: #FF6A24; transform: scaleX(0); transform-origin: left; transition: transform 240ms ease }
 .cs-crlk:hover::after, .cs-crlk:focus-visible::after { transform: scaleX(1) }
 
@@ -68,7 +67,7 @@
    .cs-rule (another .rl) is the bottom rule. Line heights are whole pixels so
    everything below keeps its exact position. */
 .cs-band { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0 var(--edge) }
-.cs-bc { display: flex; flex-direction: column; gap: 12px; padding: 24px 20px 26px 0; border-right: 1px solid #242424; min-width: 0 }
+.cs-bc { display: flex; flex-direction: column; gap: 12px; padding: 12px 20px 13px 0; border-right: 1px solid #242424; min-width: 0 }
 .cs-bc + .cs-bc { padding-left: 20px }
 .cs-bc:nth-child(4) { border-right: 0 }
 .cs-bc dt { color: #A8A59E; font-size: 11px; line-height: 16px }
@@ -89,7 +88,7 @@
 
 /* ── Media placeholders (visibly empty) ── */
 .cs-hero {
-  padding-top: 48px;
+  padding-top: 24px;
   padding-right: var(--edge);
   padding-bottom: 64px;
   padding-left: var(--edge);
@@ -163,16 +162,126 @@
 .cs-sv { font-size: clamp(32px, 3.2vw, 48px); font-weight: 700; letter-spacing: -.04em; line-height: 1; color: #FF6A24; font-variant-numeric: tabular-nums }
 .cs-su { color: #F4F1EA; font-size: 11px }
 
-/* ── Next ── */
-.cs-next { padding: 0 var(--edge) }
-.cs-nx { display: flex; align-items: baseline; gap: 16px 20px; flex-wrap: wrap; padding: 44px 0 56px; transition: background-color 300ms ease }
-.cs-nxk { color: #A8A59E }
-.cs-nxn { font-size: clamp(28px, 3.4vw, 48px); font-weight: 700; letter-spacing: -.04em; line-height: 1; text-transform: uppercase; transition: color 200ms ease, transform 250ms cubic-bezier(.2,.7,.2,1) }
-.cs-nx:hover .cs-nxn, .cs-nx:focus-visible .cs-nxn { transform: translateX(4px) }
-.cs-nx:focus-visible { outline: 1px solid #91C9F7; outline-offset: 4px }
+/* ── Next-Index Band (cs-nib-*) ─────────────────────────────────────────────
+   Collapsed = exactly one row: NEXT link (left) + INDEX toggle (right).
+   Expanded  = same header row + 3×3 project grid below (height-animated).
+   Height transition: grid-template-rows 0fr → 1fr (same pattern as drawers). */
 
-/* ── Sticky expand / collapse all ── */
-.cs-all {
+.cs-nib { padding: 0 var(--edge); border-top: 1px solid var(--hl) }
+
+/* One-row header */
+.cs-nib-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--hl);
+}
+
+/* NEXT — left, fills remaining space */
+.cs-nib-next {
+  display: flex;
+  align-items: baseline;
+  gap: 16px 20px;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+.cs-nib-next:focus-visible { outline: 1px solid #91C9F7; outline-offset: 4px }
+.cs-nib-np { cursor: default }
+
+/* Project name — large display text (reused from old cs-nxn) */
+.cs-nxn { font-size: clamp(28px, 3.4vw, 48px); font-weight: 700; letter-spacing: -.04em; line-height: 1; text-transform: uppercase; transition: transform 250ms cubic-bezier(.2,.7,.2,1) }
+
+/* Hover shift on the name — only for link rows */
+.cs-nib-next:not(.cs-nib-np):hover .cs-nxn,
+.cs-nib-next:not(.cs-nib-np):focus-visible .cs-nxn { transform: translateX(4px) }
+
+/* "Next →" key label */
+.cs-nib-nk { color: #A8A59E }
+
+/* INDEX toggle — right, never grows */
+.cs-nib-tog {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #A8A59E;
+  cursor: pointer;
+  transition: color 200ms ease;
+  white-space: nowrap;
+}
+.cs-nib-tog:hover, .cs-nib.on .cs-nib-tog { color: #F4F1EA }
+.cs-nib-tog:focus-visible { outline: 1px solid #91C9F7; outline-offset: 2px }
+.cs-nib-tog-lbl { font-size: 11px; letter-spacing: .06em }
+.cs-nib-tog-pm { font-size: 11px; width: 12px; text-align: center }
+
+/* Drawer — height animates via grid-template-rows */
+.cs-nib-dr {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 400ms cubic-bezier(.2,.7,.2,1);
+}
+.cs-nib.on .cs-nib-dr { grid-template-rows: 1fr }
+.cs-nib-di { overflow: hidden; min-height: 0 }
+
+/* 3×3 grid — gap technique: 1px gap filled with hairline color = clean intersections.
+   background is transparent when collapsed so zero pixels bleed through the drawer clip. */
+.cs-nib-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: transparent;
+}
+.cs-nib.on .cs-nib-grid { background: rgba(244,241,234,.08) }
+
+/* Cell — base */
+.cs-nib-cell {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 0 10px;
+  padding: 10px 16px;
+  background: #101010; /* opaque — covers grid bg; gap remains as hairline */
+  color: #F4F1EA;
+  text-decoration: none;
+  min-width: 0;
+}
+/* First column: flush with NEXT row left edge (no extra left pad) */
+.cs-nib-cell:nth-child(3n+1) { padding-left: 0 }
+/* Last column: flush with toggle right edge (no extra right pad) */
+.cs-nib-cell:nth-child(3n) { padding-right: 0 }
+
+/* Number */
+.cs-nib-cn { font-size: 11px; letter-spacing: .04em; color: #91C9F7 }
+
+/* Name */
+.cs-nib-cname { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0 }
+
+/* Arrow — hidden by default, appears on hover */
+.cs-nib-arr { font-size: 11px; color: #F4F1EA; opacity: 0; transition: opacity 150ms ease }
+.cs-nib-link:hover .cs-nib-arr,
+.cs-nib-link:focus-visible .cs-nib-arr { opacity: 1 }
+.cs-nib-link:hover { background: rgba(244,241,234,.03) }
+.cs-nib-link:focus-visible { outline: 1px solid #91C9F7; outline-offset: -1px }
+
+/* HERE badge — signature orange, full opacity */
+.cs-nib-badge { font-size: 11px; color: #FF6A24; letter-spacing: .04em }
+
+/* Dim states — color-based so the opaque cell background is unaffected */
+.cs-nib-here .cs-nib-cn,
+.cs-nib-here .cs-nib-cname { color: rgba(244,241,234,.45) }
+
+.cs-nib-plain .cs-nib-cn,
+.cs-nib-plain .cs-nib-cname { color: rgba(244,241,234,.4) }
+
+/* ── Scroll toggle — cs-stg ── */
+.cs-stg {
   position: fixed;
   right: calc(24px + env(safe-area-inset-right, 0px));
   bottom: calc(24px + env(safe-area-inset-bottom, 0px));
@@ -187,8 +296,8 @@
   cursor: pointer;
   transition: border-color 200ms ease;
 }
-.cs-all:hover { border-color: rgba(244,241,234,.55) }
-.cs-all:focus-visible { outline: 1px solid #91C9F7; outline-offset: 2px }
+.cs-stg:hover { border-color: rgba(244,241,234,.55) }
+.cs-stg:focus-visible { outline: 1px solid #91C9F7; outline-offset: 2px }
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
@@ -199,11 +308,11 @@
 }
 @media (max-width: 768px) {
   .cs { --cs-l: 32px }
-  .cs-hd { padding-top: calc(32px + 81px); padding-right: var(--edge); padding-bottom: 36px; padding-left: var(--edge) }
-  .cs-crumb { margin-bottom: 40px }
-  .cs-hero { padding-top: 32px; padding-right: var(--edge); padding-bottom: 40px; padding-left: var(--edge) }
+  .cs-hd { padding-top: calc(16px + 81px); padding-right: var(--edge); padding-bottom: 20px; padding-left: var(--edge) }
+  .cs-crumb { margin-bottom: 20px }
+  .cs-hero { padding-top: 16px; padding-right: var(--edge); padding-bottom: 40px; padding-left: var(--edge) }
   .cs-band { grid-template-columns: 1fr 1fr }
-  .cs-bc { padding: 20px 16px 20px 0 }
+  .cs-bc { padding: 10px 16px 10px 0 }
   .cs-bc + .cs-bc { padding-left: 16px }
   .cs-bc:nth-child(2) { border-right: 0 }
   .cs-bc:nth-child(3) { padding-left: 0 }
@@ -214,8 +323,19 @@
   .cs-body { padding-left: 0 }
   .cs-stats { grid-template-columns: 1fr }
   .cs-stat + .cs-stat { padding-left: 0; border-left: 0; border-top: 1px solid var(--hl) }
-  .cs-all { right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)) }
+  .cs-stg { right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)) }
+  .cs-nib-row { gap: 12px; padding: 16px 0 }
+  .cs-nib-tog-lbl { display: none }
+  .cs-nib-cell { padding: 8px 12px }
+}
+@media (max-width: 540px) {
+  /* Collapse grid to single column; all cells flush with content edges */
+  .cs-nib-grid { grid-template-columns: 1fr }
+  .cs-nib-cell,
+  .cs-nib-cell:nth-child(3n+1),
+  .cs-nib-cell:nth-child(3n) { padding-left: 0; padding-right: 0 }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cs-dr, .cs-body, .cs-row, .cs-nxn, .cs-pm { transition: none !important }
+  .cs-dr, .cs-body, .cs-row, .cs-nxn, .cs-pm,
+  .cs-nib-dr, .cs-nib-next, .cs-nib-arr { transition: none !important }
 }
