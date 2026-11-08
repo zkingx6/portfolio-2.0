@@ -6,6 +6,7 @@ import { SiteNav } from "@/components/nav/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useNavChrome } from "@/lib/useNavChrome";
 import { useReveal } from "@/lib/useReveal";
+import { StickPlayground } from "./StickPlayground";
 
 /* ── Content (edit here) ─────────────────────── */
 
@@ -18,13 +19,10 @@ const SECTIONS = [
 ] as const;
 
 const PROFILE: { k: string; v: string; ph?: boolean; cursor?: boolean }[] = [
-  { k: "name", v: "Ronger Xu — \"Zion\" 🧡" },
-  { k: "based", v: "New Jersey / New York" },
-  { k: "started in", v: "Fashion design" },
-  { k: "now", v: "Product & UX/UI design × AI Workflow" },
-  { k: "building", v: "Portfolio 2.0" },
-  { k: "believes", v: "Accessible by default" },
-  { k: "mode", v: "Directs the AI; keeps the taste", cursor: true },
+  { k: "name", v: "Ronger Xu / Zion" },
+  { k: "based", v: "New York / New Jersey" },
+  { k: "background", v: "Fashion → Visual Communication" },
+  { k: "now", v: "Product Design · UI/UX · Vibe Coding", cursor: true },
 ];
 
 const THREAD = [
@@ -174,19 +172,24 @@ export function AboutPage() {
           </nav>
 
               {/* ── 00 INTRO ─────────────────────────── */}
-              <section id="intro" className="ab-sec" style={{ padding: "calc(24px + 81px) var(--edge) 0" }}>
+              <section id="intro" className="ab-sec" style={{ paddingLeft: "var(--edge)", paddingRight: "var(--edge)" }}>
                 <SecLabel num="00" label="Intro" />
-                <h1 className="ab-h1">
-                  <span className="mask">
-                    <span>
-                      Direct the tools, keep the taste.
-                    </span>
-                  </span>
-                </h1>
-                <p className="ab-sub rv" style={{ transitionDelay: "120ms" }}>
-                  I design accessible digital products that make everyday
-                  experiences simpler, more intuitive, and more human.
-                </p>
+                <div className="ab-intro">
+                  <div className="ab-intro-l">
+                    <h1 className="ab-h1">
+                      <span className="mask">
+                        <span>Hi, I’m Ronger.</span>
+                      </span>
+                    </h1>
+                    <p className="ab-sub rv" style={{ transitionDelay: "120ms" }}>
+                      I design and build digital products through product design,
+                      UI/UX, and AI‑assisted development.
+                    </p>
+                  </div>
+                  <div className="rv" style={{ transitionDelay: "160ms" }}>
+                    <StickPlayground />
+                  </div>
+                </div>
                 <div className="ab-win rv" role="group" aria-label="Profile summary" style={{ transitionDelay: "200ms" }}>
                   <WinHead title="Ronger.profile" status="Live" active />
                   <div className="ab-wb">

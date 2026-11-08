@@ -27,6 +27,147 @@
   color: rgba(244,241,234,.78);
 }
 
+/* Intro-only spacing — tighter so 01 Origin peeks in at 1440×900 */
+#intro { padding-top: calc(8px + 81px) }
+/* ≤1279px the section strip sits under the header — clear it */
+@media (max-width: 1279px) { #intro { padding-top: calc(48px + 81px) } }
+#intro .ab-k { margin-bottom: 20px }
+#intro .ab-h1 { margin-bottom: 16px }
+#intro .ab-win { margin-top: 32px }
+#intro .ab-wb { padding: 16px 24px 18px }
+
+/* Intro row — headline left, playground right */
+.ab-intro {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) clamp(240px, 30%, 320px);
+  gap: 40px;
+  align-items: end;
+}
+.ab-intro .ab-h1 { white-space: nowrap }
+.ab-intro .ab-sub { max-width: 560px; text-wrap: pretty }
+
+/* ── Stick-figure playground ─────────────────── */
+.abpg {
+  --pg-line: rgba(244,241,234,.18);
+  border: 1px solid var(--pg-line);
+  background: #141414;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.abpg .mono { font-size: 10px }
+.abpg-hd, .abpg-ft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 30px;
+  padding: 0 6px 0 12px;
+  box-sizing: border-box;
+  color: #A8A59E;
+}
+.abpg-hd { border-bottom: 1px solid rgba(244,241,234,.1) }
+.abpg-ft { height: 26px; padding-right: 12px; border-top: 1px solid rgba(244,241,234,.1) }
+.abpg-tt { color: #A8A59E }
+.abpg-st { margin-left: auto; display: flex; align-items: center; gap: 6px; color: #A8A59E }
+.abpg-dot { width: 5px; height: 5px; background: #4a4a4a }
+.abpg.on .abpg-st { color: #F4F1EA }
+.abpg.on .abpg-dot { background: #FF6A24; animation: blink 1s steps(1) infinite }
+.abpg-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  padding: 0 8px;
+  border: 1px solid rgba(244,241,234,.22);
+  background: transparent;
+  color: #F4F1EA;
+  cursor: pointer;
+}
+.abpg-btn:hover { border-color: #91C9F7; color: #91C9F7 }
+.abpg-btn:focus-visible, .abpg-tb:focus-visible { outline: 1px solid #91C9F7; outline-offset: 2px }
+.abpg-ic.play {
+  width: 0; height: 0;
+  border-left: 6px solid currentColor;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.abpg-ic.pause { width: 6px; height: 8px; border-left: 2px solid currentColor; border-right: 2px solid currentColor; box-sizing: border-box }
+
+.abpg-stage {
+  position: relative;
+  height: 104px;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+}
+.abpg.on .abpg-stage { cursor: default }
+.abpg-stage:focus-visible { box-shadow: inset 0 0 0 1px #91C9F7 }
+.abpg-floor { position: absolute; left: 12px; right: 12px; bottom: 12px; height: 1px; background: rgba(244,241,234,.28) }
+
+.abpg-figwrap { position: absolute; left: 0; bottom: 13px; width: 24px; height: 44px; will-change: transform }
+.abpg-fig { display: block; overflow: visible; transform: rotate(var(--lean, 0deg)); transform-origin: 12px 42px; transition: transform 120ms ease-out }
+.abpg-fig circle, .abpg-fig line { fill: none; stroke: #F4F1EA; stroke-width: 1.5; stroke-linecap: square; transition: stroke 120ms }
+.abpg-fig .abpg-arm, .abpg-fig .abpg-leg { transform-box: view-box; transition: transform 140ms ease-out }
+.abpg-fig .abpg-arm { transform-origin: 12px 15px }
+.abpg-fig .abpg-leg { transform-origin: 12px 26px }
+.abpg-body { transform-box: view-box; transform-origin: 12px 42px; animation: abpg-idle 2.4s ease-in-out infinite }
+.abpg-fig.walk .abpg-body, .abpg-fig.air .abpg-body { animation: none }
+.abpg-fig.walk .l1 { animation: abpg-swing 320ms ease-in-out infinite alternate }
+.abpg-fig.walk .l2 { animation: abpg-swing 320ms ease-in-out infinite alternate-reverse }
+.abpg-fig.walk .a1 { animation: abpg-swing 320ms ease-in-out infinite alternate-reverse }
+.abpg-fig.walk .a2 { animation: abpg-swing 320ms ease-in-out infinite alternate }
+.abpg-fig.air .l1 { transform: rotate(24deg) }
+.abpg-fig.air .l2 { transform: rotate(-24deg) }
+.abpg-fig.air .a1 { transform: rotate(70deg) }
+.abpg-fig.air .a2 { transform: rotate(-70deg) }
+.abpg-fig.hit circle, .abpg-fig.hit line { stroke: #FF6A24 }
+.abpg-fig.hit .a1 { animation: none; transform: rotate(110deg) }
+.abpg-fig.hit .a2 { animation: none; transform: rotate(-110deg) }
+
+.abpg-sq {
+  position: absolute;
+  bottom: 13px;
+  width: 12px;
+  height: 12px;
+  background: #FF6A24;
+  transition: left 0s;
+}
+.abpg-sq.pop { animation: abpg-pop 360ms ease-out both }
+
+.abpg-hint { color: #A8A59E }
+.abpg-tch { display: none }
+.abpg-ct { margin-left: auto; color: #FF6A24 }
+.abpg-touch { display: none }
+.abpg .sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@keyframes abpg-idle { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(1px) scaleY(.985) } }
+@keyframes abpg-swing { from { transform: rotate(-22deg) } to { transform: rotate(22deg) } }
+@keyframes abpg-pop {
+  0% { transform: none; opacity: 1 }
+  45% { transform: translateY(-14px) rotate(90deg); opacity: 1 }
+  100% { transform: translateY(-20px) rotate(180deg) scale(.4); opacity: 0 }
+}
+
+/* touch devices: compact hold controls */
+@media (pointer: coarse) {
+  .abpg-kb { display: none }
+  .abpg-tch { display: inline }
+  .abpg-touch { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-top: 1px solid rgba(244,241,234,.1) }
+  .abpg-tb {
+    height: 40px;
+    border: 0;
+    border-left: 1px solid rgba(244,241,234,.1);
+    background: transparent;
+    color: #F4F1EA;
+    font-size: 12px;
+    touch-action: none;
+  }
+  .abpg-tb:first-child { border-left: 0 }
+  .abpg-tb:active { background: #1C1C1C; color: #FF6A24 }
+}
+
 /* window chrome (profile, now.log, AI panes) */
 .ab-win {
   margin-top: 48px;
@@ -259,10 +400,16 @@
   .ab-nt > div:last-child { grid-column: 2 }
   .ab-lr { grid-template-columns: 1fr; gap: 2px; padding: 12px 20px }
   .ab-portrait { width: 160px }
+  .ab-intro { grid-template-columns: 1fr; gap: 24px }
+  .ab-intro .ab-h1 { white-space: normal }
+  .abpg-stage { height: 96px }
   .ab-close { margin-top: 64px }
 }
 
 /* ── Reduced motion ───────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .ab-cur, .ab-thread:hover .ab-tn { animation: none !important }
+  .abpg-body, .abpg-fig .abpg-arm, .abpg-fig .abpg-leg, .abpg.on .abpg-dot, .abpg-sq.pop { animation: none !important }
+  .abpg-fig, .abpg-fig .abpg-arm, .abpg-fig .abpg-leg { transition: none !important }
+  .abpg-fig { transform: none }
 }
