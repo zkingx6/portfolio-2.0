@@ -8,7 +8,7 @@ export type ExternalCase = {
   /** Full accessible name, including that it opens in a new tab. */
   ariaLabel: string;
   /** Project-specific hero design instead of the generic card. */
-  design?: "bcg-landing" | "fennec-site";
+  design?: "bcg-landing" | "fennec-site" | "visa-landing";
 };
 
 export function ExternalPreview({ href, title, label, ariaLabel }: ExternalCase) {

@@ -153,7 +153,7 @@ export const PROJECTS: Project[] = [
     id: "008",
     name: "Prompt Direction",
     tags: "AI Direction / Prompt Design",
-    status: "[Process]",
+    status: "[Vibe Coding]",
     categories: [3],
     d1: "A working log of how I direct AI to design and build — the prompts, the cuts, and what shipped.",
     d2: "Prompting is a skill. Anyone can talk to AI. Being specific is experience.",

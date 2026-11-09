@@ -17,7 +17,8 @@
   - gallery  → expanded project row on the landing page Work index
   - sections → case study page: media inside a section, keyed by the section
                label exactly as written in lib/cases.ts (e.g. "The Problem").
-               Sections without media keep their dashed placeholder.
+               Sections without media keep their dashed placeholder;
+               an empty array ([]) makes that section text-only.
   Order on screen = order in the array. Remove an item = delete its entry.
 */
 
@@ -36,6 +37,8 @@ type Base = {
    * object-fit: cover (centered) instead of using its own proportions.
    */
   aspect?: string;
+  /** With `aspect`: which part stays in view, e.g. "50% 40%" (default centered). */
+  position?: string;
 };
 
 export type ImageMedia = Base & {
@@ -116,13 +119,119 @@ export const PROJECT_MEDIA: Record<ProjectSlug, ProjectMedia> = {
     //   ],
     // },
   },
-  tapgo: {},
-  restify: {},
-  "rit-mycourses": {},
-  ecoviz: {},
+  tapgo: {
+    // Hero = three-video composition (components/case/TapGoHero.tsx).
+    // Section images share one 5:4 frame (cover) so heights stay consistent;
+    // the crop only trims background. [] = text-only section.
+    sections: {
+      "Project Overview": [
+        { type: "image", src: "/projects/tapgo/example%201.png", width: 2976, height: 3206, aspect: "5 / 4", position: "50% 47%", alt: "Hand holding an iPhone showing the TapGo welcome screen — “Shopping made easy.”" },
+      ],
+      "The Problem": [],
+      "The Challenge": [
+        { type: "image", src: "/projects/tapgo/example%203.png", width: 1500, height: 1125, aspect: "5 / 4", alt: "Hands holding an iPhone showing TapGo onboarding — “Big text. Easy taps. No confusion.”" },
+      ],
+      "Key Decisions": [],
+      "Results & Impact": [
+        { type: "image", src: "/projects/tapgo/example%204.png", width: 1500, height: 1125, aspect: "5 / 4", alt: "iPhone showing TapGo’s “Make reading comfortable” settings for text size, contrast and color theme" },
+      ],
+      "Learnings": [
+        { type: "image", src: "/projects/tapgo/example%205.png", width: 1500, height: 1125, aspect: "5 / 4", alt: "TapGo poster on a wall — “Your favorites, always one tap away.”" },
+      ],
+    },
+  },
+  restify: {
+    // Case study hero — 1726×911 is a touch wider than 16:9; cover trims only side background
+    hero: {
+      type: "image",
+      src: "/projects/restify/landing.png",
+      width: 1726,
+      height: 911,
+      aspect: "16 / 9",
+      alt: "Restify app on two iPhones — breathing screen and sleep-sound player — on a blue gradient",
+    },
+    // [] = text-only section (no media block, no placeholder)
+    sections: {
+      "Project Overview": [
+        { type: "image", src: "/projects/restify/homeview.png", width: 2044, height: 1080, alt: "Restify app icon next to an iPhone home screen showing the installed app" },
+      ],
+      "The Problem": [],
+      "The Challenge": [
+        { type: "image", src: "/projects/restify/example%201.png", width: 1448, height: 1086, alt: "Restify Insights screen with sleep duration, meditation streak and mood charts on an iPhone" },
+      ],
+      "Key Decisions": [
+        { type: "image", src: "/projects/restify/example%202.png", width: 1024, height: 1536, aspect: "4 / 3", position: "50% 46%", alt: "Restify home screen on an iPhone lying on a grey surface" },
+      ],
+      "Results & Impact": [
+        { type: "image", src: "/projects/restify/example%204.png", width: 4096, height: 2730, alt: "Person slipping an iPhone showing Restify's dark-mode insights into a jacket pocket" },
+      ],
+      "Learnings": [
+        { type: "image", src: "/projects/restify/example%203.png", width: 2044, height: 1080, alt: "Restify breathing and home screens on two iPhones against a blue gradient" },
+      ],
+    },
+  },
+  "rit-mycourses": {
+    // Case study hero — 4:3 mockup shown in the 16:9 hero frame (cover, centered)
+    hero: {
+      type: "image",
+      src: "/projects/rit-mycourses/rit%20landing.png",
+      width: 1500,
+      height: 1125,
+      aspect: "16 / 9",
+      alt: "Redesigned RIT myCourses assignment page — “Project 3: Interview Practices, Due: Nov 26” with orange course tiles — shown on a laptop",
+    },
+    // [] = text-only section (no media block, no placeholder)
+    sections: {
+      "Project Overview": [
+        { type: "image", src: "/projects/rit-mycourses/example%203.png", width: 2048, height: 1227, alt: "RIT myCourses redesign on a laptop — orange course tiles for ID, MD, T, PP and UX" },
+      ],
+      "The Problem": [],
+      "The Challenge": [],
+      "Key Decisions": [
+        { type: "image", src: "/projects/rit-mycourses/example%201.png", width: 1024, height: 769, alt: "RIT myCourses redesign on a tablet — upcoming assignment, course tiles and the Fall 2024 calendar" },
+      ],
+      "Results & Impact": [
+        { type: "image", src: "/projects/rit-mycourses/example%202.png", width: 1024, height: 768, alt: "RIT myCourses redesign on a laptop — Fall 2024 calendar with deadlines" },
+      ],
+      "Learnings": [],
+    },
+  },
+  ecoviz: {
+    // Hero — tall 954×1648 poster: shown as a centered square crop (all five
+    // phones) over a blurred copy, in the 16:9 frame (see .csp[data-case="ecoviz"] in case.css)
+    hero: {
+      type: "image",
+      src: "/projects/ecoviz/ECOVIZ%20landing.png",
+      width: 954,
+      height: 1648,
+      aspect: "16 / 9",
+      alt: "Five iPhones showing the ECOVIZ experiences — DropPulse, SolarTrace, the ECOVIZ home screen, BreatheGrid and FrostBloom — on a soft gradient",
+    },
+    // pairs share one 4:5 frame (cover) so both images match in height;
+    // the abstract textures crop safely. [] = text-only section.
+    sections: {
+      "Project Overview": [
+        { type: "image", src: "/projects/ecoviz/ecoviz%20app%20overview.png", width: 1920, height: 1170, alt: "ECOVIZ app overview — onboarding, home and detail screens for all four environmental experiences" },
+      ],
+      "The Problem": [
+        { type: "image", src: "/projects/ecoviz/element%201.png", width: 800, height: 800, aspect: "4 / 5", alt: "Blue fluid texture — DropPulse rainfall visual" },
+        { type: "image", src: "/projects/ecoviz/element%202.png", width: 1023, height: 1537, aspect: "4 / 5", alt: "Yellow fluid texture — SolarTrace solar energy visual" },
+      ],
+      "The Challenge": [],
+      "Key Decisions": [],
+      "Results & Impact": [
+        { type: "image", src: "/projects/ecoviz/element%203.png", width: 1023, height: 1537, aspect: "4 / 5", alt: "Purple fluid texture — environmental visual study" },
+        { type: "image", src: "/projects/ecoviz/element%204.png", width: 800, height: 800, aspect: "4 / 5", alt: "Green fluid texture — BreatheGrid air quality visual" },
+      ],
+      "Learnings": [],
+    },
+  },
   "visa-financial-insights": {},
   "bcg-x": {},
-  fennec: {},
+  fennec: {
+    // [] = text-only section (no media block, no placeholder)
+    sections: { "Project Overview": [] },
+  },
   "prompt-direction": {},
   "zf-diary": {},
 };

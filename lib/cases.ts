@@ -31,6 +31,8 @@ export type CaseStudy = {
   outcomeMaxWidth?: string;
   /** false = expanded sections are text-only (no media block or placeholder). Default true. */
   showSectionMedia?: boolean;
+  /** Optional project-specific hero composition (replaces the hero media). */
+  heroDesign?: "tapgo-phones";
   /** Optional compact external button pinned to the hero media (bottom-right). */
   heroCta?: { label: string; href: string; ariaLabel: string };
   /** Optional live link, shown as an extra row under Role (row title defaults to "Live Product"). */
@@ -138,7 +140,7 @@ export const PROMPT_DIRECTION: CaseStudy = {
   slug: "prompt-direction",
   id: "008",
   name: "Prompt Direction",
-  type: "[Process]",
+  type: "[Vibe Coding]",
   // verbatim thesis from brief
   outcome:
     "Prompting is a skill — anyone can talk to AI, but being personalized and specific takes experience and practice.",
@@ -233,7 +235,7 @@ export const CATALOG: CatalogEntry[] = [
   { id: "005", name: "RIT MyCourses Redesign", type: "[Redesign]",          href: "/work/rit-mycourses" },
   { id: "006", name: "Visa Financial Insights", type: "[Self-initiated]",   href: "/work/visa-financial-insights" },
   { id: "007", name: "Fennec",                 type: "[Ongoing]",           href: "/work/fennec" },
-  { id: "008", name: "Prompt Direction",       type: "[Process]",         href: "/work/prompt-direction" },
+  { id: "008", name: "Prompt Direction",       type: "[Vibe Coding]",     href: "/work/prompt-direction" },
   { id: "009", name: "BCG by Forage",          type: "[Forage Simulation]", href: "/work/bcg-x" },
 ];
 
@@ -526,6 +528,58 @@ const TAPGO_SECTIONS: CaseSection[] = [
   },
 ];
 
+// ── 002 ECOVIZ — written case study sections ──────────────────────────────
+const ECOVIZ_SECTIONS: CaseSection[] = [
+  {
+    label: "Project Overview",
+    summary:
+      "ECOVIZ reimagines environmental data as an interactive visual system, translating rainfall, air quality, snowfall, and solar energy into immersive 3D experiences.",
+    body: [
+      "Developed as my MFA thesis at Rochester Institute of Technology, ECOVIZ explores how environmental information can move beyond conventional charts, dashboards, and numerical interfaces. Through research, 3D visualization, motion, and interaction design, I created four connected experiences that translate environmental conditions into visual behaviors, making data more immediate, expressive, and perceptible.",
+    ],
+  },
+  {
+    label: "The Problem",
+    summary:
+      "Traditional weather interfaces rely heavily on numbers, charts, and technical terminology, requiring users to interpret information before understanding environmental conditions.",
+    body: [
+      "Weather applications often communicate conditions through precipitation percentages, AQI values, measurements, and dense forecasts. While these formats provide useful precision, they can create an additional layer of interpretation. ECOVIZ began by questioning whether environmental information could be communicated through movement, density, and visual patterns, allowing people to perceive conditions alongside the numerical data.",
+    ],
+  },
+  {
+    label: "The Challenge",
+    summary:
+      "How might environmental datasets become intuitive, interactive experiences without sacrificing information clarity or turning visualization into decoration?",
+    body: [
+      "The challenge was balancing scientific meaning with visual expression. Each environmental dataset required a distinct visual metaphor while remaining part of one coherent system. Motion and interaction needed to communicate meaningful changes rather than simply create visual interest. The project also explored how to connect data accuracy, human perception, and emotional engagement through a consistent design language.",
+    ],
+  },
+  {
+    label: "Key Decisions",
+    summary:
+      "Established a Data → Behavior → Experience framework and developed four distinct visualization languages within a shared interactive system.",
+    body: [
+      "I translated rainfall into fluid accumulation (DropPulse), air quality into spatial density (BreatheGrid), snowfall into atmospheric particles (FrostBloom), and solar energy into light and trajectory (SolarTrace). These experiences were organized into two visual families: Solid / Tactile and Atmospheric / Expressive. This approach maintained a coherent system while allowing each dataset to communicate through its own behavior.",
+    ],
+  },
+  {
+    label: "Results & Impact",
+    summary:
+      "Created four interactive environmental visualization experiences and presented ECOVIZ as an MFA thesis within RIT's College of Art and Design.",
+    body: [
+      "ECOVIZ resulted in a connected system of four environmental visualization concepts exploring rainfall, air quality, snowfall, and solar energy. Using 3D, motion, and interaction, the project demonstrated alternative ways of representing environmental information through visual behavior. The completed thesis was presented within RIT's College of Art and Design, bringing together research, information design, and experimental interaction.",
+    ],
+  },
+  {
+    label: "Learnings",
+    summary:
+      "Data visualization can communicate through behavior, not just numbers. Expressive interactions are most effective when they preserve the meaning behind the data.",
+    body: [
+      "ECOVIZ taught me to approach data as a design material capable of shaping motion, form, density, space, and rhythm. I learned that simplification does not always require removing information; it can involve translating information into another perceptual form. Most importantly, the thesis expanded my understanding of interaction design from designing static interfaces toward designing meaningful systems of behavior.",
+    ],
+  },
+];
+
 // ── 006 Visa Financial Insights — written case study sections ─────────────
 const VISA_SECTIONS: CaseSection[] = [
   {
@@ -632,9 +686,29 @@ const FENNEC_SECTIONS: CaseSection[] = [
 
 export const STANDARD_CASES: Partial<Record<ProjectSlug, CaseStudy>> = {
   parallel: PARALLEL,
-  ecoviz: draftCase("ecoviz", "002", "ECOVIZ"),
+  ecoviz: (() => {
+    const draft = draftCase("ecoviz", "002", "ECOVIZ");
+    return {
+      ...draft,
+      type: "[MFA Thesis / Interactive Data Visualization]",
+      outcome:
+        "An interactive MFA thesis exploring how environmental data can become intuitive, immersive experiences through 3D visualization, motion, and interaction.",
+      // two lines on desktop at the existing type size; natural wrap on mobile
+      outcomeMaxWidth: "62ch",
+      meta: [
+        { label: "Scope", value: "Data Visualization · Interaction Design · 3D · Motion · Information Design" },
+        { label: "Service", value: "Interactive Environmental Data Visualization" },
+        { label: "Category", value: "Data & Systems / Interaction Design", ice: true },
+        // keep the existing project date (from the Resume entry)
+        draft.meta.find((m) => m.label === "Date")!,
+      ],
+      role: "Interaction Designer / Visual Designer / Researcher",
+      sections: ECOVIZ_SECTIONS,
+    };
+  })(),
   tapgo: {
     ...draftCase("tapgo", "003", "TapGo"),
+    heroDesign: "tapgo-phones",
     type: "[Self-initiated UX/UI Case Study]",
     outcome:
       "Designed an accessibility-first grocery shopping experience that helps older adults navigate digital shopping with greater clarity, confidence, and independence.",
@@ -671,7 +745,9 @@ export const STANDARD_CASES: Partial<Record<ProjectSlug, CaseStudy>> = {
       ...draft,
       type: "[Self-initiated Information Design]",
       outcome:
-        "Transformed publicly available Visa financial reports into an interactive digital narrative, using data visualization and information design to make complex business insights clearer and more accessible.",
+        "Turning complex Visa financial reports into clear, interactive stories through data visualization, information design, and financial storytelling.",
+      // two lines on desktop at the existing type size; natural wrap on mobile
+      outcomeMaxWidth: "56ch",
       meta: [
         { label: "Scope", value: "Data Visualization · Information Architecture · Financial Storytelling" },
         { label: "Service", value: "Financial Data Visualization" },
@@ -681,6 +757,14 @@ export const STANDARD_CASES: Partial<Record<ProjectSlug, CaseStudy>> = {
       ],
       role: "Information Designer / Visual Designer",
       sections: VISA_SECTIONS,
+      showSectionMedia: false,
+      external: {
+        href: "https://kneel-human-39937570.figma.site",
+        title: "View case study",
+        label: "Visa Financial Insights",
+        ariaLabel: "View the Visa Financial Insights case study (opens in a new tab)",
+        design: "visa-landing",
+      },
     };
   })(),
   fennec: (() => {

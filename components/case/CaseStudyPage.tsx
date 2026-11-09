@@ -14,6 +14,8 @@ import { MediaFigure, MediaGallery } from "@/components/media/ProjectMedia";
 import { ExternalPreview } from "@/components/case/ExternalPreview";
 import { BcgHero } from "@/components/case/BcgHero";
 import { FennecHero } from "@/components/case/FennecHero";
+import { VisaHero } from "@/components/case/VisaHero";
+import { TapGoHero } from "@/components/case/TapGoHero";
 import "@/app/styles/case.css";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -38,7 +40,7 @@ function Section({
   n: number;
   open: boolean;
   onToggle: () => void;
-  /** Media for this section from lib/projectMedia.ts; placeholder when empty. */
+  /** Media for this section from lib/projectMedia.ts; placeholder when missing, none when []. */
   media?: MediaItem[];
   /** false = text-only section (no media block, no placeholder). */
   showMedia?: boolean;
@@ -100,7 +102,7 @@ function Section({
                 ))}
               </dl>
             ) : null}
-            {!showMedia ? null : media && media.length > 0 ? (
+            {!showMedia || media?.length === 0 ? null : media ? (
               <MediaGallery items={media} />
             ) : (
               <MediaSlot label="Media" />
@@ -162,7 +164,7 @@ export function CaseStudyPage({
             onClose={nav.closeAll}
           />
 
-          <main className="csp" id="top">
+          <main className="csp" id="top" data-case={data.slug}>
             {/* 1 · Header block */}
             <header className="cs-hd">
               <div className="mono cs-crumb rv">
@@ -231,9 +233,13 @@ export function CaseStudyPage({
                     <BcgHero href={data.external.href} />
                   ) : data.external.design === "fennec-site" ? (
                     <FennecHero href={data.external.href} />
+                  ) : data.external.design === "visa-landing" ? (
+                    <VisaHero href={data.external.href} />
                   ) : (
                     <ExternalPreview {...data.external} />
                   )
+                ) : data.heroDesign === "tapgo-phones" ? (
+                  <TapGoHero />
                 ) : heroMedia ? (
                   <div className="cs-heroimg">
                     <MediaFigure m={heroMedia} priority full />

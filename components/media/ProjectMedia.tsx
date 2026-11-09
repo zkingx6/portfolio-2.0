@@ -28,7 +28,7 @@ const SIZES_FULL = "(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1160px";
 function Asset({ m, priority, sizes, onFail }: { m: MediaItem; priority?: boolean; sizes: string; onFail: () => void }) {
   const reduced = useReducedMotion();
   // with a fixed frame ratio, fill the frame (cover); otherwise keep natural proportions
-  const fill = { width: "100%", height: m.aspect ? "100%" : "auto", display: "block", objectFit: "cover" } as const;
+  const fill = { width: "100%", height: m.aspect ? "100%" : "auto", display: "block", objectFit: "cover", objectPosition: m.position } as const;
 
   if (m.type === "image") {
     return (

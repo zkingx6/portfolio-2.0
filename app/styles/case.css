@@ -219,6 +219,99 @@
 @media (max-width: 640px) { .cs-heroimg { display: flex; flex-direction: column; align-items: flex-end; gap: 10px } .cs-heroimg .pm-fig { align-self: stretch } .csp a.cs-herocta { position: static; padding: 8px 12px; font-size: 10px; gap: 6px } }
 @media (prefers-reduced-motion: reduce) { .cs-herocta, .cs-herocta span { transition: none } .cs-herocta:hover span, .cs-herocta:focus-visible span { transform: none } }
 
+/* ── Visa Financial Insights hero (components/case/VisaHero.tsx) ─────────
+   Recreates the Figma Sites landing. Fixed dark artwork in both themes.
+   Positions measured from the reference (1cqw = 1% of hero width). */
+.vsh-wrap { container-type: inline-size }
+.vsh {
+  --vy: 1.45cqw; /* vertical offset: reference is 53.3cqw tall, hero is 56.25cqw */
+  --gold: #C9A84C; --cream: #F5F0E8; --muted: #8E99B1; --dim: #5E6679; --dimmer: #4E5669;
+  position: relative; aspect-ratio: 16 / 9; overflow: hidden;
+  border: 1px solid rgba(var(--c-fg-rgb), .14);
+  background-color: #0B1220;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size: 9.9cqw 9.9cqw; background-position: -0.05cqw -0.05cqw;
+  color: var(--cream); text-align: left;
+}
+.vsh .vsh-top, .vsh-tags, .vsh-chart-lbl, .vsh-note, .vsh-k, .vsh-s, .vsh-sec-t, .vsh-sec-grid, .vsh-source, .vsh-foot, .vsh-btn { font-family: var(--vsh-mono), ui-monospace, monospace }
+.vsh-water { position: absolute; left: 21cqw; top: calc(var(--vy) + 18.6cqw); font-family: var(--vsh-serif), serif; font-size: 12.6cqw; line-height: 1; color: rgba(255,255,255,.028); letter-spacing: -.01em; white-space: nowrap; pointer-events: none }
+.vsh-top { position: absolute; top: calc(var(--vy) + 2.2cqw); left: 2.65cqw; right: 2.1cqw; translate: 0 -50%; display: flex; align-items: center; justify-content: space-between }
+.vsh-brand { display: inline-flex; align-items: center; gap: 1cqw; color: var(--gold); font-size: .68cqw; letter-spacing: .3em; text-transform: uppercase }
+.vsh-brand i { width: 1.2cqw; height: 1px; background: var(--gold) }
+.vsh-meta { display: inline-flex; align-items: center; gap: 1cqw; color: var(--muted); font-size: .72cqw; letter-spacing: .03em }
+.vsh-sun { width: 1.9cqw; height: 1.9cqw; border-radius: 50%; display: grid; place-items: center; background: #1A2840; color: var(--gold) }
+.vsh-sun svg { width: .8cqw; height: .8cqw }
+
+.vsh-left { position: absolute; left: 12.6cqw; top: calc(var(--vy) + 10.45cqw); width: 42.75cqw }
+.vsh-tags { display: flex; align-items: center; gap: .75cqw }
+.vsh-badge { display: inline-flex; align-items: center; height: 1.25cqw; padding: 0 .5cqw; background: var(--gold); color: #0B1220; font-size: .62cqw; letter-spacing: .25em; text-transform: uppercase }
+.vsh-tagtxt { color: var(--muted); font-size: .72cqw; letter-spacing: .03em }
+.vsh-title { margin: 1.35cqw 0 0; font-family: var(--vsh-serif), serif; font-weight: 400; font-size: 5.55cqw; line-height: .94; letter-spacing: -.01em; color: var(--cream) }
+.vsh-title span { display: block }
+.vsh-title .g { color: var(--gold) }
+.vsh-rule { display: block; width: 3.75cqw; height: 2px; margin-top: 1.05cqw; background: var(--gold) }
+.vsh-sub { margin: 1.25cqw 0 0; max-width: 33cqw; font-family: var(--vsh-sans), sans-serif; font-size: 1.1cqw; line-height: 1.6; color: var(--muted) }
+.vsh-chart { position: relative; margin-top: 1.35cqw; height: 7.75cqw; box-sizing: border-box; border: 1px solid #1A2840; background: #131E30 }
+.vsh-chart-lbl { position: absolute; left: 1cqw; top: 1.45cqw; translate: 0 -50%; font-size: .7cqw; color: var(--muted); letter-spacing: .03em }
+.vsh-chart-lbl b { color: var(--gold); font-weight: 400 }
+.vsh-chart svg { position: absolute; left: 1cqw; right: 1.2cqw; top: 2.85cqw; bottom: .4cqw; width: calc(100% - 2.2cqw); height: calc(100% - 3.25cqw) }
+.vsh-cta-row { display: flex; align-items: center; gap: .95cqw; margin-top: 1.45cqw }
+.csp a.vsh-btn, .vsh-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 1.1cqw;
+  width: 13cqw; height: 2.55cqw; box-sizing: border-box;
+  background: var(--gold); color: #0B1220; font-size: .82cqw; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.vsh-btn span { transition: transform 200ms ease }
+.csp a.vsh-btn:hover, .csp a.vsh-btn:focus-visible { background: var(--cream); color: #0B1220 }
+.vsh-btn:hover span, .vsh-btn:focus-visible span { transform: translateX(3px) }
+.csp a.vsh-btn:focus-visible { outline: 2px solid #91C9F7; outline-offset: 3px }
+.vsh-note { display: flex; flex-direction: column; gap: .3cqw; font-size: .68cqw; letter-spacing: .03em; color: var(--muted) }
+.vsh-note .d { color: var(--dim) }
+
+.vsh-right { position: absolute; left: 58.2cqw; top: calc(var(--vy) + 13.25cqw); width: 29.75cqw; display: flex; flex-direction: column; gap: .75cqw }
+.vsh-row { display: flex; gap: .75cqw }
+.vsh-row.r2 .vsh-card { flex: 1 1 0; height: 7.15cqw }
+.vsh-row.r3 { height: 8.55cqw }
+.vsh-row.r3 .tall { flex: 0 0 17.55cqw }
+.vsh-row.r3 .sectors { flex: 1 1 0 }
+.vsh-card { position: relative; box-sizing: border-box; display: flex; flex-direction: column; padding: 1.3cqw 1.25cqw 0; border: 1px solid #1A2840; background: #131E30; min-width: 0 }
+.vsh-card.wide { height: 7.95cqw; padding-top: 1.1cqw }
+.vsh-dash { width: 1.4cqw; height: 2px; background: var(--gold); margin-bottom: .75cqw }
+.vsh-v { font-family: var(--vsh-serif), serif; font-weight: 400; font-size: 2.05cqw; line-height: 1; color: var(--cream); letter-spacing: -.01em }
+.vsh-v.gold { color: var(--gold) }
+.vsh-k { margin-top: .65cqw; font-size: .72cqw; letter-spacing: .07em; color: var(--cream) }
+.vsh-s { margin-top: .35cqw; font-size: .72cqw; letter-spacing: .05em; color: var(--muted) }
+.vsh-card.sectors { background: #1B1E24; border-color: #262A31; padding-top: 1cqw }
+.vsh-sec-t { font-size: .72cqw; color: var(--gold); letter-spacing: .04em }
+.vsh-sec-grid { display: grid; grid-template-columns: 1fr 1fr; row-gap: .8cqw; margin-top: 1.1cqw; text-align: center }
+.vsh-sec-grid > span { display: flex; flex-direction: column; align-items: center; gap: .45cqw; font-size: .55cqw; letter-spacing: .04em; color: var(--muted) }
+.vsh-sec-grid i { font-style: normal; color: var(--gold); font-size: .75cqw; line-height: 1 }
+.vsh-source { margin-top: .45cqw; font-size: .7cqw; letter-spacing: .03em; color: var(--dimmer) }
+
+.vsh-foot { position: absolute; left: 12.6cqw; right: 12.05cqw; top: calc(var(--vy) + 50.15cqw); display: flex; justify-content: space-between; align-items: center; padding-top: 1.05cqw; border-top: 1px solid #1A2840; font-size: .72cqw; letter-spacing: .03em }
+.vsh-ftags { display: flex; gap: 1.4cqw; color: var(--muted) }
+.vsh-year { color: var(--dimmer) }
+@media (prefers-reduced-motion: reduce) { .vsh-btn, .vsh-btn span { transition: none } .vsh-btn:hover span, .vsh-btn:focus-visible span { transform: none } }
+
+/* Narrow heroes: reflow into a readable stack (box grows instead of shrinking text) */
+@container (max-width: 640px) {
+  .vsh { aspect-ratio: auto; min-height: 56.25cqw; padding: 24px 18px 22px; display: flex; flex-direction: column; gap: 18px; background-size: 40px 40px }
+  .vsh-water, .vsh-meta, .vsh-foot, .vsh-chart, .vsh-card.sectors, .vsh-source { display: none }
+  .vsh-top, .vsh-left, .vsh-right { position: static; translate: none; width: auto }
+  .vsh-brand { font-size: 9px; gap: 8px } .vsh-brand i { width: 16px }
+  .vsh-badge { height: 18px; padding: 0 6px; font-size: 8px } .vsh-tagtxt { font-size: 10px } .vsh-tags { gap: 8px; flex-wrap: wrap }
+  .vsh-title { margin-top: 14px; font-size: 40px } .vsh-rule { width: 40px; margin-top: 12px } .vsh-sub { max-width: none; margin-top: 12px; font-size: 14px }
+  .vsh-cta-row { flex-wrap: wrap; gap: 10px; margin-top: 16px }
+  .csp a.vsh-btn, .vsh-btn { width: auto; height: 40px; padding: 0 16px; gap: 10px; font-size: 11px }
+  .vsh-note { font-size: 9px; gap: 3px }
+  .vsh-right { gap: 8px } .vsh-row { gap: 8px } .vsh-row.r3 { height: auto } .vsh-row.r3 .tall { flex: 1 1 0 }
+  .vsh-card, .vsh-card.wide, .vsh-row.r2 .vsh-card { height: auto; padding: 12px 12px 12px } .vsh-dash { width: 18px; margin-bottom: 8px }
+  .vsh-v { font-size: 24px } .vsh-k { margin-top: 6px; font-size: 10px } .vsh-s { margin-top: 3px; font-size: 9px }
+}
+
 /* ── FENNEC hero (components/case/FennecHero.tsx) ──────────────────────
    Mirrors fennecnyc.com. 1cqw = 1% of the hero width ≈ 1vw on the live site. */
 .fnh-wrap { container-type: inline-size }
@@ -529,3 +622,23 @@
   .cs-dr, .cs-body, .cs-row, .cs-nxn, .cs-pm,
   .cs-nib-dr, .cs-nib-next, .cs-nib-arr { transition: none !important }
 }
+
+/* ── TapGo hero — three phone videos (scoped .tgh-*) ── */
+.tgh-wrap { container-type: inline-size }
+/* stage = the videos' flat background as browsers render it (file #FDFDFD → #FFF), both themes */
+.tgh { aspect-ratio: 16 / 9; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 13cqw; overflow: hidden; background: #FFFFFF; border: 1px solid var(--c-line) }
+/* crop window = phone bounding box (+ margin) inside the 1080×1920 frame */
+.tgh-phone { flex: 0 0 16cqw; aspect-ratio: 600 / 1240; overflow: hidden }
+.tgh-phone video { display: block; width: 180%; height: auto; max-width: none; margin: -54% 0 0 -39%; background: transparent; pointer-events: none }
+@container (max-width: 640px) {
+  .tgh { aspect-ratio: 4 / 3; gap: 4cqw }
+  .tgh-phone { flex-basis: 27cqw }
+}
+
+/* ── ECOVIZ media (scoped to data-case="ecoviz") ── */
+/* hero: tall poster → centered square crop over a blurred copy, inside the 16:9 frame */
+.csp[data-case="ecoviz"] .cs-heroimg .pm-frame { isolation: isolate }
+.csp[data-case="ecoviz"] .cs-heroimg .pm-frame::before { content: ""; position: absolute; inset: -48px; z-index: -1; background: url("/_next/image?url=%2Fprojects%2Fecoviz%2FECOVIZ%2520landing.png&w=384&q=75") center 18% / cover; filter: blur(40px) saturate(1.05) }
+.csp[data-case="ecoviz"] .cs-heroimg .pm-frame img { width: auto !important; height: 100% !important; aspect-ratio: 1; margin: 0 auto; object-position: 50% 65% !important; box-shadow: 0 0 60px rgba(0,0,0,.18) }
+/* two-image sections stay side by side on mobile too */
+@media (max-width: 768px) { .csp[data-case="ecoviz"] .cs-body .pm-gal { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px } }
