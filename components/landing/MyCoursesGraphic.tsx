@@ -6,8 +6,8 @@ const LABEL =
   "RIT myCourses redesign — tasks growing along one straight path, each one landing, then done";
 
 const SQUARES = [
-  { x: 218, y: 428, s: 44, fill: "#F4F1EA" },
-  { x: 386, y: 406, s: 88, fill: "#F4F1EA" },
+  { x: 218, y: 428, s: 44, fill: "var(--c-fg)" },
+  { x: 386, y: 406, s: 88, fill: "var(--c-fg)" },
   { x: 594, y: 384, s: 132, fill: "#91C9F7" },
   { x: 842, y: 362, s: 176, fill: "#FF6A24", last: true },
 ];
@@ -76,7 +76,7 @@ export function MyCoursesGraphic() {
           y={sq.y}
           width={sq.s}
           height={sq.s}
-          fill={sq.fill}
+          style={{ fill: sq.fill }}
           rx="0"
           ry="0"
         />

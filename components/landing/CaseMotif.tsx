@@ -47,7 +47,7 @@ export function CaseMotif({ index }: { index: number }) {
           alignItems: "center",
           gap: 6,
           font: "13px var(--font-jetbrains-mono), monospace",
-          color: "#F4F1EA",
+          color: "var(--c-fg)",
           whiteSpace: "nowrap",
           overflow: "hidden",
         }}
@@ -76,7 +76,7 @@ export function CaseMotif({ index }: { index: number }) {
             fontWeight: 800,
             letterSpacing: "-.06em",
             lineHeight: 1,
-            color: "#F4F1EA",
+            color: "var(--c-fg)",
           }}
         >
           Aa

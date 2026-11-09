@@ -2,22 +2,25 @@
    Case study template — cs-* prefix
    Used by components/case/CaseStudyPage.tsx (imported there, so no
    shared stylesheet is edited). Existing tokens only:
-   ink #101010 · paper #F4F1EA · muted #A8A59E · ice #91C9F7
-   orange #FF6A24 (metrics only) · hairline rgba(244,241,234,.14)
+   ink var(--c-bg) · paper var(--c-fg) · muted var(--c-muted) · ice #91C9F7
+   orange #FF6A24 (metrics only) · hairline rgba(var(--c-fg-rgb), .14)
    Sharp corners. Ease cubic-bezier(.2,.7,.2,1).
 ───────────────────────────────────────────── */
 
 .cs-wrap {
-  color: #F4F1EA;
+  color: var(--c-fg);
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   overflow-x: clip;
-  background-color: #101010;
-  background-image: radial-gradient(#2a2a2a 1.2px, transparent 1.2px);
+  background-color: var(--c-bg);
+  background-image: radial-gradient(var(--c-line-1) 1.2px, transparent 1.2px);
   background-size: 32px 32px;
 }
-.csp { display: block; --hl: rgba(244,241,234,.14); --cs-l: 48px; --cs-lab: minmax(160px, 220px) }
+.csp { display: block; --hl: rgba(var(--c-fg-rgb), .14); --cs-l: 48px; --cs-lab: minmax(160px, 220px) }
 .csp * { border-radius: 0 }
 .csp a { color: inherit; text-decoration: none }
+/* Title uses the shared .mask rise; cancel its layout padding so the title box is unchanged */
+.cs-t .mask { margin-bottom: -.24em }
+@media (prefers-reduced-motion: reduce) { .cs-t .mask > span { animation: none } }
 
 /* ── 1 · Header block ── */
 .cs-hd {
@@ -28,13 +31,14 @@
 }
 .cs-hdtop { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; margin-bottom: 10px }
 .cs-id { color: #91C9F7 }
-.cs-type { color: #A8A59E; font-size: 11px }
+.cs-type { color: var(--c-muted); font-size: 11px }
 .cs-t {
   margin: 0;
   font-size: clamp(36px, 5.5vw, 88px);
   font-weight: 800;
   line-height: .88;
   letter-spacing: -.055em;
+  word-spacing: .08em;
   text-transform: uppercase;
 }
 .cs-out {
@@ -52,12 +56,12 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 8px 24px;
-  color: #A8A59E;
+  color: var(--c-muted);
   padding-bottom: 18px;
   border-bottom: 1px solid var(--hl);
   margin-bottom: 28px;
 }
-.cs-crsep { margin: 0 10px; color: #3F3D3A }
+.cs-crsep { margin: 0 10px; color: var(--c-line-5) }
 .csp a.cs-crlk { color: #FF6A24; position: relative }
 .cs-crlk::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: #FF6A24; transform: scaleX(0); transform-origin: left; transition: transform 240ms ease }
 .cs-crlk:hover::after, .cs-crlk:focus-visible::after { transform: scaleX(1) }
@@ -67,11 +71,11 @@
    .cs-rule (another .rl) is the bottom rule. Line heights are whole pixels so
    everything below keeps its exact position. */
 .cs-band { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0 var(--edge) }
-.cs-bc { display: flex; flex-direction: column; gap: 12px; padding: 12px 20px 13px 0; border-right: 1px solid #242424; min-width: 0 }
+.cs-bc { display: flex; flex-direction: column; gap: 12px; padding: 12px 20px 13px 0; border-right: 1px solid var(--c-charcoal); min-width: 0 }
 .cs-bc + .cs-bc { padding-left: 20px }
 .cs-bc:nth-child(4) { border-right: 0 }
-.cs-bc dt { color: #A8A59E; font-size: 11px; line-height: 16px }
-.cs-bc dd { margin: 0; color: #F4F1EA; line-height: 20px }
+.cs-bc dt { color: var(--c-muted); font-size: 11px; line-height: 16px }
+.cs-bc dd { margin: 0; color: var(--c-fg); line-height: 20px }
 .cs-bice { color: #91C9F7 !important }
 .cs-brole {
   grid-column: 1 / -1;
@@ -80,10 +84,17 @@
   align-items: baseline;
   gap: 12px 0;
   border-right: 0;
-  border-top: 1px solid #242424;
+  border-top: 1px solid var(--c-charcoal);
   padding-left: 0 !important;
 }
 .cs-brole dd { grid-column: 2 / -1; padding-left: 20px; font-size: 15px; line-height: 21px }
+.csp a.cs-live { color: var(--c-fg); transition: color 200ms ease }
+.cs-live span[aria-hidden] { display: inline-block; color: #FF6A24; transition: transform 200ms ease }
+.csp a.cs-live:hover, .csp a.cs-live:focus-visible { color: #FF6A24 }
+.cs-live:hover span[aria-hidden], .cs-live:focus-visible span[aria-hidden] { transform: translate(2px, -2px) }
+.cs-live:focus-visible { outline: 1px solid #91C9F7; outline-offset: 3px }
+.cs-live .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+@media (prefers-reduced-motion: reduce) { .cs-live span[aria-hidden] { transition: none; transform: none !important } }
 .cs-rule { height: 0 }
 
 /* ── Media placeholders (visibly empty) ── */
@@ -96,16 +107,184 @@
 .cs-media {
   aspect-ratio: 16 / 9;
   max-width: 100%;
-  border: 1px dashed rgba(244,241,234,.24);
+  border: 1px dashed rgba(var(--c-fg-rgb), .24);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.cs-media .mono { color: #A8A59E; font-size: 11px }
+.cs-media .mono { color: var(--c-muted); font-size: 11px }
+
+/* External case-study card (e.g. BCG → Figma Make). Same 16:9 box as .cs-media. */
+.cs-ext {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(20px, 4vw, 48px);
+  box-sizing: border-box;
+  border: 1px solid rgba(var(--c-fg-rgb), .24);
+  background: rgba(var(--c-fg-rgb), .02);
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+.csp a.cs-ext { color: var(--c-fg) }
+.cs-ext-lbl { position: absolute; top: clamp(20px, 4vw, 48px); left: clamp(20px, 4vw, 48px); right: 72px; color: var(--c-muted); font-size: 11px }
+.cs-ext-t { font-size: clamp(28px, 4.6vw, 64px); font-weight: 800; letter-spacing: -.04em; line-height: .95; text-transform: uppercase; max-width: 12ch }
+.cs-ext-arr {
+  position: absolute; top: clamp(14px, 3vw, 40px); right: clamp(14px, 3vw, 40px);
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border: 1px solid rgba(var(--c-fg-rgb), .24); color: var(--c-fg);
+  transition: border-color 200ms ease, color 200ms ease;
+}
+.cs-ext-arr svg { transition: transform 200ms ease }
+.cs-ext:hover, .cs-ext:focus-visible { border-color: #FF6A24; background: rgba(255, 106, 36, .04) }
+.cs-ext:hover .cs-ext-arr, .cs-ext:focus-visible .cs-ext-arr { border-color: #FF6A24; color: #FF6A24 }
+.cs-ext:hover .cs-ext-arr svg, .cs-ext:focus-visible .cs-ext-arr svg { transform: translate(2px, -2px) }
+.cs-ext:focus-visible { outline: 2px solid #91C9F7; outline-offset: 4px }
+@media (prefers-reduced-motion: reduce) { .cs-ext, .cs-ext-arr, .cs-ext-arr svg { transition: none } .cs-ext:hover .cs-ext-arr svg, .cs-ext:focus-visible .cs-ext-arr svg { transform: none } }
+
+/* ── BCG × Forage hero (components/case/BcgHero.tsx) ───────────────────
+   Recreates the Figma Make landing page. Fixed dark artwork in both themes.
+   Units: 1cqw = 1% of the hero width (reference composition ≈ 100cqw wide). */
+.bcgh-wrap { container-type: inline-size }
+.bcgh {
+  --bcg-serif: "Didot", "Bodoni 72", "Bodoni MT", "Iowan Old Style", Georgia, serif;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(var(--c-fg-rgb), .14);
+  background-color: #0D0D0D;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 3.85cqw 3.85cqw;
+  background-position: -1px -1px;
+  color: #F2F2F2;
+  text-align: center;
+}
+.bcgh-tags { display: flex; align-items: stretch; gap: .5cqw }
+.bcgh-tags.mono, .bcgh .mono { text-transform: uppercase; letter-spacing: .13em }
+.bcgh-badge, .bcgh-meta { display: inline-flex; align-items: center; font-size: max(7px, .57cqw); line-height: 1; padding: .55cqw .8cqw }
+.bcgh-badge { background: #5BC27E; color: #0D0D0D; font-weight: 600 }
+.bcgh-meta { border: 1px solid rgba(255,255,255,.12); color: #7E7E7E }
+.bcgh-rule { display: block; width: 41.5cqw; height: 1px; margin-top: 3.6cqw; background: rgba(255,255,255,.1) }
+.bcgh-title {
+  margin: 3.4cqw 0 0;
+  font-family: var(--bcg-serif);
+  font-weight: 400;
+  font-size: 5cqw;
+  line-height: 1.02;
+  letter-spacing: -.04em;
+  color: #F4F4F4;
+}
+.bcgh-title span { display: block }
+.bcgh-sub { margin: 1.6cqw 0 0; max-width: 32cqw; font-size: max(9px, 1.2cqw); line-height: 1.7; color: #7A7A7A }
+.bcgh-info { display: flex; justify-content: center; gap: 2cqw; margin: 3.2cqw 0 0; width: 41.5cqw }
+.bcgh-info > div { min-width: 0 }
+.bcgh-info dt { font-size: max(6px, .5cqw); color: #4C4C4C; margin-bottom: .55cqw }
+.bcgh-info dd { margin: 0; font-size: max(8px, .85cqw); color: #BDBDBD; white-space: nowrap }
+.csp a.bcgh-btn, .bcgh-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .9cqw;
+  margin-top: 3.6cqw; width: 14.9cqw; height: 3.1cqw; box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.28); color: #F2F2F2;
+  font-size: max(8px, .78cqw); letter-spacing: .14em; text-transform: none;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+.bcgh-btn span { font-size: .85em; transition: transform 200ms ease }
+.csp a.bcgh-btn:hover, .csp a.bcgh-btn:focus-visible { background: #5BC27E; color: #0D0D0D }
+.bcgh-btn:hover span, .bcgh-btn:focus-visible span { transform: translateX(3px) }
+.bcgh-btn:focus-visible { outline: 2px solid #91C9F7; outline-offset: 3px }
+@media (prefers-reduced-motion: reduce) { .bcgh-btn, .bcgh-btn span { transition: none } .bcgh-btn:hover span, .bcgh-btn:focus-visible span { transform: none } }
+
+/* Hero image + optional compact external button (e.g. Parallel → live product) */
+.cs-heroimg { position: relative }
+.csp a.cs-herocta {
+  position: absolute; right: 16px; bottom: 16px; z-index: 1;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 14px; font-size: 11px; letter-spacing: .08em;
+  background: #101010; color: #F4F1EA; border: 1px solid rgba(244,241,234,.18);
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+.cs-herocta span { display: inline-block; color: #FF6A24; transition: transform 200ms ease, color 200ms ease }
+.csp a.cs-herocta:hover, .csp a.cs-herocta:focus-visible { background: #FF6A24; border-color: #FF6A24; color: #101010 }
+.cs-herocta:hover span, .cs-herocta:focus-visible span { color: #101010; transform: translate(2px, -2px) }
+.csp a.cs-herocta:focus-visible { outline: 2px solid #91C9F7; outline-offset: 3px }
+/* small screens: button sits below the image so it never covers the mockup */
+@media (max-width: 640px) { .cs-heroimg { display: flex; flex-direction: column; align-items: flex-end; gap: 10px } .cs-heroimg .pm-fig { align-self: stretch } .csp a.cs-herocta { position: static; padding: 8px 12px; font-size: 10px; gap: 6px } }
+@media (prefers-reduced-motion: reduce) { .cs-herocta, .cs-herocta span { transition: none } .cs-herocta:hover span, .cs-herocta:focus-visible span { transform: none } }
+
+/* ── FENNEC hero (components/case/FennecHero.tsx) ──────────────────────
+   Mirrors fennecnyc.com. 1cqw = 1% of the hero width ≈ 1vw on the live site. */
+.fnh-wrap { container-type: inline-size }
+.csp a.fnh, .fnh {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(var(--c-fg-rgb), .14);
+  background: #FFFBF1;
+  color: #252120;
+  text-decoration: none;
+}
+.fnh-nav { position: absolute; inset: 0 0 auto 0; height: 4.4cqw; display: flex; align-items: center; background: #EA5514; z-index: 1 }
+.fnh-logo { position: absolute; left: 3.85cqw; top: 50%; translate: 0 -50%; width: 7.4cqw; height: auto }
+.fnh-links { position: absolute; left: 37.5cqw; display: flex; gap: 3.6cqw; font-family: var(--fnh-hand), cursive; font-size: 2cqw; line-height: 1; color: #FFFFFF }
+.fnh-h {
+  position: absolute; left: 0; right: 0; top: 5.2cqw; z-index: 2;
+  font-family: var(--fnh-display), fantasy; font-size: 22.5cqw; line-height: .75; letter-spacing: -.05em;
+  text-align: center; white-space: nowrap; color: #252120;
+}
+.fnh-sub { position: absolute; left: 3.92cqw; top: 39.2cqw; z-index: 2; font-family: var(--fnh-hand), cursive; font-size: 2.8125cqw; line-height: 1.05; color: #252120 }
+.fnh-rope { position: absolute; left: 32.9cqw; top: 27.85cqw; width: 40.7cqw; height: auto; z-index: 3; pointer-events: none }
+.fnh-cta {
+  position: absolute; right: 2cqw; bottom: 2cqw; z-index: 4;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 12px; font-size: max(10px, .9cqw); letter-spacing: .08em;
+  background: #252120; color: #FFFBF1;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.fnh-cta span { display: inline-block; transition: transform 200ms ease }
+.fnh:hover .fnh-cta, .fnh:focus-visible .fnh-cta { background: #FF6A24; color: #101010 }
+.fnh:hover .fnh-cta span, .fnh:focus-visible .fnh-cta span { transform: translate(2px, -2px) }
+.csp a.fnh:focus-visible { outline: 2px solid #91C9F7; outline-offset: 3px }
+@container (max-width: 640px) { .fnh-cta { right: 6px; bottom: 6px; gap: 5px; padding: 4px 7px; font-size: 8px; letter-spacing: .06em } }
+@media (prefers-reduced-motion: reduce) { .fnh-cta, .fnh-cta span { transition: none } .fnh:hover .fnh-cta span, .fnh:focus-visible .fnh-cta span { transform: none } }
+
+/* Narrow heroes: keep the composition readable — the box grows instead of shrinking text */
+@container (max-width: 640px) {
+  .bcgh { aspect-ratio: auto; min-height: 56.25cqw; padding: 32px 18px }
+  .bcgh-tags { gap: 6px; flex-wrap: wrap; justify-content: center }
+  .bcgh-badge, .bcgh-meta { font-size: 9px; padding: 6px 9px }
+  .bcgh-rule { width: 70%; margin-top: 20px }
+  .bcgh-title { margin-top: 18px; font-size: 34px }
+  .bcgh-sub { margin-top: 12px; max-width: 30ch; font-size: 13px }
+  .bcgh-info { flex-direction: column; gap: 10px; margin-top: 18px; width: auto }
+  .bcgh-info dt { font-size: 8px; margin-bottom: 3px }
+  .bcgh-info dd { font-size: 12px; white-space: normal }
+  .csp a.bcgh-btn, .bcgh-btn { margin-top: 20px; width: auto; height: 40px; padding: 0 22px; gap: 10px; font-size: 11px }
+}
 
 /* ── 4 · Sections (collapsed first) ── */
 .cs-secs { margin: 0 var(--edge); border-bottom: 1px solid var(--hl) }
 .cs-sec { border-top: 1px solid var(--hl) }
+/* Expand all / Collapse all — compact text control above the first section */
+.cs-secs-hd { display: flex; justify-content: flex-end; padding-bottom: 14px }
+.cs-all {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 0; background: none; border: 0; cursor: pointer;
+  font-size: 11px; letter-spacing: .06em; color: var(--c-muted);
+  transition: color 200ms ease;
+}
+.cs-all-ic { display: inline-block; width: 10px; text-align: center }
+.cs-all:hover, .cs-all:focus-visible { color: #FF6A24 }
+.cs-all:focus-visible { outline: 1px solid #91C9F7; outline-offset: 4px }
+@media (prefers-reduced-motion: reduce) { .cs-all { transition: none } }
 .cs-h { margin: 0; font: inherit }
 .cs-row {
   display: grid;
@@ -122,13 +301,15 @@
   cursor: pointer;
   transition: background-color 300ms ease;
 }
-.cs-row:hover { background: rgba(244,241,234,.03) }
+.cs-row:hover { background: rgba(var(--c-fg-rgb), .03) }
 .cs-row:focus-visible { outline: 1px solid #91C9F7; outline-offset: -1px }
 .cs-num { color: #91C9F7 }
-.cs-lab { color: #F4F1EA }
-.cs-sum { font-size: clamp(17px, 1.4vw, 20px); line-height: 1.4; letter-spacing: -.01em; color: #F4F1EA; max-width: 62ch }
-.cs-pm { justify-self: end; font-size: 18px; line-height: 1; color: #A8A59E; transition: color 200ms ease }
-.cs-row:hover .cs-pm, .cs-sec.on .cs-pm { color: #F4F1EA }
+.cs-lab { color: var(--c-fg) }
+.cs-sum { font-size: clamp(17px, 1.4vw, 20px); line-height: 1.4; letter-spacing: -.01em; color: var(--c-fg); max-width: 62ch }
+/* summary stays 18px in both states; expanded body text (.cs-body) is 16px */
+.cs-secs .cs-sum { font-size: 18px }
+.cs-pm { justify-self: end; font-size: 18px; line-height: 1; color: var(--c-muted); transition: color 200ms ease }
+.cs-row:hover .cs-pm, .cs-sec.on .cs-pm { color: var(--c-fg) }
 
 /* height transition via grid rows (same pattern as Work drawers) */
 .cs-dr {
@@ -147,20 +328,20 @@
   transition: opacity 300ms ease;
 }
 .cs-sec.on .cs-body { opacity: 1; transition-delay: 80ms }
-.cs-body p { margin: 0; max-width: 66ch; font-size: 16px; line-height: 1.65; color: #A8A59E }
+.cs-body p { margin: 0; max-width: 66ch; font-size: 16px; line-height: 1.65; color: var(--c-muted) }
 
 .cs-pts { list-style: none; margin: 0; padding: 0; max-width: 66ch; border-top: 1px solid var(--hl) }
-.cs-pts li { padding: 18px 0; border-bottom: 1px solid var(--hl); font-size: 16px; line-height: 1.55; color: #A8A59E }
-.cs-ptk { color: #F4F1EA; font-weight: 500 }
+.cs-pts li { padding: 18px 0; border-bottom: 1px solid var(--hl); font-size: 16px; line-height: 1.55; color: var(--c-muted) }
+.cs-ptk { color: var(--c-fg); font-weight: 500 }
 
 /* metrics — the page's one orange */
 .cs-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--hl); border-bottom: 1px solid var(--hl) }
 .cs-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 12px; padding: 22px 20px 24px 0; min-width: 0 }
 .cs-stat + .cs-stat { padding-left: 20px; border-left: 1px solid var(--hl) }
-.cs-stat dt { color: #A8A59E; font-size: 11px; line-height: 1.5 }
+.cs-stat dt { color: var(--c-muted); font-size: 11px; line-height: 1.5 }
 .cs-stat dd { margin: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap }
 .cs-sv { font-size: clamp(32px, 3.2vw, 48px); font-weight: 700; letter-spacing: -.04em; line-height: 1; color: #FF6A24; font-variant-numeric: tabular-nums }
-.cs-su { color: #F4F1EA; font-size: 11px }
+.cs-su { color: var(--c-fg); font-size: 11px }
 
 /* ── Next-Index Band (cs-nib-*) ─────────────────────────────────────────────
    Collapsed = exactly one row: NEXT link (left) + INDEX toggle (right).
@@ -200,7 +381,7 @@
 .cs-nib-next:not(.cs-nib-np):focus-visible .cs-nxn { transform: translateX(4px) }
 
 /* "Next →" key label */
-.cs-nib-nk { color: #A8A59E }
+.cs-nib-nk { color: var(--c-muted) }
 
 /* INDEX toggle — right, never grows */
 .cs-nib-tog {
@@ -211,12 +392,12 @@
   padding: 0;
   background: none;
   border: 0;
-  color: #A8A59E;
+  color: var(--c-muted);
   cursor: pointer;
   transition: color 200ms ease;
   white-space: nowrap;
 }
-.cs-nib-tog:hover, .cs-nib.on .cs-nib-tog { color: #F4F1EA }
+.cs-nib-tog:hover, .cs-nib.on .cs-nib-tog { color: var(--c-fg) }
 .cs-nib-tog:focus-visible { outline: 1px solid #91C9F7; outline-offset: 2px }
 .cs-nib-tog-lbl { font-size: 11px; letter-spacing: .06em }
 .cs-nib-tog-pm { font-size: 11px; width: 12px; text-align: center }
@@ -238,7 +419,7 @@
   gap: 1px;
   background: transparent;
 }
-.cs-nib.on .cs-nib-grid { background: rgba(244,241,234,.08) }
+.cs-nib.on .cs-nib-grid { background: rgba(var(--c-fg-rgb), .08) }
 
 /* Cell — base */
 .cs-nib-cell {
@@ -247,8 +428,8 @@
   align-items: center;
   gap: 0 10px;
   padding: 10px 16px;
-  background: #101010; /* opaque — covers grid bg; gap remains as hairline */
-  color: #F4F1EA;
+  background: var(--c-bg); /* opaque — covers grid bg; gap remains as hairline */
+  color: var(--c-fg);
   text-decoration: none;
   min-width: 0;
 }
@@ -257,6 +438,15 @@
 /* Last column: flush with toggle right edge (no extra right pad) */
 .cs-nib-cell:nth-child(3n) { padding-right: 0 }
 
+/* Standard case pages (with .cs-secs): one line per boundary.
+   - top: the band's full-width border closes the section list (no second inset line)
+   - bottom: the footer's border is the band's bottom edge; the row/grid divider
+     lives on the grid, so it exists only while ALL PROJECTS is open
+   Scoped with .cs-secs ~ so Prompt Direction (no sections) is untouched. */
+.cs-secs:has(~ .cs-nib) { border-bottom: 0 }
+.cs-secs ~ .cs-nib .cs-nib-row { border-bottom: 0 }
+.cs-secs ~ .cs-nib .cs-nib-grid { border-top: 1px solid var(--hl) }
+
 /* Number */
 .cs-nib-cn { font-size: 11px; letter-spacing: .04em; color: #91C9F7 }
 
@@ -264,10 +454,10 @@
 .cs-nib-cname { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0 }
 
 /* Arrow — hidden by default, appears on hover */
-.cs-nib-arr { font-size: 11px; color: #F4F1EA; opacity: 0; transition: opacity 150ms ease }
+.cs-nib-arr { font-size: 11px; color: var(--c-fg); opacity: 0; transition: opacity 150ms ease }
 .cs-nib-link:hover .cs-nib-arr,
 .cs-nib-link:focus-visible .cs-nib-arr { opacity: 1 }
-.cs-nib-link:hover { background: rgba(244,241,234,.03) }
+.cs-nib-link:hover { background: rgba(var(--c-fg-rgb), .03) }
 .cs-nib-link:focus-visible { outline: 1px solid #91C9F7; outline-offset: -1px }
 
 /* HERE badge — signature orange, full opacity */
@@ -275,10 +465,10 @@
 
 /* Dim states — color-based so the opaque cell background is unaffected */
 .cs-nib-here .cs-nib-cn,
-.cs-nib-here .cs-nib-cname { color: rgba(244,241,234,.45) }
+.cs-nib-here .cs-nib-cname { color: rgba(var(--c-fg-rgb), .45) }
 
 .cs-nib-plain .cs-nib-cn,
-.cs-nib-plain .cs-nib-cname { color: rgba(244,241,234,.4) }
+.cs-nib-plain .cs-nib-cname { color: rgba(var(--c-fg-rgb), .4) }
 
 /* ── Scroll toggle — cs-stg ── */
 .cs-stg {
@@ -287,16 +477,16 @@
   bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   z-index: 90; /* below .nav (100) */
   padding: 12px 16px;
-  border: 1px solid rgba(244,241,234,.24);
+  border: 1px solid rgba(var(--c-fg-rgb), .24);
   border-radius: 0;
-  background: rgba(16,16,16,.6);
+  background: rgba(var(--c-bg-rgb), .6);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  color: #F4F1EA;
+  color: var(--c-fg);
   cursor: pointer;
   transition: border-color 200ms ease;
 }
-.cs-stg:hover { border-color: rgba(244,241,234,.55) }
+.cs-stg:hover { border-color: rgba(var(--c-fg-rgb), .55) }
 .cs-stg:focus-visible { outline: 1px solid #91C9F7; outline-offset: 2px }
 
 /* ── Responsive ── */
@@ -316,7 +506,7 @@
   .cs-bc + .cs-bc { padding-left: 16px }
   .cs-bc:nth-child(2) { border-right: 0 }
   .cs-bc:nth-child(3) { padding-left: 0 }
-  .cs-bc:nth-child(n+3) { border-top: 1px solid #242424 }
+  .cs-bc:nth-child(n+3) { border-top: 1px solid var(--c-charcoal) }
   .cs-brole { grid-template-columns: 1fr }
   .cs-brole dd { grid-column: 1; padding-left: 0 }
   .cs-row { column-gap: 12px; padding: 24px 0 }

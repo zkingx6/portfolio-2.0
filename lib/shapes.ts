@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 
 const o = "#FF6A24";
 const b = "#91C9F7";
-const w = "#F4F1EA";
+const w = "var(--c-fg)";
 
 function bx(
   l: number,
@@ -67,7 +67,7 @@ export function projectShapes(i: number): CSSProperties[] {
     ];
   if (i === 4)
     return [0, 1, 2, 3, 4, 5, 6].map((k) =>
-      bx(10, 12 + k * 11, k % 3 === 1 ? 48 : 72 - k * 4, 5, k === 2 ? o : "#4a4a4a"),
+      bx(10, 12 + k * 11, k % 3 === 1 ? 48 : 72 - k * 4, 5, k === 2 ? o : "var(--c-line-6)"),
     );
   if (i === 5)
     return [28, 38, 34, 52, 60, 74].map((h, k) =>
@@ -82,7 +82,7 @@ export function projectShapes(i: number): CSSProperties[] {
           y,
           5,
           4,
-          k === 3 ? o : "#242424",
+          k === 3 ? o : "var(--c-charcoal)",
           `border:1px solid ${k === 3 ? o : w};box-sizing:border-box`,
         ),
       ),
@@ -101,9 +101,9 @@ export function projectShapes(i: number): CSSProperties[] {
     return [
       bx(14, 16, 72, 22, "transparent", `border:1.5px solid ${b};box-sizing:border-box`),
       bx(14, 46, 32, 10, b),
-      bx(54, 46, 32, 10, "#4a4a4a"),
-      bx(14, 66, 72, 3, "#4a4a4a"),
-      bx(14, 74, 50, 3, "#4a4a4a"),
+      bx(54, 46, 32, 10, "var(--c-line-6)"),
+      bx(14, 66, 72, 3, "var(--c-line-6)"),
+      bx(14, 74, 50, 3, "var(--c-line-6)"),
     ];
   return [
     bx(18, 18, 52, 40, o),

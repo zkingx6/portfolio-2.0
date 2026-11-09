@@ -12,8 +12,8 @@ export type DotConfig = {
 
 export type AskResult = {
   q: string;
-  miss: boolean;
-  text?: string;
+  /** Indexes into PROJECTS; empty = no match. */
+  hits: number[];
 };
 
 export type NavTab = {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { onThemeChange, readRgbVar } from "./theme";
 
 /**
  * Simplified dot-field for the About Journey strip.
@@ -22,6 +23,15 @@ export function useJourneyDots(canvasId: string, hostId: string) {
 
     const REST: [number, number, number] = [46, 46, 46];
     const MID: [number, number, number] = [120, 118, 114];
+    let restCss = "#2e2e2e";
+    const readTheme = () => {
+      const r = readRgbVar("--c-dot-rest", [46, 46, 46]);
+      const m = readRgbVar("--c-dot-mid", [120, 118, 114]);
+      REST.splice(0, 3, ...r);
+      MID.splice(0, 3, ...m);
+      restCss = `rgb(${r[0]},${r[1]},${r[2]})`;
+    };
+    readTheme();
     const ORA: [number, number, number] = [255, 106, 36];
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
     const mix = (
@@ -54,7 +64,7 @@ export function useJourneyDots(canvasId: string, hostId: string) {
 
     const draw = () => {
       ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = "#2e2e2e";
+      ctx.fillStyle = restCss;
       ctx.beginPath();
       for (let j = 0; j < rows; j++)
         for (let i = 0; i < cols; i++) {
@@ -151,7 +161,13 @@ export function useJourneyDots(canvasId: string, hostId: string) {
     resize();
     if (!rm) raf = requestAnimationFrame(frame);
 
+    const offTheme = onThemeChange(() => {
+      readTheme();
+      draw();
+    });
+
     return () => {
+      offTheme();
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("blur", onLeave);
       document.documentElement.removeEventListener("pointerleave", onLeave);

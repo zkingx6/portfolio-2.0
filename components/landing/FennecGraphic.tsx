@@ -6,15 +6,15 @@ const LABEL =
   "Fennec — a geometric fox head built from solid facets, split light and shade";
 
 const FACETS: { points: string; fill: string; kind: "ear" | "face" }[] = [
-  { points: "395,150 320,450 520,400", fill: "#F4F1EA", kind: "ear" },
+  { points: "395,150 320,450 520,400", fill: "var(--c-fg)", kind: "ear" },
   { points: "400,205 360,425 490,398", fill: "#91C9F7", kind: "ear" },
   { points: "805,150 880,450 680,400", fill: "#91C9F7", kind: "ear" },
-  { points: "800,205 840,425 710,398", fill: "#F4F1EA", kind: "ear" },
-  { points: "520,400 600,470 600,600", fill: "#F4F1EA", kind: "face" },
+  { points: "800,205 840,425 710,398", fill: "var(--c-fg)", kind: "ear" },
+  { points: "520,400 600,470 600,600", fill: "var(--c-fg)", kind: "face" },
   { points: "680,400 600,470 600,600", fill: "#91C9F7", kind: "face" },
-  { points: "320,450 400,560 600,600 520,400", fill: "#F4F1EA", kind: "face" },
+  { points: "320,450 400,560 600,600 520,400", fill: "var(--c-fg)", kind: "face" },
   { points: "880,450 800,560 600,600 680,400", fill: "#91C9F7", kind: "face" },
-  { points: "400,560 600,810 600,600", fill: "#F4F1EA", kind: "face" },
+  { points: "400,560 600,810 600,600", fill: "var(--c-fg)", kind: "face" },
   { points: "800,560 600,810 600,600", fill: "#91C9F7", kind: "face" },
 ];
 
@@ -68,7 +68,7 @@ export function FennecGraphic() {
           key={f.points}
           className={"fn-facet fn-" + f.kind}
           points={f.points}
-          fill={f.fill}
+          style={{ fill: f.fill }}
         />
       ))}
       <polygon

@@ -52,7 +52,7 @@ type Example = {
 
 // ── Accent colors — one per example (user-directed scoped exception) ───────────
 // 01 → signature orange · 02 → ice blue · 03 → warm grey
-const ACCENTS = ["#FF6A24", "#91C9F7", "#A8A59E"];
+const ACCENTS = ["#FF6A24", "#91C9F7", "var(--c-muted)"];
 
 // ── Data — all copy editable here ─────────────────────────────────────────────
 
@@ -206,7 +206,7 @@ export function PromptExamples() {
       </div>
 
       {/* Frame line */}
-      <p className="mono" style={{ fontSize: "13px", color: "#F4F1EA", margin: "0 0 32px", lineHeight: 1.5 }}>
+      <p className="mono" style={{ fontSize: "13px", color: "var(--c-fg)", margin: "0 0 32px", lineHeight: 1.5 }}>
         Same model. Same task. Different director — different product.
       </p>
 
@@ -363,14 +363,14 @@ function MistakeWindow({
           <div className="pe-vf-notes">
             <div
               className="mono"
-              style={{ fontSize: "9px", letterSpacing: ".07em", color: "#A8A59E" }}
+              style={{ fontSize: "9px", letterSpacing: ".07em", color: "var(--c-muted)" }}
             >
               {ex.footnote}
             </div>
             {/* [DRAFT] REF FOOTNOTE */}
             <div
               className="mono"
-              style={{ fontSize: "9px", letterSpacing: ".07em", color: "#A8A59E" }}
+              style={{ fontSize: "9px", letterSpacing: ".07em", color: "var(--c-muted)" }}
             >
               {ex.refNote}{" "}
               <a
@@ -381,7 +381,7 @@ function MistakeWindow({
                 style={{
                   color: "inherit",
                   textDecoration: "none",
-                  borderBottom: "1px solid rgba(168,165,158,.45)",
+                  borderBottom: "1px solid rgba(var(--c-muted-rgb), .45)",
                 }}
               >
                 {ex.refUrl}

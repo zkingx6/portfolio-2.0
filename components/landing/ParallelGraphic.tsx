@@ -17,7 +17,7 @@ const ROWS: { y: number; markY: number; bars: Bar[] }[] = [
     y: 225,
     markY: 218,
     bars: [
-      { x: 180, w: 320, fill: "#F4F1EA" },
+      { x: 180, w: 320, fill: "var(--c-fg)" },
       { x: 548, w: 216, fill: "#91C9F7" },
       { x: 812, w: 212, fill: "#FF6A24", orange: true },
     ],
@@ -26,7 +26,7 @@ const ROWS: { y: number; markY: number; bars: Bar[] }[] = [
     y: 450,
     markY: 443,
     bars: [
-      { x: 180, w: 232, fill: "#F4F1EA" },
+      { x: 180, w: 232, fill: "var(--c-fg)" },
       { x: 472, w: 252, fill: "#FF6A24", orange: true },
       { x: 788, w: 232, fill: "#91C9F7" },
     ],
@@ -37,7 +37,7 @@ const ROWS: { y: number; markY: number; bars: Bar[] }[] = [
     bars: [
       { x: 180, w: 244, fill: "#FF6A24", orange: true },
       { x: 484, w: 224, fill: "#91C9F7" },
-      { x: 772, w: 256, fill: "#F4F1EA" },
+      { x: 772, w: 256, fill: "var(--c-fg)" },
     ],
   },
 ];
@@ -122,7 +122,7 @@ export function ParallelGraphic() {
                 height="44"
                 rx="0"
                 ry="0"
-                fill={bar.fill}
+                style={{ fill: bar.fill }}
               />
             );
           })}

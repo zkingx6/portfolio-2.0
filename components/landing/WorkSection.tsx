@@ -9,6 +9,8 @@ import {
   PROJECTS,
 } from "@/lib/content";
 import { parse, projectShapes } from "@/lib/shapes";
+import { mediaForProjectId } from "@/lib/projectMedia";
+import { MediaGallery } from "@/components/media/ProjectMedia";
 import { BcgGraphic } from "./BcgGraphic";
 import { CaseMotif } from "./CaseMotif";
 import { NarrowingGraphic } from "./NarrowingGraphic";
@@ -151,7 +153,7 @@ export function WorkSection({
                       — Close
                     </button>
                   </div>
-                  <div style={{ borderBottom: "1px solid #333" }}>
+                  <div style={{ borderBottom: "1px solid var(--c-line)" }}>
                     {k === 4
                       ? PLAYGROUND.map((x) => (
                           <div className="ex" key={x.name}>
@@ -181,7 +183,7 @@ export function WorkSection({
                                     style={{
                                       display: "block",
                                       marginTop: 8,
-                                      color: "#A8A59E",
+                                      color: "var(--c-muted)",
                                     }}
                                   >
                                     {p.tags}
@@ -194,7 +196,7 @@ export function WorkSection({
                                     color:
                                       p.status === "[Deployed MVP]"
                                         ? "#FF6A24"
-                                        : "#A8A59E",
+                                        : "var(--c-muted)",
                                   }}
                                 >
                                   {p.status}
@@ -279,6 +281,12 @@ export function WorkSection({
                                         ))
                                       )}
                                     </div>
+                                    <MediaGallery
+                                      items={(() => {
+                                        const m = mediaForProjectId(p.id);
+                                        return [...(m.cover ? [m.cover] : []), ...(m.gallery ?? [])];
+                                      })()}
+                                    />
                                   </div>
                                 ) : null}
                               </div>

@@ -6,6 +6,9 @@ import { SiteNav } from "@/components/nav/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useNavChrome } from "@/lib/useNavChrome";
 import { useReveal } from "@/lib/useReveal";
+import { MAILTO, PRINCIPLES } from "@/lib/content";
+import { StickPlayground } from "./StickPlayground";
+import { BuildWorkspace } from "./BuildWorkspace";
 
 /* ── Content (edit here) ─────────────────────── */
 
@@ -13,18 +16,15 @@ const SECTIONS = [
   { id: "intro",    num: "00", label: "Intro",    sh: "INTRO"   },
   { id: "origin",   num: "01", label: "Origin",   sh: "ORIGIN"  },
   { id: "beliefs",  num: "02", label: "Beliefs",  sh: "BELIEFS" },
-  { id: "with-ai",  num: "03", label: "With AI",  sh: "WITH AI" },
+  { id: "with-ai",  num: "03", label: "How I build", sh: "BUILD" },
   { id: "now",      num: "04", label: "Now",       sh: "NOW"     },
 ] as const;
 
 const PROFILE: { k: string; v: string; ph?: boolean; cursor?: boolean }[] = [
-  { k: "name", v: "Ronger Xu — \"Zion\" 🧡" },
-  { k: "based", v: "New Jersey / New York" },
-  { k: "started in", v: "Fashion design" },
-  { k: "now", v: "Product & UX/UI design × AI Workflow" },
-  { k: "building", v: "Portfolio 2.0" },
-  { k: "believes", v: "Accessible by default" },
-  { k: "mode", v: "Directs the AI; keeps the taste", cursor: true },
+  { k: "name", v: "Ronger Xu / Zion" },
+  { k: "based", v: "New York / New Jersey" },
+  { k: "background", v: "Fashion → Visual Communication" },
+  { k: "now", v: "Product Design · UI/UX · Vibe Coding", cursor: true },
 ];
 
 const THREAD = [
@@ -34,35 +34,11 @@ const THREAD = [
   { name: "New York", tag: "Visual communication → product" },
 ];
 
-const BELIEFS = [
-  {
-    lead: "Accessible by ",
-    key: "default",
-    tail: ".",
-    body: "Older adults, global organizations or startups — the goal is the same: make products easier for people.",
-  },
-  {
-    lead: "AI is a tool. I’m the ",
-    key: "director",
-    tail: ".",
-    body: "I lead the AI to design — I’m still the one in charge of the design.",
-  },
-];
-
-const AI_NOTES: { changed: string; why: string }[] = [];
-
-/* positions of the numbered pins on both screenshots */
-const PINS = [
-  { top: "18%", left: "14%" },
-  { top: "46%", right: "16%" },
-  { bottom: "16%", left: "40%" },
-];
-
 const NOW_LOG = [
-  { date: "Oct 2026", tag: "building", text: "Portfolio 2.0" },
-  { date: "Oct 2026", tag: "open to", text: "AI product design roles", arrow: true },
+  { date: "Nov 2026", tag: "building", text: "Digital products & creative experiments" },
+  { date: "Nov 2026", tag: "open to", text: "Product Design · UX/UI · AI Workflow roles", arrow: true },
 ];
-const NOW_UPDATED = "Oct 2026";
+const NOW_UPDATED = "Nov 2026";
 
 const PERSONAL: string[] = [];
 
@@ -116,15 +92,15 @@ export function AboutPage() {
   return (
     <div
       style={{
-        color: "#F4F1EA",
+        color: "var(--c-fg)",
         fontFamily: "var(--font-inter-tight), system-ui, sans-serif",
         overflowX: "clip",
       }}
     >
       <div
         style={{
-          backgroundColor: "#101010",
-          backgroundImage: "radial-gradient(#2a2a2a 1.2px,transparent 1.2px)",
+          backgroundColor: "var(--c-bg)",
+          backgroundImage: "radial-gradient(var(--c-line-1) 1.2px,transparent 1.2px)",
           backgroundSize: "32px 32px",
           padding: "0 var(--fm)",
         }}
@@ -174,19 +150,26 @@ export function AboutPage() {
           </nav>
 
               {/* ── 00 INTRO ─────────────────────────── */}
-              <section id="intro" className="ab-sec" style={{ padding: "calc(24px + 81px) var(--edge) 0" }}>
+              <section id="intro" className="ab-sec" style={{ paddingLeft: "var(--edge)", paddingRight: "var(--edge)" }}>
                 <SecLabel num="00" label="Intro" />
-                <h1 className="ab-h1">
-                  <span className="mask">
-                    <span>
-                      Direct the tools, keep the taste.
-                    </span>
-                  </span>
-                </h1>
-                <p className="ab-sub rv" style={{ transitionDelay: "120ms" }}>
-                  I design accessible digital products that make everyday
-                  experiences simpler, more intuitive, and more human.
-                </p>
+                <div className="ab-intro">
+                  <div className="ab-intro-l">
+                    <h1 className="ab-h1">
+                      <span className="mask">
+                        <span>Hi, I’m Ronger.</span>
+                      </span>
+                    </h1>
+                    <p className="ab-sub rv" style={{ transitionDelay: "120ms" }}>
+                      I design and build digital products through{" "}
+                      <span style={{ color: "#FF6A24" }}>Product Design</span>,{" "}
+                      <span style={{ color: "#FF6A24" }}>UI/UX</span>, and{" "}
+                      <span style={{ color: "#FF6A24" }}>AI‑assisted development</span>.
+                    </p>
+                  </div>
+                  <div className="rv" style={{ transitionDelay: "160ms" }}>
+                    <StickPlayground />
+                  </div>
+                </div>
                 <div className="ab-win rv" role="group" aria-label="Profile summary" style={{ transitionDelay: "200ms" }}>
                   <WinHead title="Ronger.profile" status="Live" active />
                   <div className="ab-wb">
@@ -204,7 +187,7 @@ export function AboutPage() {
               </section>
 
               {/* ── 01 ORIGIN ────────────────────────── */}
-              <section id="origin" className="ab-sec rl" style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 0" }}>
+              <section id="origin" className="ab-sec rl" style={{ marginTop: 40, padding: "40px var(--edge) 0" }}>
                 <SecLabel num="01" label="Origin" />
                 <p className="ab-arc rv">
                   Fashion <i>→</i> visual communication <i>→</i> product.
@@ -212,18 +195,17 @@ export function AboutPage() {
                 <div className="ab-og">
                   <div className="ab-ogt rv">
                     <p>
-                      <span className="ab-drop">I</span>started in fashion design.
-                      What I was learning, without quite naming it, was how to design
-                      for a person — the garment was the medium, not the point.
+                      <span className="ab-drop">I</span> started in fashion, where I learned
+                      to design around people, not just what they wear.
                     </p>
                     <p>
-                      That recognition moved me from fashion into visual communication,
-                      and from there into product design and AI. The materials changed
-                      each time. The question stayed the same.
+                      That thinking led me to visual communication, then product design.
+                      Different mediums, same curiosity: how can design make everyday
+                      experiences better?
                     </p>
                     <div className="ab-lesson">
                       <span className="mono">What fashion still teaches me</span>
-                      <p>The garment was never the point — the person wearing it was.</p>
+                      <p>Different medium. Same focus on people.</p>
                     </div>
                   </div>
                   <div className="ab-thread rv" role="group" aria-label="Journey" style={{ transitionDelay: "80ms" }}>
@@ -242,65 +224,36 @@ export function AboutPage() {
               {/* ── 02 BELIEFS ───────────────────────── */}
               <section id="beliefs" className="ab-sec rl" style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 0" }}>
                 <SecLabel num="02" label="Beliefs" />
-                <div className="ab-bl">
-                  {BELIEFS.map((b, i) => (
-                    <div key={i} className="ab-br rv" style={{ transitionDelay: `${i * 80}ms` }}>
-                      <b className="mono">{String(i + 1).padStart(2, "0")}</b>
-                      <div>
-                        <h3>
-                          {b.lead}
-                          {b.key && <span>{b.key}</span>}
-                          {b.tail}
-                        </h3>
-                        <p>{b.body}</p>
-                      </div>
+                <div className="pgrid">
+                  {PRINCIPLES.map((p, i) => (
+                    <div
+                      key={p.num}
+                      className="pcell rv"
+                      style={{ transitionDelay: `${(i % 3) * 60}ms` }}
+                    >
+                      <span className="mono pnum">{p.num}</span>
+                      <h3 className="ptit">{p.title}</h3>
+                      <p className="pex">{p.body}</p>
+                      <span className="mono ppr">{p.proof}</span>
                     </div>
                   ))}
                 </div>
               </section>
 
-              {/* ── 03 WITH AI ───────────────────────── */}
-              <section id="with-ai" className="ab-sec rl" style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 0" }}>
-                <SecLabel num="03" label="With AI" />
-                <div className="ab-cmp rv">
-                  <div className="ab-pane">
-                    <WinHead title="ai.draft" status="Before" />
-                    <div className="ab-shot mono">
-                      AI draft
-                      {PINS.map((p, i) => (
-                        <span key={i} className="ab-pin w" style={p}>{i + 1}</span>
-                      ))}
-                    </div>
-                    <p className="ab-cap">—</p>
-                  </div>
-                  <div className="ab-pane me">
-                    <WinHead title="zion.edit" status="After" active />
-                    <div className="ab-shot mono">
-                      Edited version
-                      {PINS.map((p, i) => (
-                        <span key={i} className="ab-pin" style={p}>{i + 1}</span>
-                      ))}
-                    </div>
-                    <p className="ab-cap">—</p>
-                  </div>
+              {/* ── 03 HOW I BUILD ──────────────────── */}
+              <section id="with-ai" className="ab-sec rl" style={{ marginTop: 40, padding: "40px var(--edge) 0" }}>
+                <SecLabel num="03" label="How I build" />
+                <h2 className="ab-arc rv">From idea to working product.</h2>
+                <p className="bw-sub rv" style={{ transitionDelay: "60ms" }}>
+                  Design judgment, AI-assisted coding, and iteration — from the first
+                  question to a working product.
+                </p>
+                <div className="rv" style={{ transitionDelay: "120ms" }}>
+                  <BuildWorkspace />
+                  <span className="bw-cap mono">
+                    Simulated session · a walkthrough of how I built Parallel — not a live build
+                  </span>
                 </div>
-                {AI_NOTES.length > 0 && (
-                  <div className="ab-notes rv" style={{ transitionDelay: "80ms" }}>
-                    {AI_NOTES.map((n, i) => (
-                      <div key={i} className="ab-nt">
-                        <span className="ab-pin">{i + 1}</span>
-                        <div>
-                          <span className="ab-l mono">Changed</span>
-                          <p>{n.changed}</p>
-                        </div>
-                        <div>
-                          <span className="ab-l mono">Why</span>
-                          <p>{n.why}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </section>
 
               {/* ── 04 NOW ───────────────────────────── */}
@@ -310,12 +263,22 @@ export function AboutPage() {
                   <WinHead title="now.log" status="Live" active />
                   <div className="ab-wb">
                     {NOW_LOG.map((r) => (
-                      <div key={r.tag} className="ab-lr">
+                      <div key={r.tag} className={"ab-lr" + (r.arrow ? " ab-lr-cta" : "")}>
                         <span className="ab-lt">{r.date}</span>
                         <span className="ab-ltag">{r.tag}</span>
-                        <span className="ab-ltx">
-                          {r.text}
-                          {r.arrow && <em> →</em>}
+                        <span className={"ab-ltx" + (r.arrow ? " ab-ltx-cta" : "")}>
+                          <span>{r.text}</span>
+                          {r.arrow && (
+                            <a
+                              className="ab-hello mono"
+                              href={`${MAILTO}?subject=${encodeURIComponent("Let’s build something together")}`}
+                            >
+                              Say hello
+                              <svg width="9" height="9" viewBox="0 0 9 9" aria-hidden>
+                                <path d="M1.5 7.5 L7.5 1.5 M3 1.5 H7.5 V6" fill="none" stroke="currentColor" strokeWidth="1.2" />
+                              </svg>
+                            </a>
+                          )}
                         </span>
                       </div>
                     ))}

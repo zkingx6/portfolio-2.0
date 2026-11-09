@@ -101,7 +101,7 @@ export function LoopDemo() {
     });
     stageRefs.current.forEach((el, i) => {
       if (!el) return;
-      el.style.color = i === 2 ? "#91C9F7" : "#A8A59E";
+      el.style.color = i === 2 ? "#91C9F7" : "var(--c-muted)";
     });
   }, [reducedMotion]);
 
@@ -138,7 +138,7 @@ export function LoopDemo() {
 
       stageRefs.current.forEach((el, i) => {
         if (!el) return;
-        el.style.color = stage === i + 1 ? "#91C9F7" : "#A8A59E";
+        el.style.color = stage === i + 1 ? "#91C9F7" : "var(--c-muted)";
       });
     }
 
@@ -245,7 +245,7 @@ export function LoopDemo() {
                 <span
                   ref={(el) => { stageRefs.current[i] = el; }}
                   className="ld-stage-n"
-                  style={{ color: s === 1 ? "#91C9F7" : "#A8A59E" }}
+                  style={{ color: s === 1 ? "#91C9F7" : "var(--c-muted)" }}
                 >
                   {String(s).padStart(2, "0")}
                 </span>

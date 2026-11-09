@@ -8,6 +8,12 @@ import { NextIndexBand } from "@/components/case/NextIndexBand";
 import { ScrollToggle } from "@/components/case/ScrollToggle";
 import type { CaseSection, CaseStudy } from "@/lib/cases";
 import { useNavChrome } from "@/lib/useNavChrome";
+import { useReveal } from "@/lib/useReveal";
+import { mediaFor, type MediaItem } from "@/lib/projectMedia";
+import { MediaFigure, MediaGallery } from "@/components/media/ProjectMedia";
+import { ExternalPreview } from "@/components/case/ExternalPreview";
+import { BcgHero } from "@/components/case/BcgHero";
+import { FennecHero } from "@/components/case/FennecHero";
 import "@/app/styles/case.css";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -25,11 +31,17 @@ function Section({
   n,
   open,
   onToggle,
+  media,
+  showMedia = true,
 }: {
   s: CaseSection;
   n: number;
   open: boolean;
   onToggle: () => void;
+  /** Media for this section from lib/projectMedia.ts; placeholder when empty. */
+  media?: MediaItem[];
+  /** false = text-only section (no media block, no placeholder). */
+  showMedia?: boolean;
 }) {
   const id = `cs-sec-${pad(n)}`;
   return (
@@ -88,7 +100,11 @@ function Section({
                 ))}
               </dl>
             ) : null}
-            <MediaSlot label="Media" />
+            {!showMedia ? null : media && media.length > 0 ? (
+              <MediaGallery items={media} />
+            ) : (
+              <MediaSlot label="Media" />
+            )}
           </div>
         </div>
       </div>
@@ -109,10 +125,17 @@ export function CaseStudyPage({
   hideSections?: boolean;
 }) {
   const nav = useNavChrome();
+  // same page entrance as Home / About / Resume: .mask rise + .rv reveal
+  useReveal();
   const [open, setOpen] = useState<boolean[]>(() => data.sections.map(() => false));
+  const media = mediaFor(data.slug);
+  const heroMedia = media.hero ?? media.cover;
 
   const toggle = (i: number) =>
     setOpen((o) => o.map((v, j) => (j === i ? !v : v)));
+  // one source of truth: the global control reads/writes the same open[] state
+  const allOpen = open.length > 0 && open.every(Boolean);
+  const toggleAll = () => setOpen(data.sections.map(() => !allOpen));
 
   return (
     <div className="cs-wrap">
@@ -142,7 +165,7 @@ export function CaseStudyPage({
           <main className="csp" id="top">
             {/* 1 · Header block */}
             <header className="cs-hd">
-              <div className="mono cs-crumb">
+              <div className="mono cs-crumb rv">
                 <span>
                   <Link href="/#work" className="cs-crlk">
                     ← Work
@@ -156,16 +179,25 @@ export function CaseStudyPage({
                   Case {pad(data.caseNo)} / {pad(data.caseTotal)}
                 </span>
               </div>
-              <div className="cs-hdtop">
+              <div className="cs-hdtop rv" style={{ transitionDelay: "60ms" }}>
                 <span className="mono cs-id">{data.id}</span>
                 <span className="mono cs-type">{data.type}</span>
               </div>
-              <h1 className="cs-t">{data.name}</h1>
-              <p className="cs-out">{data.outcome}</p>
+              <h1 className="cs-t">
+                <span className="mask">
+                  <span>{data.name}</span>
+                </span>
+              </h1>
+              <p
+                className="cs-out rv"
+                style={{ transitionDelay: "120ms", ...(data.outcomeMaxWidth ? { maxWidth: data.outcomeMaxWidth } : null) }}
+              >
+                {data.outcome}
+              </p>
             </header>
 
             {/* 2 · Meta band */}
-            <dl className="rl cs-band">
+            <dl className="rl cs-band rv" style={{ transitionDelay: "180ms" }}>
               {data.meta.map((m) => (
                 <div key={m.label} className="cs-bc">
                   <dt className="mono">{m.label}</dt>
@@ -176,17 +208,67 @@ export function CaseStudyPage({
                 <dt className="mono">Role</dt>
                 <dd>{data.role}</dd>
               </div>
+              {data.live ? (
+                <div className="cs-bc cs-brole">
+                  <dt className="mono">{data.live.title ?? "Live Product"}</dt>
+                  <dd>
+                    <a className="cs-live" href={data.live.href} target="_blank" rel="noopener noreferrer">
+                      {data.live.label} <span aria-hidden>↗</span>
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
             </dl>
             <div className="rl cs-rule" aria-hidden />
 
             {/* 3 · Hero media — heroSlot replaces the placeholder when provided */}
-            <div className="cs-hero">
-              {heroSlot ?? <MediaSlot label="Media — 16:9" wide />}
+            {/* exhibit pages (heroSlot) keep their own motion — no reveal wrapper */}
+            <div className={"cs-hero" + (heroSlot ? "" : " rv")} style={heroSlot ? undefined : { transitionDelay: "240ms" }}>
+              {heroSlot ??
+                (data.external ? (
+                  data.external.design === "bcg-landing" ? (
+                    <BcgHero href={data.external.href} />
+                  ) : data.external.design === "fennec-site" ? (
+                    <FennecHero href={data.external.href} />
+                  ) : (
+                    <ExternalPreview {...data.external} />
+                  )
+                ) : heroMedia ? (
+                  <div className="cs-heroimg">
+                    <MediaFigure m={heroMedia} priority full />
+                    {data.heroCta ? (
+                      <a
+                        className="cs-herocta mono"
+                        href={data.heroCta.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={data.heroCta.ariaLabel}
+                      >
+                        {data.heroCta.label} <span aria-hidden>↗</span>
+                      </a>
+                    ) : null}
+                  </div>
+                ) : (
+                  <MediaSlot label="Media — 16:9" wide />
+                ))}
             </div>
 
             {/* 4 · Sections, collapsed first (suppressed on exhibit pages via hideSections) */}
             {!hideSections && (
-              <div className="cs-secs">
+              <div className="cs-secs rv">
+                <div className="cs-secs-hd">
+                  <button
+                    type="button"
+                    className="mono cs-all"
+                    onClick={toggleAll}
+                    aria-expanded={allOpen}
+                    aria-controls={data.sections.map((_, i) => `cs-sec-${pad(i + 1)}`).join(" ")}
+                  >
+                    <span className="cs-all-ic" aria-hidden>{allOpen ? "\u2212" : "+"}</span>
+                    {allOpen ? "Collapse all" : "Expand all"}
+                  </button>
+                </div>
                 {data.sections.map((s, i) => (
                   <Section
                     key={s.label}
@@ -194,6 +276,8 @@ export function CaseStudyPage({
                     n={i + 1}
                     open={open[i]}
                     onToggle={() => toggle(i)}
+                    media={media.sections?.[s.label]}
+                    showMedia={data.showSectionMedia !== false}
                   />
                 ))}
               </div>

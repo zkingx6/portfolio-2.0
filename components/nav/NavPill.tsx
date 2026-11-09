@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { GRID_DOTS } from "@/lib/logo";
+import { ThemeToggle } from "./ThemeToggle";
 import type { NavTab } from "@/lib/types";
 
 type Props = {
@@ -33,7 +34,7 @@ export function NavPill({
   return (
     <div
       className={"pill" + (expanded ? " go" : "") + (open ? " open" : "")}
-      style={{ maxWidth: expanded ? 300 : 64 }}
+      style={{ maxWidth: expanded ? 400 : 64 }}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onFocus={onFocus}
@@ -97,6 +98,17 @@ export function NavPill({
             </a>
           );
         })}
+        <ThemeToggle
+          style={
+            expanded
+              ? {
+                  opacity: 1,
+                  transform: "none",
+                  transition: `opacity 220ms ease-out ${100 + tabs.length * 40}ms, transform 220ms ease-out ${100 + tabs.length * 40}ms`,
+                }
+              : { opacity: 0, transform: "translateX(12px)", transition: "opacity 120ms ease" }
+          }
+        />
       </div>
     </div>
   );

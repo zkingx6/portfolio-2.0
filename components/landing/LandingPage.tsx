@@ -4,12 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { SiteNav } from "@/components/nav/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import {
-  CATEGORY_NAMES,
   EMAIL,
   MAILTO,
   PROJECTS,
   TICKER,
-  findProjectIndex,
+  findProjects,
 } from "@/lib/content";
 import {
   audioState,
@@ -145,45 +144,59 @@ export function LandingPage() {
   const runAsk = (raw: string) => {
     const q = (raw || "").trim();
     if (!q) return;
-    const i = findProjectIndex(q);
-    if (i < 0) {
-      setAr({ q, miss: true });
-      return;
-    }
+    setAr({ q, hits: findProjects(q) });
+  };
+
+  /* ASK RX → Work: open the project's primary category (its first listed one),
+     wait for the drawers to stop animating, then scroll to the row.
+     Rows without a case page are also expanded; case-page rows stay links. */
+  const locateRun = useRef(0);
+  const locateProject = (i: number) => {
     const p = PROJECTS[i];
     const k = p.categories[0] - 1;
     const key = k + "-" + i;
-    setAr({
-      q,
-      miss: false,
-      text: `Routing you to ${p.name} — filed under ${CATEGORY_NAMES[p.categories[0]]}.`,
-    });
+    const run = ++locateRun.current;
     setOc(k);
-    setEx(key);
+    setEx(p.hasPage ? "" : key);
     setH(-1);
-    setTimeout(() => {
-      const cs = document.querySelectorAll(".cases .cs")[k];
-      const rows = cs?.querySelectorAll("button.ix");
+    const rowEl = () => {
+      const rows = document.querySelectorAll(".cases .cs")[k]?.querySelectorAll(".ix");
       const pos = PROJECTS.filter((x) => x.categories.includes(k + 1)).indexOf(p);
-      const el = rows && rows[pos];
-      if (el) nav.go(el, false, Math.min(280, Math.round(window.innerHeight * 0.35)));
-    }, 80);
-    setTimeout(() => setHl(key), 650);
-    setTimeout(() => setHl(""), 1850);
+      return rows?.[pos] ?? null;
+    };
+    // Row's page position must hold still for a few frames (max ~1s) before we scroll.
+    let last = NaN;
+    let still = 0;
+    const t0 = performance.now();
+    const settle = () => {
+      if (run !== locateRun.current) return;
+      const el = rowEl();
+      const y = el ? el.getBoundingClientRect().top + window.scrollY : NaN;
+      still = el && Math.abs(y - last) < 0.5 ? still + 1 : 0;
+      last = y;
+      if (el && (still >= 4 || performance.now() - t0 > 1000)) {
+        nav.go(el, false, Math.min(280, Math.round(window.innerHeight * 0.35)));
+        setTimeout(() => run === locateRun.current && setHl(key), 600);
+        setTimeout(() => run === locateRun.current && setHl(""), 1800);
+        return;
+      }
+      if (performance.now() - t0 < 1500) requestAnimationFrame(settle);
+    };
+    requestAnimationFrame(settle);
   };
 
   return (
     <div
       style={{
-        color: "#F4F1EA",
+        color: "var(--c-fg)",
         fontFamily: "var(--font-inter-tight), system-ui, sans-serif",
         overflow: "hidden",
       }}
     >
       <div
         style={{
-          backgroundColor: "#101010",
-          backgroundImage: "radial-gradient(#2a2a2a 1.2px,transparent 1.2px)",
+          backgroundColor: "var(--c-bg)",
+          backgroundImage: "radial-gradient(var(--c-line-1) 1.2px,transparent 1.2px)",
           backgroundSize: "32px 32px",
           padding: "0 var(--fm) 48px",
         }}
@@ -237,7 +250,7 @@ export function LandingPage() {
                   justifyContent: "space-between",
                   flexWrap: "wrap",
                   gap: 16,
-                  color: "#A8A59E",
+                  color: "var(--c-muted)",
                 }}
                 className="mono"
               >
@@ -280,13 +293,13 @@ export function LandingPage() {
                     margin: 0,
                     fontSize: 14,
                     lineHeight: 1.4,
-                    color: "#F4F1EA",
+                    color: "var(--c-fg)",
                   }}
                 >
                   <span style={{ color: "#FF6A24" }}>Product</span>,{" "}
                   <span style={{ color: "#FF6A24" }}>UX/UI</span>, and{" "}
                   <span style={{ color: "#FF6A24" }}>AI workflows</span> —{" "}
-                  <span style={{ color: "rgba(244,241,234,.65)" }}>
+                  <span style={{ color: "rgba(var(--c-fg-rgb), .65)" }}>
                     designed, directed, and shipped.
                   </span>
                 </p>
@@ -335,7 +348,7 @@ export function LandingPage() {
             </section>
             <div className="rl" style={{ flex: "none" }}>
               <div
-                style={{ overflow: "hidden", padding: "16px 0", color: "#A8A59E" }}
+                style={{ overflow: "hidden", padding: "16px 0", color: "var(--c-muted)" }}
                 className="mono"
                 aria-hidden
               >
@@ -349,7 +362,7 @@ export function LandingPage() {
             </div>
           </div>
 
-          <AskTerminal result={ar} onRun={runAsk} />
+          <AskTerminal result={ar} onRun={runAsk} onLocate={locateProject} />
 
           <WorkSection
             openCase={oc}
@@ -392,7 +405,7 @@ export function LandingPage() {
             className="rl"
             style={{
               padding: "28px var(--edge)",
-              borderBlock: "1px solid #242424",
+              borderBlock: "1px solid var(--c-charcoal)",
             }}
           >
             <p className="mono now">

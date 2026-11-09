@@ -16,7 +16,7 @@ export function getLogoDots(): LogoDot[] {
         style: {
           ["--c" as string]: String(c),
           ["--o" as string]: lit ? 1 : 0.12,
-          ["--bg" as string]: lit && c > 5 ? "#FF6A24" : "#F4F1EA",
+          ["--bg" as string]: lit && c > 5 ? "#FF6A24" : "var(--c-fg)",
         } as CSSProperties,
       });
     }

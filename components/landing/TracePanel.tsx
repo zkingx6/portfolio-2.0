@@ -10,7 +10,7 @@ export function TracePanel({ tab, onPrompt, onNotes }: Props) {
   return (
     <div className="trw">
       <div className="trl">
-        <div className="mono" style={{ color: "#A8A59E", marginBottom: 16 }}>
+        <div className="mono" style={{ color: "var(--c-muted)", marginBottom: 16 }}>
           {TRACE.id}
         </div>
         {TRACE.steps.map((st, i) => (
@@ -22,7 +22,7 @@ export function TracePanel({ tab, onPrompt, onNotes }: Props) {
             <span className={"tn" + (st.k === "OUTPUT" ? " o" : "")} />
             <span
               className="mono"
-              style={{ color: st.k === "OUTPUT" ? "#FF6A24" : "#F4F1EA" }}
+              style={{ color: st.k === "OUTPUT" ? "#FF6A24" : "var(--c-fg)" }}
             >
               [ {st.k} ]
             </span>
@@ -53,7 +53,7 @@ export function TracePanel({ tab, onPrompt, onNotes }: Props) {
           {tab !== "n" ? (
             TRACE.steps.map((st) => (
               <div key={st.k} style={{ marginBottom: 14 }}>
-                <div className="mono" style={{ color: "#A8A59E", marginBottom: 4 }}>
+                <div className="mono" style={{ color: "var(--c-muted)", marginBottom: 4 }}>
                   [ {st.k} ]
                 </div>
                 <div className="trx">
@@ -76,7 +76,7 @@ export function TracePanel({ tab, onPrompt, onNotes }: Props) {
               </div>
             ))
           ) : (
-            <div className="trx" style={{ color: "#A8A59E" }}>
+            <div className="trx" style={{ color: "var(--c-muted)" }}>
               Notes will collect here as traces are added.
             </div>
           )}

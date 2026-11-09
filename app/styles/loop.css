@@ -1,15 +1,15 @@
 /* ─────────────────────────────────────────────
    Loop Demo — ld-* prefix
    Used by components/case/LoopDemo.tsx
-   Palette: ink #101010 · paper #F4F1EA · muted #A8A59E
+   Palette: ink var(--c-bg) · paper var(--c-fg) · muted var(--c-muted)
             ice #91C9F7 · orange #FF6A24 · hairline var(--hl)
    Sharp corners. Easing matches site convention.
 ───────────────────────────────────────────── */
 
 /* ── Outer container ── */
 .ld-wrap {
-  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
-  background: #0d0d0d;
+  border: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
+  background: var(--c-bg-deep-2);
   user-select: none;
 }
 
@@ -19,12 +19,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 16px;
-  border-bottom: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border-bottom: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
   gap: 12px;
 }
 
 .ld-chrome-title {
-  color: #F4F1EA;
+  color: var(--c-fg);
   font-size: 10px;
   letter-spacing: .07em;
 }
@@ -44,11 +44,11 @@
 }
 
 .ld-scripted-tag {
-  color: #A8A59E;
+  color: var(--c-muted);
   font-size: 9px;
   letter-spacing: .08em;
   padding: 2px 7px;
-  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
 }
 
 /* ── Inner wrapper (target for global end-of-loop fade) ── */
@@ -63,7 +63,7 @@
 }
 
 .ld-left {
-  border-right: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border-right: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
   padding: 28px 24px;
   position: relative;
   min-height: 340px;
@@ -87,7 +87,7 @@
 }
 
 .ld-type-lbl {
-  color: #A8A59E;
+  color: var(--c-muted);
   font-size: 9px;
   letter-spacing: .07em;
 }
@@ -95,7 +95,7 @@
 /* TYPE 01 */
 .ld-p01-text {
   font-size: 17px;
-  color: #F4F1EA;
+  color: var(--c-fg);
   line-height: 1.6;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .ld-p03-task {
-  color: #F4F1EA;
+  color: var(--c-fg);
   font-size: 11px;
   margin-bottom: 4px;
 }
@@ -120,7 +120,7 @@
 
 .ld-line-txt {
   font-size: 10px;
-  color: #A8A59E;
+  color: var(--c-muted);
   line-height: 1.5;
 }
 
@@ -262,7 +262,7 @@
 .ld-mock-d {
   width: 100%;
   height: 100%;
-  background: #0A0A0A;
+  background: var(--c-bg-deep);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -273,7 +273,7 @@
 .ld-md-tag {
   font-size: 8px;
   font-family: var(--font-jb-mono), monospace;
-  color: #A8A59E;
+  color: var(--c-muted);
   letter-spacing: .1em;
 }
 
@@ -281,14 +281,14 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 1.15;
-  color: #F4F1EA;
+  color: var(--c-fg);
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   letter-spacing: -.04em;
 }
 
 .ld-md-sub {
   font-size: 8px;
-  color: #A8A59E;
+  color: var(--c-muted);
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   line-height: 1.6;
 }
@@ -308,13 +308,13 @@
 
 .ld-md-rule {
   height: 1px;
-  background: rgba(244, 241, 234, .1);
+  background: rgba(var(--c-fg-rgb), .1);
   max-width: 180px;
 }
 
 .ld-md-fine {
   font-size: 7px;
-  color: #3F3D3A;
+  color: var(--c-line-5);
   font-family: var(--font-jb-mono), monospace;
   letter-spacing: .07em;
 }
@@ -325,7 +325,7 @@
   justify-content: flex-start;
   align-items: center;
   padding: 10px 16px;
-  border-top: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border-top: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
 }
 
 .ld-stage {
@@ -341,7 +341,7 @@
 }
 
 .ld-sep {
-  color: #3F3D3A;
+  color: var(--c-line-5);
 }
 
 /* ── Responsive ── */
@@ -352,7 +352,7 @@
 
   .ld-left {
     border-right: 0;
-    border-bottom: 1px solid var(--hl, rgba(244, 241, 234, .14));
+    border-bottom: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
     min-height: 260px;
   }
 

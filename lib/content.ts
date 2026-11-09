@@ -69,6 +69,8 @@ export const PROJECTS: Project[] = [
     categories: [2, 4],
     d1: "Financial data visualization.",
     d2: "A self-initiated project.",
+    pageSlug: "visa-financial-insights",
+    hasPage: true,
   },
   {
     id: "007",
@@ -78,6 +80,8 @@ export const PROJECTS: Project[] = [
     categories: [4],
     d1: "Website, e-commerce and digital visual communication.",
     d2: "Ongoing work.",
+    pageSlug: "fennec",
+    hasPage: true,
   },
   {
     id: "001",
@@ -98,6 +102,8 @@ export const PROJECTS: Project[] = [
     categories: [1],
     d1: "Developed a UX research framework encompassing participant screening, surveys, personas, and 5+ customer pain points for a simulated banking-product challenge.",
     d2: "Synthesized research findings into actionable product opportunities, translating customer needs into a Figma case study emphasizing experience strategy and UX storytelling.",
+    pageSlug: "bcg-x",
+    hasPage: true,
   },
   {
     id: "002",
@@ -107,6 +113,8 @@ export const PROJECTS: Project[] = [
     categories: [2],
     d1: "Interactive environmental data visualization.",
     d2: "My MFA thesis, built around four climate data systems: rainfall, air, snowfall, solar.",
+    pageSlug: "ecoviz",
+    hasPage: true,
   },
   {
     id: "005",
@@ -116,6 +124,8 @@ export const PROJECTS: Project[] = [
     categories: [1],
     d1: "Learning experience design.",
     d2: "A redesign of RIT MyCourses.",
+    pageSlug: "rit-mycourses",
+    hasPage: true,
   },
   {
     id: "004",
@@ -125,6 +135,8 @@ export const PROJECTS: Project[] = [
     categories: [1],
     d1: "Sleep wellness UX.",
     d2: "Documented as a design system.",
+    pageSlug: "restify",
+    hasPage: true,
   },
   {
     id: "003",
@@ -134,6 +146,8 @@ export const PROJECTS: Project[] = [
     categories: [1],
     d1: "Accessibility-focused mobile UX.",
     d2: "Presented as a case study.",
+    pageSlug: "tapgo",
+    hasPage: true,
   },
   {
     id: "008",
@@ -143,7 +157,7 @@ export const PROJECTS: Project[] = [
     categories: [3],
     d1: "A working log of how I direct AI to design and build — the prompts, the cuts, and what shipped.",
     d2: "Prompting is a skill. Anyone can talk to AI. Being specific is experience.",
-    d2s: "font-size:14px;color:#A8A59E",
+    d2s: "font-size:14px;color:var(--c-muted)",
     pageSlug: "prompt-direction",
     hasPage: true,
   },
@@ -215,25 +229,30 @@ export const TRACE: TraceDef = {
   ],
 };
 
-export const ASK_KEYWORDS: [number, string[]][] = [
-  [0, ["fintech", "payments", "banking", "finance", "visa"]],
-  [2, ["ai", "saas", "agents", "shipped", "startup", "parallel"]],
-  [4, ["climate", "environment", "data viz", "thesis", "ecoviz", "data"]],
-  [7, ["accessibility", "seniors", "mobile", "health", "tapgo"]],
-  [6, ["wellness", "design system", "sleep", "restify"]],
-  [5, ["education", "lms", "learning", "mycourses", "rit"]],
-  [8, ["prompting", "prompt", "process", "directing", "how do you work"]],
-  [1, ["branding", "ecommerce", "web", "website", "phoenix", "fennec"]],
+/* ASK RX search index — project id → explicit keywords, aliases and names.
+   Matching is whole-phrase only (see findProjects), so "ai" never hits "email".
+   Playground items are intentionally not indexed. Order = result order. */
+export const ASK_INDEX: [string, string[]][] = [
+  ["003", ["tapgo", "tap go", "ux/ui", "product design", "interaction", "interaction design", "mobile"]],
+  ["004", ["restify", "ux/ui", "product design", "wellness", "sleep", "mobile"]],
+  ["005", ["rit mycourses", "rit mycourses redesign", "mycourses", "rit", "ux/ui", "product design", "education", "learning", "lms", "accessibility"]],
+  ["009", ["bcg by forage", "bcg x forage", "bcg", "forage", "ux/ui", "product design", "strategy"]],
+  ["002", ["ecoviz", "data visualization", "data viz", "sustainability", "climate", "environment", "thesis"]],
+  ["006", ["visa financial insights", "visa", "fintech", "finance", "financial", "payments", "data visualization", "data viz"]],
+  ["001", ["parallel", "vibe coding", "product design", "b2b saas", "saas", "ai", "ai workflows", "development", "algorithms", "algorithm"]],
+  ["007", ["fennec", "ux/ui", "web design", "branding", "brand", "visual design", "website", "ecommerce"]],
+  ["008", ["prompt direction", "vibe coding", "ai", "development", "prompting", "prompt", "prompts", "creative technology", "creative tech"]],
 ];
 
-export const ASK_CHIPS = [
-  "fintech",
-  "AI",
-  "accessibility",
-  "data viz",
-  "wellness",
-  "education",
+/* Synonyms collapsed to one canonical keyword before matching. */
+const ASK_ALIASES: [RegExp, string][] = [
+  [/\b(ux\/ui|ui\/ux|uxui|uiux|ux ui|ui ux|ux|ui)\b/g, "ux/ui"],
+  [/\b(dataviz|data visualisation)\b/g, "data visualization"],
+  [/\be commerce\b/g, "ecommerce"],
+  [/\bvibecoding\b/g, "vibe coding"],
 ];
+
+export const ASK_CHIPS = ["PRODUCT DESIGN", "UI/UX DESIGN", "FINTECH", "DATA VIZ", "VIBE CODING"];
 
 export const TICKER =
   "Product Design  ✦  UX / UI  ✦  Interaction  ✦  Creative Technology  ✦  AI-powered Experiences  ✦  Fintech  ✦  Data Visualization  ✦  HTML · CSS · JS · React  ✦  Digital Systems  ✦  ";
@@ -243,15 +262,17 @@ export const SKILLS: SkillGroup[] = [
     num: "01",
     title: "Product & UX/UI",
     chips: [
+      // ordered for two balanced rows at laptop widths
       "Product Design",
-      "UX/UI Design",
-      "Interaction Design",
       "User Research",
       "Information Architecture",
       "Wireframing",
       "Prototyping",
+      "UX/UI Design",
+      "Interaction Design",
       "Design Systems",
       "Accessibility",
+      "Usability Testing",
     ],
   },
   {
@@ -267,7 +288,7 @@ export const SKILLS: SkillGroup[] = [
       "Typography",
       "Motion Design",
       "3D Visualization",
-      "Digital Marketing Design",
+      "Editorial Design",
     ],
   },
   {
@@ -275,29 +296,24 @@ export const SKILLS: SkillGroup[] = [
     title: "Design Tools",
     chips: [
       "Figma",
-      "FigJam",
       "Framer",
       "Adobe Creative Cloud",
-      "After Effects",
       "Cinema 4D",
       "Spline",
       "Miro",
-      "Wix",
+      "Microsoft Office",
     ],
   },
   {
     num: "04",
     title: "Technical",
     chips: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "TypeScript",
+      "HTML / CSS",
+      "JS / TS",
       "React",
       "Next.js",
       "Tailwind CSS",
       "Supabase",
-      "SQL",
       "GitHub",
       "Vercel",
     ],
@@ -450,39 +466,39 @@ export const EDUCATION: EducationItem[] = [
 export const PRINCIPLES: Principle[] = [
   {
     num: "01",
-    title: "Direct the tools, keep the taste.",
-    body: "AI doesn’t design for me — I direct it. The vision, the calls, and the cuts are mine; I work like a design director, and the tools are my very fast team.",
-    proof: "PROOF — 008 PROMPT DIRECTION",
-  },
-  {
-    num: "02",
-    title: "Reframe before solving.",
-    body: "Parallel started as ‘when is everyone available?’ The real question was ‘who keeps paying for this meeting?’ Availability isn’t fairness — finding the question behind the question is the design work.",
-    proof: "PROOF — 001 PARALLEL",
-  },
-  {
-    num: "03",
-    title: "Simplify the path, never the product.",
-    body: "Cut steps, not capability. If people need it, it stays — it just takes less effort to reach. Minimalism should reduce effort, not function.",
+    title: "Simplify the path, not the product.",
+    body: "Remove unnecessary steps without removing what people actually need.",
     proof: "PROOF — 005 RIT MYCOURSES",
   },
   {
+    num: "02",
+    title: "Make data understandable.",
+    body: "Turn complex information into clear, meaningful visual experiences.",
+    proof: "PROOF — 002 ECOVIZ · 006 VISA",
+  },
+  {
+    num: "03",
+    title: "If users struggle, question the interface.",
+    body: "Accessibility should be built into the experience, not added afterward.",
+    proof: "PROOF — 003 TAPGO",
+  },
+  {
     num: "04",
-    title: "Build to learn. Believe what you learn.",
-    body: "A deployed MVP in a month teaches more than a polished deck. When the evidence said the problem was a nice-to-have, I believed it — a killed hypothesis is a result, not a failure.",
+    title: "Reframe before solving.",
+    body: "Parallel began with availability. The real problem was fairness across time zones.",
     proof: "PROOF — 001 PARALLEL",
   },
   {
     num: "05",
-    title: "Data should behave like what it means.",
-    body: "Numbers give precision; behavior gives understanding. Rain accumulates, bad air thickens, a financial report becomes a story — information people can perceive before they have to decode it.",
-    proof: "PROOF — 002 ECOVIZ · 006 VISA",
+    title: "Build to learn.",
+    body: "Ship, test, and improve. Real feedback teaches more than endless polishing.",
+    proof: "PROOF — 001 PARALLEL",
   },
   {
     num: "06",
-    title: "If the user struggles, suspect the interface.",
-    body: "Accessibility isn’t a special mode for other people. It’s removing barriers from the same product, so people can act on their own instead of asking for help.",
-    proof: "PROOF — 003 TAPGO",
+    title: "Direct the tools, keep the taste.",
+    body: "AI speeds up execution. I direct the vision, decisions, and final design.",
+    proof: "PROOF — 008 PROMPT DIRECTION",
   },
 ];
 
@@ -491,26 +507,34 @@ export const RESUME_RAIL = [
   { id: "experience", num: "02", label: "Experience", sh: "EXP" },
   { id: "work", num: "03", label: "Selected work", sh: "WORK" },
   { id: "education", num: "04", label: "Education", sh: "EDU" },
-  { id: "principles", num: "05", label: "Principles", sh: "PRIN." },
 ] as const;
 
-export function findProjectIndex(q: string) {
-  const t = q.toLowerCase().trim();
-  if (!t) return -1;
-  const tok = t.split(/[^a-z0-9]+/).filter(Boolean);
-  if (/\b(bcg|forage|banking app|ux research|boston consulting)\b/.test(t)) {
-    return 3;
-  }
-  for (const [i, ks] of ASK_KEYWORDS) {
-    for (const k of ks) {
-      if (
-        k.length <= 3
-          ? tok.includes(k)
-          : t.includes(k) || (t.length >= 3 && k.startsWith(t))
-      ) {
-        return i;
-      }
+function normalizeAsk(q: string) {
+  let t = q
+    .toLowerCase()
+    .replace(/[^a-z0-9/]+/g, " ") // drop punctuation, hyphens, &
+    .replace(/\s*\/\s*/g, "/") // "ux / ui" → "ux/ui"
+    .replace(/\s+/g, " ")
+    .trim();
+  for (const [re, canon] of ASK_ALIASES) t = t.replace(re, canon);
+  return t;
+}
+
+/** Indexes into PROJECTS matching q, deduped, in ASK_INDEX order.
+    An exact full-query keyword match wins ("ai workflows" → Parallel only);
+    otherwise any keyword appearing in q as a whole phrase counts. */
+export function findProjects(q: string): number[] {
+  const t = normalizeAsk(q);
+  if (!t) return [];
+  const pick = (test: (k: string) => boolean) => {
+    const out: number[] = [];
+    for (const [id, keys] of ASK_INDEX) {
+      if (!keys.some((k) => test(normalizeAsk(k)))) continue;
+      const i = PROJECTS.findIndex((p) => p.id === id);
+      if (i >= 0 && !out.includes(i)) out.push(i);
     }
-  }
-  return -1;
+    return out;
+  };
+  const exact = pick((k) => k === t);
+  return exact.length ? exact : pick((k) => (" " + t + " ").includes(" " + k + " "));
 }

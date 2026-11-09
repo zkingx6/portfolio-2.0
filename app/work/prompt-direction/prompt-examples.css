@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────
    Prompt Examples — pe-* prefix
    app/work/prompt-direction/PromptExamples.tsx
-   Palette inherits: paper #F4F1EA · muted #A8A59E
+   Palette inherits: paper var(--c-fg) · muted var(--c-muted)
      ice #91C9F7 · orange #FF6A24 · hairline var(--hl)
    Sharp corners. Site vertical rhythm.
 ───────────────────────────────────────────── */
@@ -24,22 +24,22 @@
 .pe-honest {
   font-size: 9px;
   letter-spacing: .08em;
-  color: #A8A59E;
+  color: var(--c-muted);
   padding: 2px 7px;
-  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
 }
 
 .pe-task-lbl {
   font-size: 10px;
   letter-spacing: .03em;
-  color: #A8A59E;
+  color: var(--c-muted);
 }
 
 /* ─────────────────────────────────────────────
    Example block
 ───────────────────────────────────────────── */
 .pe-block {
-  border-top: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border-top: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
   padding-top: 48px;
   padding-bottom: 56px;
   display: flex;
@@ -78,13 +78,13 @@
 .pe-name {
   font-size: 12px;
   letter-spacing: .04em;
-  color: #F4F1EA;
+  color: var(--c-fg);
   margin-bottom: 7px;
 }
 
 .pe-desc {
   font-size: 16px;
-  color: #A8A59E;
+  color: var(--c-muted);
   line-height: 1.4;
   letter-spacing: -.01em;
 }
@@ -95,7 +95,7 @@
 .pe-prompt-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
 }
 
 .pe-panel {
@@ -103,13 +103,13 @@
 }
 
 .pe-panel-l {
-  border-right: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border-right: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
 }
 
 .pe-panel-lbl {
   font-size: 9px;
   letter-spacing: .07em;
-  color: #A8A59E;
+  color: var(--c-muted);
   margin-bottom: 14px;
 }
 
@@ -133,7 +133,7 @@
 
 .pe-bad-text {
   font-size: 14px;
-  color: #F4F1EA;
+  color: var(--c-fg);
   line-height: 1.6;
   white-space: pre-wrap;
   margin: 0;
@@ -166,7 +166,7 @@
 
 .pe-dir-text {
   font-size: 12px;
-  color: #A8A59E;
+  color: var(--c-muted);
   line-height: 1.6;
 }
 
@@ -183,13 +183,13 @@
 .pe-out-col:first-child { padding-right: 16px; }
 .pe-out-col:last-child  {
   padding-left: 16px;
-  border-left: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border-left: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
 }
 
 .pe-out-lbl {
   font-size: 9px;
   letter-spacing: .07em;
-  color: #A8A59E;
+  color: var(--c-muted);
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -206,7 +206,7 @@
 
 .pe-mock-wrap {
   height: 200px;
-  border: 1px solid var(--hl, rgba(244, 241, 234, .14));
+  border: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
   overflow: hidden;
   position: relative;
 }
@@ -277,7 +277,7 @@
 
 /* ── CALM — dark directed (01 AFTER) ── */
 .pe-mock-calm {
-  background: #0A0A0A;
+  background: var(--c-bg-deep);
   padding: 22px 18px;
   display: flex;
   flex-direction: column;
@@ -288,7 +288,7 @@
 
 .pe-mcalm-tag {
   font-size: 7px;
-  color: #A8A59E;
+  color: var(--c-muted);
   letter-spacing: .1em;
   font-family: var(--font-jb-mono), monospace;
 }
@@ -296,7 +296,7 @@
 .pe-mcalm-h {
   font-size: 16px;
   font-weight: 700;
-  color: #F4F1EA;
+  color: var(--c-fg);
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   letter-spacing: -.04em;
   line-height: 1.15;
@@ -304,7 +304,7 @@
 
 .pe-mcalm-sub {
   font-size: 7px;
-  color: #A8A59E;
+  color: var(--c-muted);
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   line-height: 1.5;
 }
@@ -322,12 +322,12 @@
 
 .pe-mcalm-rule {
   height: 1px;
-  background: rgba(244, 241, 234, .08);
+  background: rgba(var(--c-fg-rgb), .08);
 }
 
 .pe-mcalm-fine {
   font-size: 6px;
-  color: #3F3D3A;
+  color: var(--c-line-5);
   letter-spacing: .06em;
   font-family: var(--font-jb-mono), monospace;
 }
@@ -398,7 +398,7 @@
 
 /* ── CONSTRAINED — dark + one accent (02 AFTER) ── */
 .pe-mock-constrained {
-  background: #0A0A0A;
+  background: var(--c-bg-deep);
   padding: 22px 18px;
   display: flex;
   flex-direction: column;
@@ -409,7 +409,7 @@
 
 .pe-mcon-tag {
   font-size: 7px;
-  color: #A8A59E;
+  color: var(--c-muted);
   letter-spacing: .08em;
   font-family: var(--font-jb-mono), monospace;
 }
@@ -417,7 +417,7 @@
 .pe-mcon-h {
   font-size: 18px;
   font-weight: 700;
-  color: #F4F1EA;
+  color: var(--c-fg);
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   letter-spacing: -.05em;
   line-height: 1.1;
@@ -425,7 +425,7 @@
 
 .pe-mcon-sub {
   font-size: 7px;
-  color: #A8A59E;
+  color: var(--c-muted);
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   line-height: 1.5;
 }
@@ -450,7 +450,7 @@
 .pe-mkill-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(10, 10, 10, .65);
+  background: rgba(var(--c-bg-deep-rgb), .65);
 }
 
 .pe-mkill-body {
@@ -490,7 +490,7 @@
 
 /* ── REVISED — second pass distinctive (03 AFTER) ── */
 .pe-mock-revised {
-  background: #0A0A0A;
+  background: var(--c-bg-deep);
   padding: 22px 18px;
   display: flex;
   flex-direction: column;
@@ -509,7 +509,7 @@
 .pe-mrev-h {
   font-size: 16px;
   font-weight: 700;
-  color: #F4F1EA;
+  color: var(--c-fg);
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   letter-spacing: -.04em;
   line-height: 1.15;
@@ -517,7 +517,7 @@
 
 .pe-mrev-sub {
   font-size: 7px;
-  color: #A8A59E;
+  color: var(--c-muted);
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   line-height: 1.5;
 }
@@ -544,7 +544,7 @@
 
   .pe-panel-l {
     border-right: 0;
-    border-bottom: 1px solid var(--hl, rgba(244, 241, 234, .14));
+    border-bottom: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
   }
 
   .pe-out-col:first-child {
@@ -555,7 +555,7 @@
   .pe-out-col:last-child {
     padding-left: 0;
     border-left: 0;
-    border-top: 1px solid var(--hl, rgba(244, 241, 234, .14));
+    border-top: 1px solid var(--hl, rgba(var(--c-fg-rgb), .14));
     padding-top: 24px;
   }
 
@@ -594,9 +594,9 @@
    Window panel — MISTAKE 01 only
    Chrome language from Ask Terminal (.rx) + Ronger.Profile (.ab-win):
      · 3 traffic dots (8px, gray, 3rd orange)
-     · mono title #A8A59E + status dot + "ANALYSIS" right-aligned
-     · panel bg #1C1C1C, border rgba(244,241,234,.18)
-     · KV rows: 100px ice-blue key (#91C9F7) + warm-white value (#F4F1EA)
+     · mono title var(--c-muted) + status dot + "ANALYSIS" right-aligned
+     · panel bg var(--c-surface), border rgba(var(--c-fg-rgb), .18)
+     · KV rows: 100px ice-blue key (#91C9F7) + warm-white value (var(--c-fg))
      · sub-panels: same chrome at 6px dot scale
    Classes: pe-win pe-wh pe-wd pe-wd-o pe-wt pe-ws pe-wdot
             pe-wb pe-w-intro pe-w-sec pe-w-sec-hd
@@ -617,9 +617,9 @@
 
 /* Panel container */
 .pe-win {
-  background: #1C1C1C;
-  border: 1px solid rgba(244, 241, 234, .18);
-  box-shadow: 0 20px 56px rgba(0, 0, 0, .5);
+  background: var(--c-surface);
+  border: 1px solid rgba(var(--c-fg-rgb), .18);
+  box-shadow: 0 20px 56px rgba(var(--c-shadow-rgb), calc(.5 * var(--c-shadow-k)));
 }
 
 /* Chrome header */
@@ -628,7 +628,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 20px;
-  border-bottom: 1px solid rgba(244, 241, 234, .12);
+  border-bottom: 1px solid rgba(var(--c-fg-rgb), .12);
 }
 
 /* Traffic dots — matches .rxd / .ab-wd exactly */
@@ -637,8 +637,8 @@
   height: 8px;
   flex: none;
   border-radius: 50%;
-  background: #242424;
-  box-shadow: inset 0 0 0 1px rgba(244, 241, 234, .22);
+  background: var(--c-charcoal);
+  box-shadow: inset 0 0 0 1px rgba(var(--c-fg-rgb), .22);
 }
 .pe-wd-o {
   background: #FF6A24;
@@ -650,7 +650,7 @@
   margin-left: 8px;
   font-size: 11px;
   letter-spacing: .06em;
-  color: #A8A59E;
+  color: var(--c-muted);
 }
 
 /* Status area — matches .rxs / .ab-ws */
@@ -661,7 +661,7 @@
   gap: 7px;
   font-size: 11px;
   letter-spacing: .06em;
-  color: #A8A59E;
+  color: var(--c-muted);
 }
 
 /* Status dot — matches .rxdt / .ab-nd */
@@ -684,7 +684,7 @@
 /* Intro / subtitle line */
 .pe-w-intro {
   font-size: 13px;
-  color: #A8A59E;
+  color: var(--c-muted);
   line-height: 1.5;
 }
 
@@ -699,7 +699,7 @@
 .pe-w-sec-hd {
   font-size: 9px;
   letter-spacing: .07em;
-  color: #A8A59E;
+  color: var(--c-muted);
   margin-bottom: 6px;
 }
 
@@ -728,7 +728,7 @@
 /* Value — warm white, matches .ab-kvv */
 .pe-wval {
   font-size: 12px;
-  color: #F4F1EA;
+  color: var(--c-fg);
   line-height: 1.6;
 }
 .pe-wval-pre {
@@ -739,7 +739,7 @@
 /* Hairline separator between THE MISTAKE and THE DIRECTION */
 .pe-w-sep {
   height: 1px;
-  background: rgba(244, 241, 234, .10);
+  background: rgba(var(--c-fg-rgb), .10);
 }
 
 /* Sub-panels grid (BEFORE / AFTER) */
@@ -751,7 +751,7 @@
 
 /* Sub-panel container */
 .pe-w-out {
-  border: 1px solid rgba(244, 241, 234, .14);
+  border: 1px solid rgba(var(--c-fg-rgb), .14);
 }
 
 /* Sub-panel chrome header — same chrome language at smaller scale */
@@ -760,10 +760,10 @@
   align-items: center;
   gap: 6px;
   padding: 8px 12px;
-  border-bottom: 1px solid rgba(244, 241, 234, .10);
+  border-bottom: 1px solid rgba(var(--c-fg-rgb), .10);
   font-size: 9px;
   letter-spacing: .07em;
-  color: #A8A59E;
+  color: var(--c-muted);
 }
 
 /* Sub-panel traffic dots (6px) */
@@ -772,8 +772,8 @@
   height: 6px;
   flex: none;
   border-radius: 50%;
-  background: #242424;
-  box-shadow: inset 0 0 0 1px rgba(244, 241, 234, .18);
+  background: var(--c-charcoal);
+  box-shadow: inset 0 0 0 1px rgba(var(--c-fg-rgb), .18);
 }
 .pe-wod-o {
   background: #FF6A24;
@@ -823,7 +823,7 @@
 .pe-vf-lbl {
   font-size: 10px;
   letter-spacing: .07em;
-  color: #A8A59E;
+  color: var(--c-muted);
 }
 
 /* ── 1 · SKILL headline + MISTAKE subtitle ── */
@@ -833,7 +833,7 @@
   align-items: end;
   gap: 6px 32px;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(244, 241, 234, .10);
+  border-bottom: 1px solid rgba(var(--c-fg-rgb), .10);
 }
 
 .pe-vf-skill .pe-vf-lbl { margin-bottom: 5px; }
@@ -845,7 +845,7 @@
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -.025em;
-  color: #F4F1EA;
+  color: var(--c-fg);
   text-wrap: balance;
 }
 
@@ -854,7 +854,7 @@
 .pe-vf-sub-t {
   font-size: 14px;
   line-height: 1.4;
-  color: #F4F1EA;
+  color: var(--c-fg);
 }
 
 /* ── 2 · BEFORE / AFTER showcase ── */
@@ -873,7 +873,7 @@
 
 .pe-win--vf .pe-woh {
   padding: 5px 12px;
-  background: rgba(244, 241, 234, .03);
+  background: rgba(var(--c-fg-rgb), .03);
 }
 
 .pe-win--vf .pe-mock-wrap {
@@ -886,8 +886,8 @@
 .pe-w-out--before .pe-mock-wrap { opacity: .7; }
 
 /* AFTER — identity-color frame, dominant */
-.pe-w-out--after { border-color: var(--pe-accent, rgba(244, 241, 234, .14)); }
-.pe-w-out--after .pe-woh-t { color: var(--pe-accent, #A8A59E); }
+.pe-w-out--after { border-color: var(--pe-accent, rgba(var(--c-fg-rgb), .14)); }
+.pe-w-out--after .pe-woh-t { color: var(--pe-accent, var(--c-muted)); }
 
 /* BEFORE mock sizing (≈⅓ column). Decorative image blocks dropped for fit. */
 .pe-w-out--before .pe-mhype-img,
@@ -927,7 +927,7 @@
 .pe-w-out--after .pe-mcalm-cta,
 .pe-w-out--after .pe-mrev-cta { font-size: 14px; padding: 8px 16px; }
 .pe-w-out--after .pe-mcon-cta { font-size: 14px; }
-.pe-w-out--after .pe-mcalm-fine { font-size: 11px; color: #6E6B66; }
+.pe-w-out--after .pe-mcalm-fine { font-size: 11px; color: var(--c-faint-3); }
 .pe-w-out--after .pe-mrev-accent { width: 36px; }
 
 /* ── 3 · THE MISTAKE / THE DIRECTION ── */
@@ -936,7 +936,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 32px;
   padding: 12px 18px;
-  background: rgba(244, 241, 234, .03);
+  background: rgba(var(--c-fg-rgb), .03);
 }
 
 .pe-vf-col-hd {
@@ -953,7 +953,7 @@
   letter-spacing: 0;
   text-transform: none;
   white-space: pre-wrap;
-  color: #F4F1EA;
+  color: var(--c-fg);
 }
 
 /* Two-column grid: tag column + text column, so untagged lines align */
@@ -975,13 +975,13 @@
   align-items: baseline;
   gap: 14px;
   padding-bottom: 11px;
-  border-bottom: 1px solid rgba(244, 241, 234, .10);
+  border-bottom: 1px solid rgba(var(--c-fg-rgb), .10);
 }
 .pe-vf-cost .pe-vf-lbl { flex: none; }
 .pe-vf-cost-t {
   font-size: 15px;
   line-height: 1.4;
-  color: #F4F1EA;
+  color: var(--c-fg);
 }
 
 /* ── 5 · PRINCIPLE / REF ── */

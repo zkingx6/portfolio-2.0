@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { SiteNav } from "@/components/nav/SiteNav";
 import {
   EDUCATION,
   EMAIL,
   EXPERIENCE,
   MAILTO,
-  PRINCIPLES,
   RESUME_WORK,
   SKILLS,
 } from "@/lib/content";
@@ -28,15 +26,29 @@ function ExperienceBody({ text }: { text: string }) {
   );
 }
 
+// Shared accordion state: collapsed by default, entries open independently.
+function useAccordion(count: number) {
+  const [open, setOpen] = useState<boolean[]>(() => Array(count).fill(false));
+  const all = open.every(Boolean);
+  return {
+    open,
+    all,
+    toggle: (i: number) => setOpen((o) => o.map((v, j) => (j === i ? !v : v))),
+    toggleAll: () => setOpen(Array(count).fill(!all)),
+  };
+}
+
 export function ResumePage() {
   const nav = useNavChrome();
   const [act, setAct] = useState(0);
+  const exp = useAccordion(EXPERIENCE.length);
+  const work = useAccordion(RESUME_WORK.length);
   useReveal();
 
   useEffect(() => {
     const h = () => {
       let next = 0;
-      ["skills", "experience", "work", "education", "principles"].forEach(
+      ["skills", "experience", "work", "education"].forEach(
         (id, i) => {
           const el = document.getElementById(id);
           if (el && el.getBoundingClientRect().top <= Math.min(240, window.innerHeight * 0.4)) {
@@ -54,15 +66,15 @@ export function ResumePage() {
   return (
     <div
       style={{
-        color: "#F4F1EA",
+        color: "var(--c-fg)",
         fontFamily: "var(--font-inter-tight), system-ui, sans-serif",
         overflow: "hidden",
       }}
     >
       <div
         style={{
-          backgroundColor: "#101010",
-          backgroundImage: "radial-gradient(#2a2a2a 1.2px,transparent 1.2px)",
+          backgroundColor: "var(--c-bg)",
+          backgroundImage: "radial-gradient(var(--c-line-1) 1.2px,transparent 1.2px)",
           backgroundSize: "32px 32px",
           padding: "0 var(--fm)",
         }}
@@ -91,7 +103,7 @@ export function ResumePage() {
         <ResumeRail active={act} scrolled={nav.sc} />
 
         <section id="top" style={{ padding: "calc(24px + 81px) var(--edge) 0" }}>
-          <div className="mono" style={{ color: "#A8A59E", marginBottom: 24 }}>
+          <div className="mono" style={{ color: "var(--c-muted)", marginBottom: 24 }}>
             Resume — Ronger Xu (Zion)
           </div>
           <h1
@@ -118,15 +130,20 @@ export function ResumePage() {
             <a className="cta mono" href={MAILTO} style={{ textTransform: "none" }}>
               {EMAIL} <span style={{ color: "#FF6A24" }}>↗</span>
             </a>
-            <Link className="cta mono" href="/">
-              Back to portfolio <span style={{ color: "#FF6A24" }}>→</span>
-            </Link>
+            <a
+              className="cta mono"
+              href="https://www.linkedin.com/in/ronger-xu/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn <span style={{ color: "#FF6A24" }}>↗</span>
+            </a>
           </div>
           <div
             className="mono"
             style={{
               marginTop: 24,
-              color: "#A8A59E",
+              color: "var(--c-muted)",
               display: "flex",
               flexWrap: "wrap",
               gap: "8px 32px",
@@ -145,7 +162,7 @@ export function ResumePage() {
           <div className="mono rv" style={{ color: "#FF6A24", marginBottom: 28 }}>
             Skills (05)
           </div>
-          <div style={{ borderBottom: "1px solid #333" }}>
+          <div style={{ borderBottom: "1px solid var(--c-line)" }}>
             {SKILLS.map((s, i) => (
               <div
                 key={s.num}
@@ -155,7 +172,7 @@ export function ResumePage() {
                 <span className="mono" style={{ color: "#91C9F7" }}>
                   {s.num}
                 </span>
-                <span className="mono xd" style={{ color: "#F4F1EA" }}>
+                <span className="mono xd" style={{ color: "var(--c-fg)" }}>
                   {s.title}
                 </span>
                 <div className="xc">
@@ -177,10 +194,19 @@ export function ResumePage() {
           className="rl"
           style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 0" }}
         >
-          <div className="mono rv" style={{ color: "#FF6A24", marginBottom: 28 }}>
-            Experience (03)
+          <div className="mono rv xa-hd">
+            <span style={{ color: "#FF6A24" }}>Experience (03)</span>
+            <button
+              type="button"
+              className="mono xa-all"
+              onClick={exp.toggleAll}
+              aria-controls={EXPERIENCE.map((x) => "exp-panel-" + x.num).join(" ")}
+              aria-expanded={exp.all}
+            >
+              {exp.all ? "Collapse all" : "Expand all"}
+            </button>
           </div>
-          <div style={{ borderBottom: "1px solid #333" }}>
+          <div style={{ borderBottom: "1px solid var(--c-line)" }}>
             {EXPERIENCE.map((item, i) => (
               <div
                 key={item.num}
@@ -190,22 +216,46 @@ export function ResumePage() {
                 <span className="mono" style={{ color: "#91C9F7" }}>
                   {item.num}
                 </span>
-                <span className="mono xd" style={{ color: "#A8A59E" }}>
+                <span className="mono xd" style={{ color: "var(--c-muted)" }}>
                   {item.when}
                   <br />
                   {item.where}
                 </span>
                 <div className="xc">
-                  <h3 className="xh">{item.title}</h3>
-                  <p className="xp">
-                    <ExperienceBody text={item.body} />
-                  </p>
-                  <div className="chips">
-                    {item.chips.map((c) => (
-                      <span className="chip" key={c}>
-                        {c}
+                  <h3 className="xh">
+                    <button
+                      type="button"
+                      id={"exp-btn-" + item.num}
+                      className={"xa-tg" + (exp.open[i] ? " on" : "")}
+                      aria-expanded={exp.open[i]}
+                      aria-controls={"exp-panel-" + item.num}
+                      onClick={() => exp.toggle(i)}
+                    >
+                      <span>{item.title}</span>
+                      <span className="mono xa-lb" aria-hidden>
+                        {exp.open[i] ? "− Close" : "+ Open"}
                       </span>
-                    ))}
+                    </button>
+                  </h3>
+                  {/* same height animation as the landing Work accordion */}
+                  <div
+                    id={"exp-panel-" + item.num}
+                    role="region"
+                    aria-labelledby={"exp-btn-" + item.num}
+                    className={"xa-dr" + (exp.open[i] ? " on" : "")}
+                  >
+                    <div className="xa-di">
+                      <p className="xp">
+                        <ExperienceBody text={item.body} />
+                      </p>
+                      <div className="chips">
+                        {item.chips.map((c) => (
+                          <span className="chip" key={c}>
+                            {c}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -229,9 +279,17 @@ export function ResumePage() {
             }}
           >
             <span style={{ color: "#FF6A24" }}>Selected work (08)</span>
-            <span style={{ color: "#A8A59E" }}>Full index on the portfolio page</span>
+            <button
+              type="button"
+              className="mono xa-all"
+              onClick={work.toggleAll}
+              aria-controls={RESUME_WORK.map((x) => "work-panel-" + x.num).join(" ")}
+              aria-expanded={work.all}
+            >
+              {work.all ? "Collapse all" : "Expand all"}
+            </button>
           </div>
-          <div style={{ borderBottom: "1px solid #333" }}>
+          <div style={{ borderBottom: "1px solid var(--c-line)" }}>
             {RESUME_WORK.map((item, i) => (
               <div
                 key={item.num}
@@ -241,7 +299,7 @@ export function ResumePage() {
                 <span className="mono" style={{ color: "#91C9F7" }}>
                   {item.num}
                 </span>
-                <span className="mono xd" style={{ color: "#A8A59E" }}>
+                <span className="mono xd" style={{ color: "var(--c-muted)" }}>
                   {item.when}
                   {item.note ? (
                     <>
@@ -251,21 +309,44 @@ export function ResumePage() {
                   ) : null}
                 </span>
                 <div className="xc">
-                  <h3 className="xh">{item.title}</h3>
+                  <h3 className="xh">
+                    <button
+                      type="button"
+                      id={"work-btn-" + item.num}
+                      className={"xa-tg" + (work.open[i] ? " on" : "")}
+                      aria-expanded={work.open[i]}
+                      aria-controls={"work-panel-" + item.num}
+                      onClick={() => work.toggle(i)}
+                    >
+                      <span>{item.title}</span>
+                      <span className="mono xa-lb" aria-hidden>
+                        {work.open[i] ? "− Close" : "+ Open"}
+                      </span>
+                    </button>
+                  </h3>
                   <div
                     style={{
                       fontSize: 14,
                       lineHeight: 1.45,
-                      color: "rgba(244,241,234,.55)",
+                      color: "rgba(var(--c-fg-rgb), .55)",
                       marginTop: 6,
                     }}
                   >
                     {item.role}
                   </div>
-                  <p className="xp">{item.p1}</p>
-                  <p className="xp" style={{ marginTop: 10 }}>
-                    {item.p2}
-                  </p>
+                  <div
+                    id={"work-panel-" + item.num}
+                    role="region"
+                    aria-labelledby={"work-btn-" + item.num}
+                    className={"xa-dr" + (work.open[i] ? " on" : "")}
+                  >
+                    <div className="xa-di">
+                      <p className="xp">{item.p1}</p>
+                      <p className="xp" style={{ marginTop: 10 }}>
+                        {item.p2}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -280,7 +361,7 @@ export function ResumePage() {
           <div className="mono rv" style={{ color: "#FF6A24", marginBottom: 28 }}>
             Education (02)
           </div>
-          <div style={{ borderBottom: "1px solid #333" }}>
+          <div style={{ borderBottom: "1px solid var(--c-line)" }}>
             {EDUCATION.map((item, i) => (
               <div
                 key={item.num}
@@ -290,7 +371,7 @@ export function ResumePage() {
                 <span className="mono" style={{ color: "#91C9F7" }}>
                   {item.num}
                 </span>
-                <span className="mono xd" style={{ color: "#A8A59E" }}>
+                <span className="mono xd" style={{ color: "var(--c-muted)" }}>
                   {item.when}
                   <br />
                   {item.where}
@@ -305,7 +386,7 @@ export function ResumePage() {
                         marginBottom: 6,
                         fontSize: 11,
                         letterSpacing: ".06em",
-                        color: "#A8A59E",
+                        color: "var(--c-muted)",
                       }}
                     >
                       Honors / Awards
@@ -318,42 +399,6 @@ export function ResumePage() {
           </div>
         </section>
 
-        <section
-          id="principles"
-          className="rl"
-          style={{ marginTop: "calc(96px / 2)", padding: "calc(96px / 2) var(--edge) 0" }}
-        >
-          <div className="mono rv" style={{ color: "#FF6A24", marginBottom: 28 }}>
-            Principles (06)
-          </div>
-          <h2
-            className="rv"
-            style={{
-              margin: "0 0 40px",
-              maxWidth: 900,
-              fontSize: "clamp(28px,4vw,56px)",
-              fontWeight: 700,
-              letterSpacing: "-.04em",
-              lineHeight: 1.05,
-            }}
-          >
-            How I work, in six rules.
-          </h2>
-          <div className="pgrid">
-            {PRINCIPLES.map((p, i) => (
-              <div
-                key={p.num}
-                className="pcell rv"
-                style={{ transitionDelay: `${(i % 2) * 60}ms` }}
-              >
-                <span className="mono pnum">{p.num}</span>
-                <h3 className="ptit">{p.title}</h3>
-                <p className="pex">{p.body}</p>
-                <span className="mono ppr">{p.proof}</span>
-              </div>
-            ))}
-          </div>
-        </section>
 
       </div>
       </div>

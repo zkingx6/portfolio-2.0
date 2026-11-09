@@ -6,10 +6,10 @@ const LABEL =
   "Visa Financial Insights — revenue rising in solid steps, with the story line drawn over the top";
 
 const COLS = [
-  { x: 180, y: 620, h: 70, fill: "#F4F1EA" },
-  { x: 335, y: 560, h: 130, fill: "#F4F1EA" },
-  { x: 490, y: 480, h: 210, fill: "#F4F1EA" },
-  { x: 645, y: 370, h: 320, fill: "#F4F1EA" },
+  { x: 180, y: 620, h: 70, fill: "var(--c-fg)" },
+  { x: 335, y: 560, h: 130, fill: "var(--c-fg)" },
+  { x: 490, y: 480, h: 210, fill: "var(--c-fg)" },
+  { x: 645, y: 370, h: 320, fill: "var(--c-fg)" },
   { x: 800, y: 230, h: 460, fill: "#FF6A24", orange: true },
 ];
 
@@ -82,7 +82,7 @@ export function VisaGraphic() {
           y={c.y}
           width="110"
           height={c.h}
-          fill={c.fill}
+          style={{ fill: c.fill }}
           rx="0"
           ry="0"
         />

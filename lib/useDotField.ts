@@ -3,6 +3,7 @@
 import { useEffect, type MutableRefObject, type RefObject } from "react";
 import { audioState, tickSound } from "./audio";
 import type { DotConfig } from "./types";
+import { onThemeChange, readRgbVar } from "./theme";
 
 type Quiet = { in: boolean; drag: boolean };
 
@@ -32,8 +33,18 @@ export function useDotField(
     };
     const panel = document.getElementById("cfgp");
     const cfg = () => cfgRef.current;
+    // theme-aware base colors (tokens --c-dot-rest / --c-dot-mid)
     const REST: [number, number, number] = [46, 46, 46];
     const MID: [number, number, number] = [120, 118, 114];
+    let restCss = "#2e2e2e";
+    const readTheme = () => {
+      const r = readRgbVar("--c-dot-rest", [46, 46, 46]);
+      const m = readRgbVar("--c-dot-mid", [120, 118, 114]);
+      REST.splice(0, 3, ...r);
+      MID.splice(0, 3, ...m);
+      restCss = `rgb(${r[0]},${r[1]},${r[2]})`;
+    };
+    readTheme();
     const ORA: [number, number, number] = [255, 106, 36];
     const ICE: [number, number, number] = [145, 201, 247];
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -117,7 +128,7 @@ export function useDotField(
       const { d, cols, rows, b } = S;
       const acc = cfg().accent;
       ctx.clearRect(0, 0, S.W, S.H);
-      ctx.fillStyle = "#2e2e2e";
+      ctx.fillStyle = restCss;
       ctx.beginPath();
       for (let j = 0; j < rows; j++)
         for (let i = 0; i < cols; i++) {
@@ -394,7 +405,13 @@ export function useDotField(
     window.addEventListener("pointerup", qUp);
     window.addEventListener("pointercancel", qUp);
 
+    const offTheme = onThemeChange(() => {
+      readTheme();
+      FIELDS.forEach(draw);
+    });
+
     return () => {
+      offTheme();
       window.removeEventListener("pointerup", qUp);
       window.removeEventListener("pointercancel", qUp);
       window.removeEventListener("pointermove", onMove);

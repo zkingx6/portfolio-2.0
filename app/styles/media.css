@@ -1,0 +1,15 @@
+/* ── Project media (components/media/ProjectMedia.tsx) ───────────
+   Neutral frame so transparent PNGs and screenshots read in both themes. */
+.pm-gal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; width: 100% }
+.pm-fig { margin: 0; min-width: 0 }
+.pm-fig.wide { grid-column: 1 / -1 }
+.pm-frame { position: relative; width: 100%; overflow: hidden; background: var(--c-sunk); border: 1px solid var(--c-line) }
+.pm-frame img, .pm-frame video { width: 100%; height: 100%; object-fit: cover; display: block }
+.pm-cap { display: block; margin-top: 8px; color: var(--c-muted); font-size: 11px; line-height: 1.5; text-transform: none; letter-spacing: .02em }
+@media (max-width: 768px) { .pm-gal { grid-template-columns: 1fr; gap: 12px } }
+
+/* case study placements */
+.cs-hero .pm-fig { margin: 0 }
+.cs-body .pm-gal { margin-top: 8px }
+/* landing Work index — expanded project row */
+.pn .pm-gal { flex: 1 1 100%; max-width: 1160px }
