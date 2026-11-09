@@ -31,6 +31,16 @@ export function ResumeRail({ active, scrolled }: Props) {
     };
   }, []);
 
+  // Keep the active item visible in the mobile strip (same rule as About):
+  // land it on the strip's own padding = the content gutter.
+  useEffect(() => {
+    const strip = document.querySelector(".strip") as HTMLElement | null;
+    const a = strip?.querySelector("a.on") as HTMLElement | null;
+    if (!strip || !a || strip.scrollWidth <= strip.clientWidth) return;
+    const pad = parseFloat(getComputedStyle(strip).paddingLeft) || 0;
+    strip.scrollTo({ left: a.offsetLeft - pad, behavior: "smooth" });
+  }, [active]);
+
   const items = RESUME_RAIL.map((r, i) => ({
     ...r,
     href: "#" + r.id,

@@ -25,6 +25,8 @@
 @media (min-width:1280px){.rail2{display:flex}.strip{display:none}}
 @media (min-width:1280px) and (max-width:1899px){.rail2{width:64px;gap:20px}.rail2 a{flex-direction:column;align-items:flex-start;gap:4px}.rail2 .dsl{width:40px}.rail2 a.on .dsh{width:40px}.rail2 .lb{display:none}.rail2 .sh{display:block;font-size:10px;letter-spacing:.04em;transition:color 200ms ease}.rail2 a.on .sh{color:#FF6A24}}
 @media (max-width:1279px){section{scroll-margin-top:142px}}
+/* mobile: clear the fixed section strip like About's intro (48px + 81px header) */
+@media (max-width:768px){#top{padding-top:calc(48px + 81px)!important}}
 .strip.sc{background:rgba(var(--c-bg-rgb), .55);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom-color:rgba(var(--c-fg-rgb), .08)}
 .rail2{pointer-events:none}
 .rail2 a{pointer-events:auto}

@@ -86,7 +86,9 @@ export function AboutPage() {
     const strip = document.querySelector(".strip") as HTMLElement | null;
     const a = strip?.querySelector("a.on") as HTMLElement | null;
     if (!strip || !a || strip.scrollWidth <= strip.clientWidth) return;
-    strip.scrollTo({ left: a.offsetLeft - 20, behavior: "smooth" });
+    // land the active tab on the strip's own padding = the content gutter
+    const pad = parseFloat(getComputedStyle(strip).paddingLeft) || 0;
+    strip.scrollTo({ left: a.offsetLeft - pad, behavior: "smooth" });
   }, [act]);
 
   return (
