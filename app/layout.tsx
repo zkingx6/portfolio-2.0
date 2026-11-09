@@ -16,9 +16,10 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  // tab titles: "Ronger" on the homepage, "Ronger / <Page>" everywhere else
   title: {
-    default: "Ronger Xu (Zion) — Portfolio",
-    template: "%s",
+    default: "Ronger",
+    template: "Ronger / %s",
   },
   description:
     "Product Designer × Creative Technologist. Product, UX/UI, and AI workflows — designed, directed, and shipped.",

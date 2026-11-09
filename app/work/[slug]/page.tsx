@@ -13,11 +13,14 @@ export function generateStaticParams() {
   return DRAFT_CASE_SLUGS.map((slug) => ({ slug }));
 }
 
+// tab-title spelling where it differs from the listed project name
+const TAB_NAMES: Partial<Record<ProjectSlug, string>> = { ecoviz: "ECOVIZ" };
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const data = STANDARD_CASES[slug as ProjectSlug];
   if (!data) return {};
-  return { title: `${data.name} — Ronger Xu (Zion)`, description: data.outcome };
+  return { title: TAB_NAMES[slug as ProjectSlug] ?? data.name, description: data.outcome };
 }
 
 export default async function StandardCaseRoute({ params }: { params: Promise<{ slug: string }> }) {

@@ -4,7 +4,7 @@ import { PromptExamples } from "./PromptExamples";
 import { PROMPT_DIRECTION } from "@/lib/cases";
 
 export const metadata: Metadata = {
-  title: "Prompt Direction — Ronger Xu (Zion)",
+  title: PROMPT_DIRECTION.name,
   description: PROMPT_DIRECTION.outcome,
 };
 
